@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "고블린",
+      "description": "작고 빠른 몬스터",
+      "health": 100,
+      "attack": 10,
+      "moveSpeed": 2.5
+    },
+    {
+      "id": 2,
+      "name": "오우거",
+      "description": "느리지만 강력한 괴물",
+      "health": 300,
+      "attack": 30,
+      "moveSpeed": 1.2
+    },
+    {
+      "id": 3,
+      "name": "나가",
+      "description": "테스트 설명",
+      "health": 150,
+      "attack": 15,
+      "moveSpeed": 2
+    },
+    {
+      "id": 4,
+      "name": "하피",
+      "description": "테스트 설명",
+      "health": 80,
+      "attack": 20,
+      "moveSpeed": 3
+    }
+  ]
+}
