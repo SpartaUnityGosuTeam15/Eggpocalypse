@@ -4,13 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+public enum BGMType//BGM 폴더의 파일 이름과 동일하게
+{
+
+}
+
+public enum SFXType//SFX 폴더의 파일 이름과 동일하게
+{
+
+}
+
 public class SoundManager : Singleton<SoundManager>
 {
-    [SerializeField] private List<AudioClip> BGM;//배경음악 모음
-    [SerializeField] private List<AudioClip> SFX;//효과음 모음
+    [SerializeField] private Dictionary<BGMType, AudioClip> bgmDict = new();//배경음악 모음
+    [SerializeField] private Dictionary<SFXType, AudioClip> sfxDict = new();//효과음 모음
 
     [SerializeField] private AudioSource bgmPlayer = new AudioSource();//배경음악 재생기
     [SerializeField] private List<AudioSource> sfxPlayers = new List<AudioSource>();//효과음 재생기
+    private Transform sfxPlayerGroup;
     private int _maxPoolSize = 10;
 
     [SerializeField] private AudioMixer audioMixer;
@@ -22,11 +33,36 @@ public class SoundManager : Singleton<SoundManager>
     {
         base.Awake();
 
-        BGM = new List<AudioClip>(Resources.LoadAll<AudioClip>("Sounds/BGM"));
-        SFX = new List<AudioClip>(Resources.LoadAll<AudioClip>("Sounds/SFX"));
+        AudioClip[] bgmClips = Resources.LoadAll<AudioClip>("Sounds/BGM");
+        foreach (AudioClip clip in bgmClips)
+        {
+            if(Enum.TryParse(clip.name, out BGMType bgmType))
+            {
+                bgmDict[bgmType] = clip;
+            }
+        }
+
+        AudioClip[] sfxClips = Resources.LoadAll<AudioClip>("Sounds/SFX");
+        foreach (AudioClip clip in sfxClips)
+        {
+            if(Enum.TryParse(clip.name, out SFXType sfxType))
+            {
+                sfxDict[sfxType] = clip;
+            }
+        }
 
         audioMixer = Resources.Load<AudioMixer>("Sounds/AudioMixer");
 
+        ResetPlayers();
+    }
+
+    private void Start()
+    {
+        LoadVolume();
+    }
+
+    void ResetPlayers()
+    {
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
@@ -38,11 +74,14 @@ public class SoundManager : Singleton<SoundManager>
         bgmPlayer.outputAudioMixerGroup = audioMixer.FindMatchingGroups(MIXER_BGM)[0];
         bgmPlayer.playOnAwake = false;
         bgmPlayer.loop = true;
-        
-        for(int i = 0; i < _maxPoolSize; i++)
+
+        sfxPlayerGroup = new GameObject("SFXPlayerGroup").transform;
+        sfxPlayerGroup.SetParent(transform);
+
+        for (int i = 0; i < _maxPoolSize; i++)
         {
             GameObject sfxObject = new GameObject("SFXPlayer");
-            sfxObject.transform.SetParent(transform);
+            sfxObject.transform.SetParent(sfxPlayerGroup);
             AudioSource sfxPlayer = sfxObject.AddComponent<AudioSource>();
             sfxPlayer.outputAudioMixerGroup = audioMixer.FindMatchingGroups(MIXER_SFX)[0];
             sfxPlayer.playOnAwake = false;
@@ -50,27 +89,17 @@ public class SoundManager : Singleton<SoundManager>
             sfxPlayers.Add(sfxPlayer);
         }
 
-        sfxPlayers = new List<AudioSource>(transform.GetChild(1).GetComponentsInChildren<AudioSource>());
+        sfxPlayers = new List<AudioSource>(sfxPlayerGroup.GetComponentsInChildren<AudioSource>());
     }
 
-    private void Start()
+    public void PlayBGM(BGMType bgm)//배경음악 재생
     {
-        LoadVolume();
-    }
-
-    public void PlayBGM(string name)//배경음악 재생
-    {
-        foreach (AudioClip clip in BGM)
+        if(bgmDict.TryGetValue(bgm, out AudioClip clip))
         {
-            if(clip.name == name)
-            {
-                bgmPlayer.clip = clip;
-                bgmPlayer.Play();
-                return;
-            }
+            bgmPlayer.clip = clip;
+            bgmPlayer.Play();
         }
-
-        throw new InvalidOperationException($"There's No BGM: {name} in SoundManager");
+        else throw new InvalidOperationException($"There's No BGM: {name} in SoundManager");
     }
 
     public void StopBGM()//배경음악 종료
@@ -78,37 +107,32 @@ public class SoundManager : Singleton<SoundManager>
         bgmPlayer.Stop();
     }
 
-    public void PlaySFX(string name)//효과음 재생
+    public void PlaySFX(SFXType sfx)//효과음 재생
     {
-        for(int i = 0; i < SFX.Count; i++)
+        if(sfxDict.TryGetValue(sfx, out AudioClip clip))
         {
-            if (SFX[i].name == name)
+            for (int j = 0; j < sfxPlayers.Count; j++)
             {
-                for (int j = 0; j < sfxPlayers.Count; j++)
+                if (!sfxPlayers[j].isPlaying)
                 {
-                    if (!sfxPlayers[j].isPlaying)
-                    {
-                        sfxPlayers[j].clip = SFX[i];
-                        sfxPlayers[j].Play();
-                        return;
-                    }
+                    sfxPlayers[j].clip = clip;
+                    sfxPlayers[j].Play();
+                    return;
                 }
-
-                GameObject sfx = new GameObject(name);
-                sfx.transform.SetParent(transform);
-                AudioSource newSource = sfx.AddComponent<AudioSource>();
-                newSource.clip = SFX[i];
-                newSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups(MIXER_SFX)[0];
-                newSource.playOnAwake = false;
-                newSource.loop = false;
-                newSource.Play();
-                sfxPlayers.Add(newSource);
-                StartCoroutine(DestoryAudiosource(newSource));
-                return;
             }
-        }
 
-        throw new InvalidOperationException($"There's No SFX: {name} in SoundManager");
+            GameObject sfxGo = new GameObject(name);
+            sfxGo.transform.SetParent(sfxPlayerGroup);
+            AudioSource newSource = sfxGo.AddComponent<AudioSource>();
+            newSource.clip = clip;
+            newSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups(MIXER_SFX)[0];
+            newSource.playOnAwake = false;
+            newSource.loop = false;
+            newSource.Play();
+            sfxPlayers.Add(newSource);
+            StartCoroutine(DestoryAudiosource(newSource));
+        }
+        else throw new InvalidOperationException($"There's No SFX: {name} in SoundManager");
     }
 
     public void StopAllSFX()//모든 효과음 종료

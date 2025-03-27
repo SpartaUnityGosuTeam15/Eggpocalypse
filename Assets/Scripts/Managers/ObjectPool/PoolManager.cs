@@ -71,9 +71,11 @@ public class PoolManager : Singleton<PoolManager>
     private Dictionary<string, Pool> _poolDict = new Dictionary<string, Pool>();
     private Transform _root;
 
-    public void Init()
+    protected override void Awake()
     {
-        if(_root == null)
+        base.Awake();
+
+        if (_root == null)
         {
             _root = new GameObject { name = "@Pool_Root" }.transform;
         }
