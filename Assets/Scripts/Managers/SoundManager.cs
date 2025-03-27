@@ -4,20 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public enum BGMType//BGM 폴더의 파일 이름과 동일하게
+public enum BGM//BGM 폴더의 파일 이름과 동일하게
 {
 
 }
 
-public enum SFXType//SFX 폴더의 파일 이름과 동일하게
+public enum SFX//SFX 폴더의 파일 이름과 동일하게
 {
 
 }
 
 public class SoundManager : Singleton<SoundManager>
 {
-    [SerializeField] private Dictionary<BGMType, AudioClip> bgmDict = new();//배경음악 모음
-    [SerializeField] private Dictionary<SFXType, AudioClip> sfxDict = new();//효과음 모음
+    [SerializeField] private Dictionary<BGM, AudioClip> bgmDict = new();//배경음악 모음
+    [SerializeField] private Dictionary<SFX, AudioClip> sfxDict = new();//효과음 모음
 
     [SerializeField] private AudioSource bgmPlayer = new AudioSource();//배경음악 재생기
     [SerializeField] private List<AudioSource> sfxPlayers = new List<AudioSource>();//효과음 재생기
@@ -36,7 +36,7 @@ public class SoundManager : Singleton<SoundManager>
         AudioClip[] bgmClips = Resources.LoadAll<AudioClip>("Sounds/BGM");
         foreach (AudioClip clip in bgmClips)
         {
-            if(Enum.TryParse(clip.name, out BGMType bgmType))
+            if(Enum.TryParse(clip.name, out BGM bgmType))
             {
                 bgmDict[bgmType] = clip;
             }
@@ -45,7 +45,7 @@ public class SoundManager : Singleton<SoundManager>
         AudioClip[] sfxClips = Resources.LoadAll<AudioClip>("Sounds/SFX");
         foreach (AudioClip clip in sfxClips)
         {
-            if(Enum.TryParse(clip.name, out SFXType sfxType))
+            if(Enum.TryParse(clip.name, out SFX sfxType))
             {
                 sfxDict[sfxType] = clip;
             }
@@ -92,7 +92,7 @@ public class SoundManager : Singleton<SoundManager>
         sfxPlayers = new List<AudioSource>(sfxPlayerGroup.GetComponentsInChildren<AudioSource>());
     }
 
-    public void PlayBGM(BGMType bgm)//배경음악 재생
+    public void PlayBGM(BGM bgm)//배경음악 재생
     {
         if(bgmDict.TryGetValue(bgm, out AudioClip clip))
         {
@@ -107,7 +107,7 @@ public class SoundManager : Singleton<SoundManager>
         bgmPlayer.Stop();
     }
 
-    public void PlaySFX(SFXType sfx)//효과음 재생
+    public void PlaySFX(SFX sfx)//효과음 재생
     {
         if(sfxDict.TryGetValue(sfx, out AudioClip clip))
         {
