@@ -6,8 +6,10 @@ using UnityEngine.AI;
 public class Monster : MonoBehaviour, IDamageable
 {
     private MonsterStateMachine stateMachine;
-    public NavMeshAgent agent;
-    public float ChaseRange;
+    public NavMeshAgent Agent {  get; private set; }
+   
+    public Animator Animator { get; private set; }
+
     public float AttackRange;
     public int Id {  get; private set; }
     public string MonsterName {  get; private set; }
@@ -19,8 +21,10 @@ public class Monster : MonoBehaviour, IDamageable
 
     public virtual void Awake()
     {
+
+        Animator = GetComponentInChildren<Animator>();
         stateMachine = new MonsterStateMachine(this);
-        agent = GetComponent<NavMeshAgent>();
+        Agent = GetComponent<NavMeshAgent>();
     }
 
     private void Start()
@@ -28,6 +32,7 @@ public class Monster : MonoBehaviour, IDamageable
         InitMonsterData();
         Cursor.lockState = CursorLockMode.Locked;
         stateMachine.ChangeState(stateMachine.ChasingState);
+        stateMachine.Target = GameManager.Instance.player;
     }
 
     private void Update()

@@ -14,7 +14,7 @@ public class MonsterChasingState : MonsterBaseState
     }
     public override void Exit() 
     { 
-        base.Exit(); 
+        base.Exit();
     }
 
     public override void Update()

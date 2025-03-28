@@ -5,10 +5,11 @@ using UnityEngine;
 public class NamedMonster : Monster
 {
     private List<MonsterSkill> skills = new();
-
+    [field: SerializeField] public MonsterAnimationData AnimationData { get; private set; }
     public override void Awake()
     {
         base.Awake();
+        AnimationData.Initialize();
         InitSkills();
     }
 

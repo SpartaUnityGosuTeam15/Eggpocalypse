@@ -22,7 +22,18 @@ public class MonsterBaseState : IState
 
     public virtual void Update()
     {
-        stateMachine.Monster.agent.SetDestination(stateMachine.Target.transform.position);
+        stateMachine.Monster.Agent.SetDestination(stateMachine.Target.transform.position);
+    }
+
+    protected void StartAnimation(int hash)
+    {
+        stateMachine.Monster.Animator.SetBool(hash, true);
+    }
+
+    protected void StopAnimation(int hash)
+    {
+        stateMachine.Monster.Animator.SetBool(hash, false);
+        
     }
 
 }

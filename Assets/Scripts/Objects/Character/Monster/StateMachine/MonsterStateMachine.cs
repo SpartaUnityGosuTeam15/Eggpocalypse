@@ -10,7 +10,7 @@ public class MonsterStateMachine : StateMachine
     public MonsterAttackState AttackState { get; }
     public MonsterChasingState ChasingState { get; }
     
-    public Player Target { get; private set; }
+    public Player Target { get; set; }
     public MonsterStateMachine(Monster monster)
     {
         Monster = monster;
