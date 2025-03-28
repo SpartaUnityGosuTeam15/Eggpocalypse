@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SkillManager : Singleton<SkillManager>
 {
-    public List<BaseSkill> skillList;
+    public List<Options> options;
 
     private void Start()
     {
-        //JsonLoader를 이용해서 스킬 정보 받기
+        //JsonLoader를 이용해서 스킬 및 스탯 옵션 정보 받기
 
     }
 }

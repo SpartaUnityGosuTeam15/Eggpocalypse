@@ -13,7 +13,7 @@ public class CircleSkill : BaseSkill
     void Update()
     {
         UseSkill();
-        y_angle += Time.deltaTime * 360f;
+        y_angle += Time.deltaTime * 360f; //1ÃÊ¿¡ 1¹ÙÄû
 
         if(y_angle > 360f)
             y_angle = 0f;
