@@ -4,46 +4,67 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    public MonsterDataLoader monsterDataLoader; // JSON으로부터 불러온 데이터
-    public Transform[] spawnPoints;             // 몬스터가 등장할 위치들
-    public float waveDuration = 300f;           // 웨이브 시간
-    public float spawnInterval = 5f;            // 몬스터 생성 간격
-    private float elapsedTime = 0f;
+    public MonsterDataLoader monsterDataLoader; // JSON에서 로드된 데이터
+    public Transform[] spawnPoints;
+    public float waveDuration = 300f;   // 시간 : 5분
+    public float spawnInterval = 0.5f;  // 스폰 주기
+    public int initialSpawnCount = 3;   // 한 번에 소환할 몬스터 수
+    public int spawnIncreaseRate = 1;   // 20초마다 스폰 수 증가
 
+    private float elapsedTime = 0f;
     private Dictionary<int, MonsterData> monsterDict;
 
     private void Start()
     {
-        // 로드된 몬스터 데이터 가져오기
         monsterDict = monsterDataLoader.MakeDict();
+
+        if (monsterDict == null || monsterDict.Count == 0)
+        {
+            Debug.LogError("몬스터 데이터가 없습니다.");
+            return;
+        }
+
         StartCoroutine(SpawnWave());
     }
 
     IEnumerator SpawnWave()
     {
+        int currentSpawnCount = initialSpawnCount;
+        float spawnCountIncreaseTimer = 0f;
+
         while (elapsedTime < waveDuration)
         {
-            SpawnMonster();
+            for (int i = 0; i < currentSpawnCount; i++)
+            {
+                SpawnMonster();
+            }
+
             yield return new WaitForSeconds(spawnInterval);
             elapsedTime += spawnInterval;
+            spawnCountIncreaseTimer += spawnInterval;
+
+            // 20초마다 스폰 수 증가
+            if (spawnCountIncreaseTimer >= 20f)
+            {
+                currentSpawnCount += spawnIncreaseRate;
+                spawnCountIncreaseTimer = 0f;
+            }
         }
     }
 
     void SpawnMonster()
     {
-        // 랜덤 몬스터 선택
         int randomId = RandomMonsterId();
         MonsterData monsterData = monsterDict[randomId];
 
-        // 프리팹을 Resources 폴더에서 불러오기
         GameObject monsterPrefab = Resources.Load<GameObject>($"Prefabs/Monsters/{monsterData.name}");
         if (monsterPrefab == null)
         {
-            Debug.LogWarning($"몬스터 프리팹을 찾을 수 없음: {monsterData.name}");
+            Debug.LogWarning($"프리팹을 찾을 수 없음: {monsterData.name}");
             return;
         }
 
-        // 랜덤 위치에 생성
+        // 스폰 위치는 랜덤
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
         Instantiate(monsterPrefab, spawnPoint.position, spawnPoint.rotation);
     }
@@ -54,4 +75,3 @@ public class MonsterSpawner : MonoBehaviour
         return keys[Random.Range(0, keys.Count)];
     }
 }
-
