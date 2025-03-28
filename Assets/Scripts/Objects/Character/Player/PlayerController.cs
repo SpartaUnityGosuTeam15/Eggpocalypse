@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
         _rb.velocity = dir * speed;
 
         if (_hasTarget) { } //Look(target);
-        else Look(dir);
+        else //Look(dir);
 
         if(dir != Vector3.zero)
         {

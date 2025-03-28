@@ -12,6 +12,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     [SerializeField] private StatEventChannel OnExpStatChanged;
 
     [SerializeField] private IntEventChannel OnLevelChanged;
+    [SerializeField] private IntEventChannel OnMeatChanged;
 
     private void Start()
     {
@@ -27,7 +28,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         Health.Subtract(damage);
-        OnHealthStatChanged.RaiseEvent(Health);
+        OnHealthStatChanged?.RaiseEvent(Health);
 
         if(Health.CurValue <= 0)
         {
@@ -51,15 +52,30 @@ public class PlayerCondition : MonoBehaviour, IDamageable
         {
             Exp.Add(amount);
         }
-        OnExpStatChanged.RaiseEvent(Exp);
+        OnExpStatChanged?.RaiseEvent(Exp);
     }
 
     public void LevelUp()
     {
         level++;
-        OnLevelChanged.RaiseEvent(level);
+        OnLevelChanged?.RaiseEvent(level);
         //스킬 선택 메서드
         //일시 정지
+    }
+
+    public void GainMeat(int amount)
+    {
+        meat += amount;
+        OnMeatChanged?.RaiseEvent(meat);
+    }
+
+    public bool UseMeat(int amount)
+    {
+        if (meat < amount) return false;
+        meat -= amount;
+        OnMeatChanged?.RaiseEvent(meat);
+
+        return true;
     }
 
     void Dead()
