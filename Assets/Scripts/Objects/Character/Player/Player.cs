@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public PlayerController controller;
-    public PlayerCondition condition;
+    [HideInInspector] public PlayerController controller;
+    [HideInInspector] public PlayerCondition condition;
 
     private void Awake()
     {
