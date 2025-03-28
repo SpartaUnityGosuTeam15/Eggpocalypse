@@ -10,7 +10,11 @@ public class NamedMonster : Monster
     {
         base.Awake();
         AnimationData.Initialize();
-        InitSkills();
+        //InitSkills();
+    }
+    public override void Start()
+    {
+        base.Start();
     }
 
     private void InitSkills()

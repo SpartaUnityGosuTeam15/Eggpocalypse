@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
 
 public interface IState
 {
@@ -10,7 +11,7 @@ public interface IState
     public void Update();
     
 }
-public abstract class StateMachine : MonoBehaviour
+public abstract class StateMachine
 {
     public IState curState;
     

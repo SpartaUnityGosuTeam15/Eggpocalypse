@@ -784,7 +784,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.6037874, y: -4.64, z: -0.9715613}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalScale: {x: 20, y: 10, z: 20}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -801,6 +801,7 @@ GameObject:
   - component: {fileID: 1779289480}
   - component: {fileID: 1779289479}
   - component: {fileID: 1779289478}
+  - component: {fileID: 1779289482}
   m_Layer: 0
   m_Name: NamedMonster
   m_TagString: Untagged
@@ -820,7 +821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f26346dcd050b41b3d7d9acb164d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackRange: 2
+  AttackRange: 9
   <AnimationData>k__BackingField:
     attackName: '@Attack'
     baseAttackName: BaseAttack
@@ -868,14 +869,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 1.3257527
+  m_Height: 4.468711
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1.7343554, z: 0.23931551}
 --- !u!4 &1779289481
 Transform:
   m_ObjectHideFlags: 0
@@ -885,13 +886,35 @@ Transform:
   m_GameObject: {fileID: 1779289477}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.76, y: 0.46, z: 1.2}
+  m_LocalPosition: {x: -2.76, y: 0.46, z: 6.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 165248951}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!195 &1779289482
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1779289477}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 1.19
+  m_Speed: 2
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 5
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &2278733573477148484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -913,7 +936,7 @@ PrefabInstance:
     - target: {fileID: 2353142452800159553, guid: a6269aeeff1949f41ab6f0c0ddcf198e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.21
+      value: -7.73
       objectReference: {fileID: 0}
     - target: {fileID: 2353142452800159553, guid: a6269aeeff1949f41ab6f0c0ddcf198e,
         type: 3}
@@ -950,10 +973,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3973482608849457023, guid: a6269aeeff1949f41ab6f0c0ddcf198e,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7543569354514058641, guid: a6269aeeff1949f41ab6f0c0ddcf198e,
         type: 3}
       propertyPath: m_Name
       value: Monster1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7543569354514058641, guid: a6269aeeff1949f41ab6f0c0ddcf198e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -968,15 +1001,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 426322126141256019, guid: c6749443a70d5de44bdea47be9b0c71f,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7675204394156678150, guid: c6749443a70d5de44bdea47be9b0c71f,
         type: 3}
       propertyPath: m_Name
       value: Monster2
       objectReference: {fileID: 0}
+    - target: {fileID: 7675204394156678150, guid: c6749443a70d5de44bdea47be9b0c71f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8044675540492566152, guid: c6749443a70d5de44bdea47be9b0c71f,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.59
+      value: -4.78
       objectReference: {fileID: 0}
     - target: {fileID: 8044675540492566152, guid: c6749443a70d5de44bdea47be9b0c71f,
         type: 3}

@@ -17,6 +17,5 @@ public class MonsterStateMachine : StateMachine
         AttackState = new MonsterAttackState(this);
         ChasingState = new MonsterChasingState(this);
 
-        Target = GameManager.Instance.player;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Monster : MonoBehaviour, IDamageable
 {
-    private MonsterStateMachine stateMachine;
+    protected MonsterStateMachine stateMachine;
     public NavMeshAgent Agent {  get; private set; }
    
     public Animator Animator { get; private set; }
@@ -23,14 +23,16 @@ public class Monster : MonoBehaviour, IDamageable
     {
 
         Animator = GetComponentInChildren<Animator>();
-        stateMachine = new MonsterStateMachine(this);
+
         Agent = GetComponent<NavMeshAgent>();
+
     }
 
-    private void Start()
+    public virtual void Start()
     {
         InitMonsterData();
         Cursor.lockState = CursorLockMode.Locked;
+        stateMachine = new MonsterStateMachine(this);
         stateMachine.ChangeState(stateMachine.ChasingState);
         stateMachine.Target = GameManager.Instance.player;
     }

@@ -13,6 +13,8 @@ public class MonsterAttackState : MonsterBaseState
     public override void Enter()
     {
         base.Enter();
+        if (stateMachine.Monster is NamedMonster monster)
+            StartAnimation(monster.AnimationData.AttackHash);
 
         alreadyApplyForce = false;
         alreadyAppliedDealing = false;
@@ -20,14 +22,20 @@ public class MonsterAttackState : MonsterBaseState
     public override void Exit()
     {
         base.Exit();
+        if (stateMachine.Monster is NamedMonster monster)
+            StopAnimation(monster.AnimationData.AttackHash);
     }
     public override void Update()
     {
         base.Update();
         if (!alreadyAppliedDealing)
         {
-            Attack();
+            //Attack();
             alreadyAppliedDealing = false;
+        }
+        if(stateMachine.Target == null)
+        {
+            stateMachine.ChangeState(stateMachine.ChasingState);
         }
     }
 
