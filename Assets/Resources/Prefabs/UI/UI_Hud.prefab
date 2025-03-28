@@ -888,6 +888,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05bdaf89419f50141b06e330caf7bed6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpText: {fileID: 5498133602184069843}
+  levelText: {fileID: 919691022489110671}
+  goldText: {fileID: 6758771986015692254}
+  killText: {fileID: 1035756116636923416}
+  hpBar: {fileID: 7297783687500726417}
+  expBar: {fileID: 7009732547055923747}
+  skillSlotsParentTransform: {fileID: 5309473573355230251}
+  statSlotsParentTransform: {fileID: 8943285078472475551}
 --- !u!1 &4067087464529957637
 GameObject:
   m_ObjectHideFlags: 0
