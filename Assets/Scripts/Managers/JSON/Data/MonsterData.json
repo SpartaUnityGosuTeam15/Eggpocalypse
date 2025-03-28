@@ -2,18 +2,18 @@
   "data": [
     {
       "id": 1,
-      "name": "고블린",
-      "description": "작고 빠른 몬스터",
+      "name": "그루멜",
+      "description": "기본 슬라임",
       "health": 100,
       "attack": 10,
       "moveSpeed": 2.5
     },
     {
       "id": 2,
-      "name": "오우거",
-      "description": "느리지만 강력한 괴물",
+      "name": "스눅",
+      "description": "가시 슬라임",
       "health": 300,
-      "attack": 30,
+      "attack": 10,
       "moveSpeed": 1.2
     },
     {
