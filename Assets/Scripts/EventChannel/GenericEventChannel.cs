@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class EventTChannel<T> : ScriptableObject
+public class GenericEventChannel<T> : ScriptableObject
 {
     protected Action<T> _onEventRaised;
 
