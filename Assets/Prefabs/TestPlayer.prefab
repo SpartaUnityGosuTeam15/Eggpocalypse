@@ -84,6 +84,7 @@ MonoBehaviour:
     type: 2}
   OnExpStatChanged: {fileID: 11400000, guid: 41b663bb88b52e44486f9b052496a67a, type: 2}
   OnLevelChanged: {fileID: 11400000, guid: 9127f4bcc0705134d91e55b31f416052, type: 2}
+  OnMeatChanged: {fileID: 0}
 --- !u!114 &6998832283190490503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,7 +147,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!1 &2711770876976135422
 GameObject:
@@ -311,22 +312,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 35c44a97c30e4e946a0f4d3310613b95,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9659258
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35c44a97c30e4e946a0f4d3310613b95,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35c44a97c30e4e946a0f4d3310613b95,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.2588191
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35c44a97c30e4e946a0f4d3310613b95,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 35c44a97c30e4e946a0f4d3310613b95,
         type: 3}
