@@ -9,5 +9,6 @@ public class Scene_Stage : Scene
         PoolManager.Instance.Clear();
 
         UIManager.Instance.ShowUI<UI_Hud>();
+        UIManager.Instance.ShowUI<ButtonManager>();
     }
 }
