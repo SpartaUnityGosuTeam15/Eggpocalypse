@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    public MonsterDataLoader monsterDataLoader; // JSON에서 로드된 데이터
+    //public MonsterDataLoader monsterDataLoader; // JSON에서 로드된 데이터
     public Transform[] spawnPoints;
     public float waveDuration = 300f;   // 시간 : 5분
     public float spawnInterval = 0.5f;  // 스폰 주기
@@ -16,7 +16,8 @@ public class MonsterSpawner : MonoBehaviour
 
     private void Start()
     {
-        monsterDict = monsterDataLoader.MakeDict();
+        DataManager.Instance.Init();
+        monsterDict = DataManager.Instance.monsterDict;
 
         if (monsterDict == null || monsterDict.Count == 0)
         {
@@ -57,10 +58,10 @@ public class MonsterSpawner : MonoBehaviour
         int randomId = RandomMonsterId();
         MonsterData monsterData = monsterDict[randomId];
 
-        GameObject monsterPrefab = Resources.Load<GameObject>($"Prefabs/Monsters/{monsterData.name}");
+        GameObject monsterPrefab = Resources.Load<GameObject>($"Prefabs/Monsters/{monsterData.id}");
         if (monsterPrefab == null)
         {
-            Debug.LogWarning($"프리팹을 찾을 수 없음: {monsterData.name}");
+            Debug.LogWarning($"프리팹을 찾을 수 없음: 이름 {monsterData.name}, id {monsterData.id}");
             return;
         }
 

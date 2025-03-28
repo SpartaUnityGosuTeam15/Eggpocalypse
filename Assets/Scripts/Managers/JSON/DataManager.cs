@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DataManager
 {
+    public static DataManager Instance { get; private set; } = new DataManager();
+
     public Dictionary<int, SkillData> skillDict { get; private set; } = new Dictionary<int, SkillData>();
     public Dictionary<int, MonsterData> monsterDict {  get; private set; } = new Dictionary<int, MonsterData>();
     public Dictionary<int, BuildingData> buildDict { get; private set; } = new Dictionary<int, BuildingData>();
