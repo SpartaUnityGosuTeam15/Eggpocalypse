@@ -57,9 +57,11 @@ public class PoolManager : Singleton<PoolManager>
     #endregion Pool
     private Dictionary<string, Pool> _poolDict = new Dictionary<string, Pool>();
     private Transform _root;
+
     protected override void Awake()
     {
         base.Awake();
+
         if (_root == null)
         {
             _root = new GameObject { name = "@Pool_Root" }.transform;
@@ -73,12 +75,12 @@ public class PoolManager : Singleton<PoolManager>
         _poolDict.Add(original.name, pool);
     }
     public Poolable Get(GameObject original, int count = 10, Transform parent = null)
-    {//Instantiate ´ë¿ë
+    {//Instantiate ï¿½ï¿½ï¿½
         if (_poolDict.ContainsKey(original.name) == false) CreatePool(original, count);
         return _poolDict[original.name].Pop(parent);
     }
     public void Release(Poolable poolable)
-    {//Destroy ´ë¿ë
+    {//Destroy ï¿½ï¿½ï¿½
         string name = poolable.gameObject.name;
         if (_poolDict.ContainsKey(name) == true) _poolDict[name].Push(poolable);
         else CreatePool(poolable.gameObject);
