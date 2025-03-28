@@ -27,7 +27,8 @@ public class MaterialColorChangeSample : MonoBehaviour
 
     public void ChangeColor(Color color)
     {
-        _mpb.SetColor("_Color", color);
+        //_mpb.SetColor("_Color", color); //빌트인이면 이거
+        _mpb.SetColor("_BaseColor", color); //URP면 이거
 
         _meshRenderer.SetPropertyBlock(_mpb);
     }
