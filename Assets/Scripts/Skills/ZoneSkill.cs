@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class ZoneSkill : BaseSkill
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private void Update()
     {
-        
+        if (isAuto) //자동 공격일 시 일정 시간마다 실행
+        {
+            if (cooldown - Time.deltaTime < 0f)
+            {
+                UseSkill();
+                cooldown = attackRate;
+            }
+        }
+
+        if (cooldown > 0f)
+            cooldown -= Time.deltaTime;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void UseSkill()
     {
-        
+        throw new System.NotImplementedException();
     }
+
 }
