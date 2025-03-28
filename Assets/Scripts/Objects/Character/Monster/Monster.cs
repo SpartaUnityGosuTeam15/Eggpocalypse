@@ -1,17 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public interface IDamagable
-{
-    public void TakeDamage(int damage);
-}
-public class Monster : MonoBehaviour, IDamagable
+public class Monster : MonoBehaviour, IDamageable
 {
     private MonsterStateMachine stateMachine;
+    public NavMeshAgent agent;
     public float ChaseRange;
     public float AttackRange;
-
     public int Id {  get; private set; }
     public string MonsterName {  get; private set; }
     public string Description {  get; private set; }
@@ -20,16 +17,17 @@ public class Monster : MonoBehaviour, IDamagable
     public float MoveSpeed {  get; private set; }
 
 
-    private void Awake()
+    public virtual void Awake()
     {
         stateMachine = new MonsterStateMachine(this);
+        agent = GetComponent<NavMeshAgent>();
     }
 
     private void Start()
     {
         InitMonsterData();
         Cursor.lockState = CursorLockMode.Locked;
-        stateMachine.ChangeState(stateMachine.IdleState);
+        stateMachine.ChangeState(stateMachine.ChasingState);
     }
 
     private void Update()

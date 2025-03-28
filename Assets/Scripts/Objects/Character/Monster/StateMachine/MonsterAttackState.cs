@@ -24,14 +24,19 @@ public class MonsterAttackState : MonsterBaseState
     public override void Update()
     {
         base.Update();
-        if (IsInChasingRange())
+        if (!alreadyAppliedDealing)
         {
-            stateMachine.ChangeState(stateMachine.ChasingState);
-            return;
+            Attack();
+            alreadyAppliedDealing = false;
         }
-        else
+    }
+
+    private void Attack()
+    {
+        if(stateMachine.Monster is NamedMonster namedMonster)
         {
-            stateMachine.ChangeState(stateMachine.IdleState);
+            namedMonster.UseRandomSkill();
+            alreadyAppliedDealing = true;
             return;
         }
     }
