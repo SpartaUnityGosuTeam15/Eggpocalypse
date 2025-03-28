@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6559213620233551102}
   - component: {fileID: 919691022489110671}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: LevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -581,7 +581,7 @@ GameObject:
   - component: {fileID: 8943285078472475551}
   - component: {fileID: 4175759233076152764}
   m_Layer: 5
-  m_Name: StatBackground
+  m_Name: StatSkillBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -805,7 +805,6 @@ RectTransform:
   m_Children:
   - {fileID: 4411026489456313180}
   - {fileID: 9053298029525203835}
-  - {fileID: 4891742386115428567}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -891,11 +890,17 @@ MonoBehaviour:
   hpText: {fileID: 5498133602184069843}
   levelText: {fileID: 919691022489110671}
   goldText: {fileID: 6758771986015692254}
-  killText: {fileID: 1035756116636923416}
+  meatText: {fileID: 1035756116636923416}
   hpBar: {fileID: 7297783687500726417}
   expBar: {fileID: 7009732547055923747}
   skillSlotsParentTransform: {fileID: 5309473573355230251}
-  statSlotsParentTransform: {fileID: 8943285078472475551}
+  statSkillSlotsParentTransform: {fileID: 8943285078472475551}
+  OnHealthStatChanged: {fileID: 11400000, guid: 9af5972972b4c704f935dbe8ad2de6ba,
+    type: 2}
+  OnExpStatChanged: {fileID: 11400000, guid: 41b663bb88b52e44486f9b052496a67a, type: 2}
+  OnLevelChanged: {fileID: 11400000, guid: 9127f4bcc0705134d91e55b31f416052, type: 2}
+  OnMeatChanged: {fileID: 11400000, guid: f1ec7dd6468ada6449244755d6c98cba, type: 2}
+  OnGoldChanged: {fileID: 11400000, guid: 22bc4999552cf6244905fcda412149be, type: 2}
 --- !u!1 &4067087464529957637
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +936,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.25, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1, y: 0}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &5560489740779600366
 CanvasRenderer:
@@ -1023,7 +1028,7 @@ GameObject:
   - component: {fileID: 2167052522728222349}
   - component: {fileID: 7407438057243984604}
   m_Layer: 5
-  m_Name: KillBackground
+  m_Name: MeatBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1043,12 +1048,12 @@ RectTransform:
   m_Children:
   - {fileID: 3135497405021952968}
   - {fileID: 5153700807448609458}
-  m_Father: {fileID: 3744857814749190865}
+  m_Father: {fileID: 4411026489456313180}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 210, y: 53}
+  m_SizeDelta: {x: 210, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &2167052522728222349
 CanvasRenderer:
@@ -1176,7 +1181,7 @@ GameObject:
   - component: {fileID: 3092219853869540529}
   - component: {fileID: 1035756116636923416}
   m_Layer: 5
-  m_Name: KillText
+  m_Name: MeatText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1328,6 +1333,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4891742386115428567}
   - {fileID: 5968110097491832040}
   - {fileID: 3658986784197571212}
   - {fileID: 1970988575482629405}
@@ -1491,7 +1497,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -210, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &317304160752985260
@@ -1544,7 +1550,7 @@ GameObject:
   - component: {fileID: 5986462796577362179}
   - component: {fileID: 5498133602184069843}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: HPText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [SelectionBase]
-public class UI_StatSlot : UI
+public class UI_StatSkillSlot : UI
 {
     [SerializeField] private Image icon;
 

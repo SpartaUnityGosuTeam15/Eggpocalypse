@@ -467,6 +467,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5845955144233895482, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
+        type: 3}
+      propertyPath: OnLevelChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 9127f4bcc0705134d91e55b31f416052,
+        type: 2}
+    - target: {fileID: 5845955144233895482, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
+        type: 3}
+      propertyPath: OnHealthChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 9af5972972b4c704f935dbe8ad2de6ba,
+        type: 2}
+    - target: {fileID: 5845955144233895482, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
+        type: 3}
+      propertyPath: OnExpStatChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 41b663bb88b52e44486f9b052496a67a,
+        type: 2}
+    - target: {fileID: 5845955144233895482, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
+        type: 3}
+      propertyPath: OnHealthStatChanged
+      value: 
+      objectReference: {fileID: 11400000, guid: 9af5972972b4c704f935dbe8ad2de6ba,
+        type: 2}
     - target: {fileID: 8789988854919992780, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
         type: 3}
       propertyPath: m_LocalPosition.x

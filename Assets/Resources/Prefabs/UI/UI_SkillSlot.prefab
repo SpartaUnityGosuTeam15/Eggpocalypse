@@ -301,6 +301,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6cb498bf3481734e974f41e3fb4704f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  icon: {fileID: 8094273761216083015}
+  levelText: {fileID: 4550414706978680009}
+  levelBackground: {fileID: 3171296049571082317}
+  maxLevelImage: {fileID: 8369508787348999576}
 --- !u!1 &6821214072980549233
 GameObject:
   m_ObjectHideFlags: 0

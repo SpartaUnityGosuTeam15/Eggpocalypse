@@ -23,18 +23,18 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    public T GetUI<T>() where T : UI
-    {
-        Type uiType = typeof(T);
+    //public T GetUI<T>() where T : UI
+    //{
+    //    Type uiType = typeof(T);
 
-        if (_sceneDict.TryGetValue(uiType, out UI existingUI))
-        {
-            existingUI.Hide();
-            return existingUI as T;
-        }
+    //    if (_sceneDict.TryGetValue(uiType, out UI existingUI))
+    //    {
+    //        existingUI.Hide();
+    //        return existingUI as T;
+    //    }
 
-        throw new InvalidOperationException($"There's No {uiType.Name} in UIManager");
-    }
+    //    throw new InvalidOperationException($"There's No {uiType.Name} in UIManager");
+    //}
 
     public T ShowPopupUI<T>() where T : UI_Popup
     {
