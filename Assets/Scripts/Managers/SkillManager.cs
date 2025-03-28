@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SkillManager : Singleton<SkillManager>
 {
-    public List<Options> options;
+    public List<BaseSkill> skills;
 
     private void Start()
     {

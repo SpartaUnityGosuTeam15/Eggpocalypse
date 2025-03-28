@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileSkill : BaseSkill
+public class ProjectileSkill : AttackSkill
 {
     Vector3 direction; //발사 방향
 

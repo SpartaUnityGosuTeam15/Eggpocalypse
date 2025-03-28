@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ZoneSkill : BaseSkill
+public class ZoneSkill : AttackSkill
 {
     private void Update()
     {

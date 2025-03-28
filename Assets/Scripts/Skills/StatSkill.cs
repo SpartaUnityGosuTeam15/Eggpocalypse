@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatOption : Options
+public class StatSkill : BaseSkill
 {
     public float amount;
     //public int type; // 스탯 타입 ex) 공격력, 이속, 공속...
