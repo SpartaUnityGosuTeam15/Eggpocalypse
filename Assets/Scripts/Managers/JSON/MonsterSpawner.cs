@@ -36,7 +36,7 @@ public class MonsterSpawner : MonoBehaviour
         MonsterData monsterData = monsterDict[randomId];
 
         // 프리팹을 Resources 폴더에서 불러오기
-        GameObject monsterPrefab = Resources.Load<GameObject>($"Monsters/{monsterData.name}");
+        GameObject monsterPrefab = Resources.Load<GameObject>($"Prefabs/Monsters/{monsterData.name}");
         if (monsterPrefab == null)
         {
             Debug.LogWarning($"몬스터 프리팹을 찾을 수 없음: {monsterData.name}");
