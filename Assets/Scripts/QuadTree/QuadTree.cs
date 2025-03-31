@@ -40,4 +40,9 @@ public class QuadTree<T> where T : HasPosition
 
         return found;
     }
+
+    public void DrawNodes()
+    {
+        _root.DrawNode();
+    }
 }

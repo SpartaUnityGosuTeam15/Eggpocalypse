@@ -22,7 +22,9 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(findNearest());
+        //StartCoroutine(findNearest());
+
+        StartCoroutine(DetectNearestMonster());
     }
 
     IEnumerator findNearest()
@@ -35,37 +37,41 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Update()
+    IEnumerator DetectNearestMonster()
     {
-        Debug.Log(closest);
-        Debug.Log(closest);
-        Debug.Log(closest);
+        while (true)
+        {
+            GetClosestMonster();
+
+            yield return waitTime;
+        }
     }
 
-    //public void DetectMonster()
-    //{
-    //    monsters.Clear();
+    public void DetectMonster()
+    {
+        monsters.Clear();
 
-    //    Collider[] hits = Physics.OverlapSphere(transform.position, detectRadius, monsterLayer);
+        Collider[] hits = Physics.OverlapSphere(transform.position, detectRadius, monsterLayer);
 
-    //    foreach (Collider hit in hits)
-    //    {
-    //        monsters.Add(hit.GetComponent<Monster>());
-    //    }
-    //}
+        foreach (Collider hit in hits)
+        {
+            monsters.Add(hit.GetComponent<Monster>());
+        }
+    }
 
-    //public void FindClosestMonster()
-    //{
-    //    if (monsters.Count == 0) return;
+    public void GetClosestMonster()
+    {
+        DetectMonster();
 
-    //    float min = detectRadius;
-    //    foreach (Monster monster in monsters)
-    //    {
-    //        //float distance = Vector3.Distance(transform.position, monster.transform.position);
-    //        min = Mathf.Min(min, monster.Agent.remainingDistance);
-    //        closest = monster;
-    //    }
-    //}
+        if (monsters.Count == 0) return;
+
+        float min = detectRadius;
+        foreach (Monster monster in monsters)
+        {
+            min = Mathf.Min(min, monster.Agent.remainingDistance);
+            closest = monster;
+        }
+    }
 
     private void OnDrawGizmosSelected()
     {

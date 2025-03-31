@@ -1,17 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.Port;
 
 public class QuadTreeNode<T> where T : HasPosition
 {
     private const int Capacity = 4;
     private Rect _bounds;
     private List<T> _objects;
+
     private bool _divided = false;
-    private QuadTreeNode<T> _first;
-    private QuadTreeNode<T> _second;
-    private QuadTreeNode<T> _third;
-    private QuadTreeNode<T> _fourth;
+    private QuadTreeNode<T> northeast;
+    private QuadTreeNode<T> northwest;
+    private QuadTreeNode<T> southeast;
+    private QuadTreeNode<T> southwest;
 
     public QuadTreeNode(Rect bounds)
     {
@@ -32,10 +34,10 @@ public class QuadTreeNode<T> where T : HasPosition
         {
             if (!_divided) SubDivide();
 
-            if (_first.Insert(obj)) return true;
-            if (_second.Insert(obj)) return true;
-            if (_third.Insert(obj)) return true;
-            if (_fourth.Insert(obj)) return true;
+            if (northeast.Insert(obj)) return true;
+            if (northwest.Insert(obj)) return true;
+            if (southeast.Insert(obj)) return true;
+            if (southwest.Insert(obj)) return true;
         }
 
         return false;
@@ -43,20 +45,26 @@ public class QuadTreeNode<T> where T : HasPosition
 
     private void SubDivide()
     {
-        float x = _bounds.x;
-        float y = _bounds.y;
+        float x = _bounds.xMin;
+        float y = _bounds.yMin;
         float w = _bounds.width / 2f;
         float h = _bounds.height / 2f;
 
-        Rect firstRect = new Rect(x + w, y, w, h);
-        Rect secondRect = new Rect(x, y, w, h);
-        Rect thirdRect = new Rect(x, y + h, w, h);
-        Rect fourthRect = new Rect(x + w, y + h, w, h);
+        Rect ne = new Rect(x + w, y + h, w, h);
+        Rect nw = new Rect(x, y + h, w, h);
+        Rect se = new Rect(x + w, y, w, h);
+        Rect sw = new Rect(x, y, w, h);
 
-        _first = new QuadTreeNode<T>(firstRect);
-        _second = new QuadTreeNode<T>(secondRect);
-        _third = new QuadTreeNode<T>(thirdRect);
-        _fourth = new QuadTreeNode<T>(fourthRect);
+        Debug.Log(ne);
+        Debug.Log(nw);
+        Debug.Log(se);
+        Debug.Log(sw);
+
+        northeast = new QuadTreeNode<T>(ne);
+        northwest = new QuadTreeNode<T>(nw);
+        southeast = new QuadTreeNode<T>(se);
+        southwest = new QuadTreeNode<T>(sw);
+
         _divided = true;
     }
 
@@ -76,10 +84,10 @@ public class QuadTreeNode<T> where T : HasPosition
 
         if (_divided)
         {
-            _first.CollectObjectsInCircle(center, radius, found);
-            _second.CollectObjectsInCircle(center, radius, found);
-            _third.CollectObjectsInCircle(center, radius, found);
-            _fourth.CollectObjectsInCircle(center, radius, found);
+            northeast.CollectObjectsInCircle(center, radius, found);
+            northwest.CollectObjectsInCircle(center, radius, found);
+            southeast.CollectObjectsInCircle(center, radius, found);
+            southwest.CollectObjectsInCircle(center, radius, found);
         }
     }
 
@@ -100,7 +108,7 @@ public class QuadTreeNode<T> where T : HasPosition
 
         if (_divided)
         {
-            List<QuadTreeNode<T>> children = new List<QuadTreeNode<T>> { _first, _second, _third, _fourth };
+            List<QuadTreeNode<T>> children = new List<QuadTreeNode<T>> { northeast, northwest, southeast, southwest };
             var sortedChildren = children.OrderBy(child => Util.SqrDistancePointToRect(point, child._bounds));
             foreach (var child in sortedChildren)
             {
@@ -114,10 +122,10 @@ public class QuadTreeNode<T> where T : HasPosition
         result.AddRange(_objects);
         if (_divided)
         {
-            _first.GetAllObjects(result);
-            _second.GetAllObjects(result);
-            _third.GetAllObjects(result);
-            _fourth.GetAllObjects(result);
+            northeast.GetAllObjects(result);
+            northwest.GetAllObjects(result);
+            southeast.GetAllObjects(result);
+            southwest.GetAllObjects(result);
         }
     }
 
@@ -139,5 +147,21 @@ public class QuadTreeNode<T> where T : HasPosition
         };
 
         return corners.All(corner => (corner - center).sqrMagnitude <= radius * radius);
+    }
+
+    public void DrawNode()
+    {
+        Vector3 center = new Vector3(_bounds.center.x, 0, _bounds.center.y);
+        Vector3 size = new Vector3(_bounds.width, 0, _bounds.height);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(center, size);
+
+        if (_divided)
+        {
+            northeast.DrawNode();
+            northwest.DrawNode();
+            southeast.DrawNode();
+            southwest.DrawNode();
+        }
     }
 }

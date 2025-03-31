@@ -7,24 +7,26 @@ public class ObjectManager : Singleton<ObjectManager>
     public List<Monster> monsters = new();
     private Transform _player;
 
-    [SerializeField] private Rect quadTreeBounds = new Rect(-10, -10, 20, 20);
+    [SerializeField] private Rect quadTreeBounds = new Rect(-25, -25, 50, 50);
     private QuadTree<Monster> monsterQuadTree;
 
     private WaitForSeconds waitTime = new WaitForSeconds(0.1f);
 
-    protected override void Awake()
-    {
-        isGlobal = false;
+    //protected override void Awake()
+    //{
+    //    isGlobal = false;
 
-        base.Awake();
-    }
+    //    base.Awake();
+    //}
 
-    private void Start()
-    {
-        _player = GameManager.Instance.player.transform;   
+    //private void Start()
+    //{
+    //    _player = GameManager.Instance.player.transform;
 
-        StartCoroutine(RebuildTreeCoroutine());
-    }
+    //    RebuildeTree();
+
+    //    StartCoroutine(RebuildTreeCoroutine());
+    //}
 
     IEnumerator RebuildTreeCoroutine()
     {
@@ -59,7 +61,7 @@ public class ObjectManager : Singleton<ObjectManager>
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.cyan;
         Vector3 position = transform.position;
 
         Vector3 center = new Vector3(position.x + quadTreeBounds.x + quadTreeBounds.width / 2,
@@ -68,5 +70,7 @@ public class ObjectManager : Singleton<ObjectManager>
         Vector3 size = new Vector3(quadTreeBounds.width, 0.01f, quadTreeBounds.height); // 얇은 두께 추가
 
         Gizmos.DrawCube(center, size);
+
+        monsterQuadTree.DrawNodes();
     }
 }
