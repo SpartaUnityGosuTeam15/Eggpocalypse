@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackRange: 2
+  id: 1
 --- !u!136 &305569757106670754
 CapsuleCollider:
   m_ObjectHideFlags: 0

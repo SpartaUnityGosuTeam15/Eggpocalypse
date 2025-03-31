@@ -67,7 +67,12 @@ public class MonsterSpawner : MonoBehaviour
 
         // 스폰 위치는 랜덤
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Instantiate(monsterPrefab, spawnPoint.position, spawnPoint.rotation);
+        GameObject monsterObj = Instantiate(monsterPrefab, spawnPoint.position, spawnPoint.rotation);
+        Monster monster = monsterObj.GetComponent<Monster>();
+        if (monster != null)
+        {
+            monster.id = randomId;
+        }
     }
 
     int RandomMonsterId()
