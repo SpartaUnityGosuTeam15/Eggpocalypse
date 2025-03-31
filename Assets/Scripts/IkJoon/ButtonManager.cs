@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ButtonManager : MonoBehaviour
+public class ButtonManager : UI
 {
     public void OnClickLayEgg()
     {

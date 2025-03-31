@@ -3,48 +3,37 @@ using UnityEngine;
 
 public class Stat
 {
-    private float _curValue;
-    public float CurValue
-    {
-        get { return _curValue; }
-        set
-        {
-            if (_curValue != value)
-            {
-                _curValue = value;
-                OnStatChanged?.Invoke();
-                OnStatChangedWithFloat?.Invoke(GetPercentage());
-            }
-        }
-    }
-    public float minValue;
-    public float maxValue;
-    public float startValue;
+    public float CurValue { get; private set; }
+    public float MinValue {  get; private set; }
+    public float MaxValue {  get; private set; }
+    private float _startValue;
     //public float passiveValue;
-
-    public Action OnStatChanged;
-    public Action<float> OnStatChangedWithFloat;
 
     public Stat(float startValue, float maxValue, float minValue = 0f)
     {
-        this.startValue = startValue;
-        this.CurValue = startValue;
-        this.maxValue = maxValue;
-        this.minValue = minValue;
+        _startValue = startValue;
+        CurValue = _startValue;
+        MaxValue = maxValue;
+        MinValue = minValue;
+    }
+
+    public void Set(float amount)
+    {
+        CurValue = Mathf.Clamp(MinValue, amount, MaxValue); ;
     }
 
     public void Add(float amount)
     {
-        CurValue = Mathf.Clamp(minValue, CurValue + amount, maxValue);
+        CurValue = Mathf.Clamp(MinValue, CurValue + amount, MaxValue);
     }
 
     public void Subtract(float amount)
     {
-        CurValue = Mathf.Clamp(minValue, CurValue - amount, maxValue);
+        CurValue = Mathf.Clamp(MinValue, CurValue - amount, MaxValue);
     }
 
     public float GetPercentage()
     {
-        return CurValue / maxValue;
+        return CurValue / MaxValue;
     }
 }
