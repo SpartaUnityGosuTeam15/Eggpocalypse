@@ -25,7 +25,7 @@
       "moveSpeed": 2
     },
     {
-      "id": 3,
+      "id": 3, 
       "name": "하피",
       "description": "테스트 설명",
       "health": 80,

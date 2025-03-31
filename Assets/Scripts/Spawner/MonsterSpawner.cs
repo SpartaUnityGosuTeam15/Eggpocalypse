@@ -6,18 +6,21 @@ public class MonsterSpawner : ObjectSpawner
 {
     private Transform player;
     private Dictionary<int, MonsterData> monsterDict;
+    private List<SpawnData> spawnDict;
+    private HashSet<int> spawnedWaves = new();
 
     protected override void Awake()
     {
         base.Awake();
-        TryFindPlayer();
+        TryFindPlayer(); //플레이어 찾는 법 변환 할 예정
+
+        spawnDict = DataManager.Instance.spawnDict;
     }
 
     private void TryFindPlayer()
     {
         PlayerController pc = FindObjectOfType<PlayerController>();
-        if (pc != null)
-            player = pc.transform;
+        if (pc != null) player = pc.transform;
         else
             Debug.LogWarning("PlayerController를 찾지 못했습니다.");
     }
@@ -43,13 +46,36 @@ public class MonsterSpawner : ObjectSpawner
 
     protected override void SpawnObject()
     {
-        if (player == null) return;
+        if (player == null || spawnDict == null) return;
 
-        const int maxAttempts = 10;
+        foreach (var data in spawnDict)
+        {
+            if (spawnedWaves.Contains(data.wave)) continue;
+
+            if (elapsedTime >= data.startTime && elapsedTime < data.endTime)
+            {
+                if (!prefabDict.TryGetValue(data.monsterId, out GameObject prefab))
+                {
+                    Debug.LogWarning($"[스폰실패] 프리팹 없음: {data.monsterId}");
+                    return;
+                }
+
+                for (int i = 0; i < data.count; i++)
+                    SpawnPosition(prefab);
+
+                spawnedWaves.Add(data.wave);
+                Debug.Log($"[스폰완료] Wave {data.wave}: ID {data.monsterId} x {data.count}");
+                return;
+            }
+        }
+    }
+    private void SpawnPosition(GameObject prefab)
+    {
+        const int maxAttempts = 10; // 무한 루프 방지용
         float minDistance = 3f;
         float areaSize = 15f;
 
-        for (int i = 0; i < maxAttempts; i++)
+        for (int attempt = 0; attempt < maxAttempts; attempt++)
         {
             Vector3 offset = new Vector3(Random.Range(-areaSize, areaSize), 0, Random.Range(-areaSize, areaSize));
             Vector3 pos = player.position + offset;
@@ -57,25 +83,16 @@ public class MonsterSpawner : ObjectSpawner
             if (Vector3.Distance(player.position, pos) < minDistance)
                 continue;
 
-            if (Physics.Raycast(pos + Vector3.up * 10f, Vector3.down, out RaycastHit hit, 20f, LayerMask.GetMask("Ground")))
+            if (Physics.Raycast(pos + Vector3.up * 1f, Vector3.down, out RaycastHit hit, 20f, LayerMask.GetMask("Ground")))
             {
-                int id = RandomMonsterId();
-                if (prefabDict.TryGetValue(id, out GameObject prefab))
-                {
-                    Poolable pooled = PoolManager.Instance.Get(prefab);
-                    pooled.transform.position = hit.point;
-                    pooled.transform.rotation = Quaternion.identity;
-                }
+                Poolable pooled = PoolManager.Instance.Get(prefab);
+                pooled.transform.position = hit.point;
+                pooled.transform.rotation = Quaternion.identity;
                 return;
             }
         }
 
-        Debug.LogWarning("몬스터 스폰 실패: 조건에 맞는 위치를 찾지 못함");
+        Debug.LogWarning("스폰 위치를 찾지 못했습니다.");
     }
 
-    private int RandomMonsterId()
-    {
-        List<int> keys = new List<int>(monsterDict.Keys);
-        return keys[Random.Range(0, keys.Count)];
-    }
 }

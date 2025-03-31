@@ -49,7 +49,7 @@ public class MonsterData
 {
     public int id;
     public string name;
-    public string description; //Ό³Έν
+    public string description;
     public int health;
     public int attack;
     public float moveSpeed;
@@ -99,6 +99,26 @@ public class BuildingDataLoader : ILoader<int, BuildingData>
         }
         return dict;
     }
+}
+
+#endregion
+
+#region SpawnData
+
+[Serializable]
+public class SpawnData
+{
+    public int wave;
+    public float startTime;
+    public float endTime;
+    public int monsterId;
+    public int count;
+}
+
+[Serializable]
+public class SpawnDataLoader
+{
+    public List<SpawnData> data;
 }
 
 #endregion

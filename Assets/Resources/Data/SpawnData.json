@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "wave": 1,
+      "startTime": 0,
+      "endTime": 5,
+      "monsterId": 1,
+      "count": 15
+    },
+    {
+      "wave": 2,
+      "startTime": 5,
+      "endTime": 10,
+      "monsterId": 2,
+      "count": 10
+    },
+    {
+      "wave": 3,
+      "startTime": 10,
+      "endTime": 15,
+      "monsterId": 3,
+      "count": 3
+    }
+  ]
+}
