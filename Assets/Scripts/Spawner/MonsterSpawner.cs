@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class MonsterSpawner : MonoBehaviour
 {
@@ -12,19 +13,41 @@ public class MonsterSpawner : MonoBehaviour
 
     private float elapsedTime = 0f;
     private Dictionary<int, MonsterData> monsterDict;
+    private Dictionary<int, GameObject> monsterPrefabs = new(); // 미리 로드된 프리팹 저장
 
     private void Awake()
     {
-        
-    }
-    private void Start()
-    {
+        // 데이터 로딩
         DataManager.Instance.Init();
         monsterDict = DataManager.Instance.monsterDict;
 
         if (monsterDict == null || monsterDict.Count == 0)
         {
             Debug.LogError("몬스터 데이터가 없습니다.");
+            return;
+        }
+
+        // 프리팹 미리 로드
+        foreach (var pair in monsterDict)
+        {
+            int id = pair.Key;
+            GameObject prefab = Resources.Load<GameObject>($"Prefabs/Monsters/{id}");
+
+            if (prefab == null)
+            {
+                Debug.LogWarning($"프리팹 로딩 실패: id {id}, name {pair.Value.name}");
+                continue;
+            }
+
+            monsterPrefabs[id] = prefab;
+        }
+    }
+
+    private void Start()
+    {
+        if (monsterPrefabs.Count == 0)
+        {
+            Debug.LogError("프리팹이 하나도 로딩되지 않았습니다.");
             return;
         }
 
@@ -51,7 +74,7 @@ public class MonsterSpawner : MonoBehaviour
             if (spawnCountIncreaseTimer >= 20f)
             {
                 currentSpawnCount += spawnIncreaseRate;
-                spawnCountIncreaseTimer = 0f;
+                spawnCountIncreaseTimer = 0f; 
             }
         }
     }
@@ -59,18 +82,17 @@ public class MonsterSpawner : MonoBehaviour
     void SpawnMonster()
     {
         int randomId = RandomMonsterId();
-        MonsterData monsterData = monsterDict[randomId];
-
-        GameObject monsterPrefab = Resources.Load<GameObject>($"Prefabs/Monsters/{monsterData.id}");
-        if (monsterPrefab == null)
+        if (!monsterPrefabs.TryGetValue(randomId, out GameObject prefab))
         {
-            Debug.LogWarning($"프리팹을 찾을 수 없음: 이름 {monsterData.name}, id {monsterData.id}");
+            Debug.LogWarning($"프리팹이 미리 로드되어 있지 않음: id {randomId}");
             return;
         }
 
-        // 스폰 위치는 랜덤
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Instantiate(monsterPrefab, spawnPoint.position, spawnPoint.rotation);
+
+        Poolable pooled = PoolManager.Instance.Get(prefab);
+        pooled.transform.position = spawnPoint.position;
+        pooled.transform.rotation = spawnPoint.rotation;
     }
 
     int RandomMonsterId()
