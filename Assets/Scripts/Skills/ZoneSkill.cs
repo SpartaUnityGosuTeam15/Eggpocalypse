@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ZoneSkill : AttackSkill
 {
+    //몬스터 리스트 
+
+
     private void Update()
     {
         if (isAuto) //자동 공격일 시 일정 시간마다 실행
