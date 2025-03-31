@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
+
 
 public class Monster : MonoBehaviour, IDamageable
 {
@@ -12,13 +9,15 @@ public class Monster : MonoBehaviour, IDamageable
     public Animator Animator { get; private set; }
 
     public float AttackRange;
+    public int Exp;
     public int id;
     public string MonsterName {  get; private set; }
     public string Description {  get; private set; }
     public Stat Health {  get; private set; }
     public int Damage {  get; private set; }
     public float MoveSpeed {  get; private set; }
-
+    
+    private bool isDead = false;
 
     public virtual void Awake()
     {
@@ -38,6 +37,7 @@ public class Monster : MonoBehaviour, IDamageable
 
     private void Update()
     {
+        if (isDead) return;
         stateMachine.Update();
     }
 
@@ -47,6 +47,7 @@ public class Monster : MonoBehaviour, IDamageable
         {
             Debug.Log(Damage);
             InvokeRepeating("DealDamage", 0f, 1f);
+            MonsterDie();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -91,7 +92,20 @@ public class Monster : MonoBehaviour, IDamageable
 
     public void MonsterDie()
     {
-        Debug.Log($"{gameObject.name} die");
+        if (isDead) return;
+
+        isDead = true;
+        Animator.SetTrigger("Die");
+        
+        Destroy(gameObject, 1f);
+        DropItems();
+
+    }
+
+    private void DropItems()
+    {
+        ItemDrop.Instance.DropMeat(transform.position);
+        ItemDrop.Instance.DropExp(transform.position, Exp);
     }
 
 }
