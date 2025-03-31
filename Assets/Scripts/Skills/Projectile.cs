@@ -22,11 +22,6 @@ public class Projectile : MonoBehaviour
             piercing--;
     }
 
-    private void Start()
-    {
-        Debug.Log(direction * shotSpeed);
-    }
-
     private void Update()
     {
         if (direction == Vector3.zero)

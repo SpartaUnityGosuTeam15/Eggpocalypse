@@ -15,7 +15,7 @@ public class ProjectileSkill : AttackSkill
         {
             if (cooldown - Time.deltaTime < 0f)
             {
-                StartCoroutine(makePrefabs());
+                StartCoroutine(makePrefabs()); //오브젝트 풀링으로 바꿀 것
                 cooldown = attackRate;
             }
         }
@@ -48,5 +48,11 @@ public class ProjectileSkill : AttackSkill
             UseSkill();
             yield return new WaitForSeconds(0.05f);
         }
+    }
+
+    public override void LevelUP()
+    {
+        base.LevelUP();
+        //수치 조정
     }
 }

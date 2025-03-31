@@ -40,4 +40,9 @@ public class ZoneSkill : AttackSkill
          * collision의 tag or layer가 몬스터인 경우 몬스터 리스트 제거
          */
     }
+
+    public override void LevelUP()
+    {
+        base.LevelUP();
+    }
 }

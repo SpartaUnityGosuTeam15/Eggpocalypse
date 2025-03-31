@@ -20,8 +20,6 @@ public class CircleSkill : AttackSkill
     private void Start()
     {
         MakePrefabs();
-        MakePrefabs();
-        MakePrefabs();
     }
     // Update is called once per frame
     void Update()
@@ -48,5 +46,12 @@ public class CircleSkill : AttackSkill
         {
             projectiles[i].transform.localPosition = Quaternion.Euler(0, (360.0f / projectiles.Count) * i, 0) * new Vector3(5f, 0f);
         }
+    }
+
+    public override void LevelUP()
+    {
+        base.LevelUP();
+        MakePrefabs(); //투사체 하나 증가
+        //그 이외 공격력 등의 수치 변경
     }
 }
