@@ -15,53 +15,28 @@ public class QuadTree<T> where T : HasPosition
         _root.Insert(obj);
     } 
 
-    public List<T> QueryRange(Rect range)
-    {
-        List<T> found = new();
-        _root.Query(range, found);
-        return found;
+    //public List<T> FindObjectsinArea(Rect range)
+    //{
+    //    List<T> found = new();
+    //    _root.CollectObjectsInCircle(range, found);
+    //    return found;
+    //}
+
+    public T FindNearestObject(Vector2 center, float radius)
+    {//가장 가까운 몬스터 찾기
+        T best = default(T);
+        float bestDistSqr = float.MaxValue;
+        _root.BestFirstSearch(center, ref best, ref bestDistSqr);
+        
+        if (best == null || bestDistSqr > radius * radius) return default(T);
+
+        return best;
     }
 
-    public T FindNearestMonster(Vector2 center, float radius)
-    {
-        Rect searchRect = new Rect(center.x - radius, center.y - radius, radius, radius);
-        List<T> candidates  = QueryRange(searchRect);
-
-        if (candidates.Count == 0) return null;
-
-        T nearest = default(T);
-        float minDistSqr = float.MaxValue;
-        float radiusSqr = radius * radius;
-        foreach (T obj in candidates)
-        {
-            float distSqr = (obj.Position - center).sqrMagnitude;
-            if (distSqr < minDistSqr && distSqr < radiusSqr)
-            {
-                minDistSqr = distSqr;
-                nearest = obj;
-            }
-        }
-
-        return nearest;
-    }
-
-    public List<T> FindNearestMonsters(Vector2 center, float radius)
-    {
-        Rect searchRect = new Rect(center.x - radius, center.y - radius, radius, radius);
-        List<T> candidates = QueryRange(searchRect);
-
-        if (candidates.Count == 0) return null;
-
+    public List<T> FindNearestObjects(Vector2 center, float radius)
+    {//일정 거리 내의 몬스터 그룹 찾기
         List<T> found = new();
-        float radiusSqr = radius * radius;
-        foreach (T obj in candidates)
-        {
-            float distSqr = (obj.Position - center).sqrMagnitude;
-            if (distSqr < radiusSqr)
-            {
-                found.Add(obj);
-            }
-        }
+        _root.CollectObjectsInCircle(center, radius, found);
 
         return found;
     }

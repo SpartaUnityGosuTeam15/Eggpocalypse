@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public float detectRadius = 10;
     public LayerMask monsterLayer;
     public Monster closest;
-    public float updateInterval = 0.1f;
+    private WaitForSeconds waitTime = new WaitForSeconds(0.1f);
 
     private void Awake()
     {
@@ -29,9 +29,9 @@ public class Player : MonoBehaviour
     {
         while (true)
         {
-            closest = ObjectManager.Instance.GetNearestMonster(detectRadius);
+            closest = ObjectManager.Instance.GetNearesrMonster(detectRadius);
 
-            yield return new WaitForSeconds(updateInterval);
+            yield return waitTime;
         }
     }
 
@@ -66,4 +66,11 @@ public class Player : MonoBehaviour
     //        closest = monster;
     //    }
     //}
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        
+        Gizmos.DrawSphere(transform.position, detectRadius);
+    }
 }

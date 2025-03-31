@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class ObjectManager : Singleton<ObjectManager>
     [SerializeField] private Rect quadTreeBounds = new Rect(-10, -10, 20, 20);
     private QuadTree<Monster> monsterQuadTree;
 
+    private WaitForSeconds waitTime = new WaitForSeconds(0.1f);
+
     protected override void Awake()
     {
         isGlobal = false;
@@ -19,6 +22,18 @@ public class ObjectManager : Singleton<ObjectManager>
     private void Start()
     {
         _player = GameManager.Instance.player.transform;   
+
+        StartCoroutine(RebuildTreeCoroutine());
+    }
+
+    IEnumerator RebuildTreeCoroutine()
+    {
+        while (true)
+        {
+            RebuildeTree();
+
+            yield return waitTime;
+        }
     }
 
     void RebuildeTree()
@@ -30,12 +45,16 @@ public class ObjectManager : Singleton<ObjectManager>
         } 
     }
 
-    public Monster GetNearestMonster(float radius)
+    public Monster GetNearesrMonster(float radius)
     {
-        RebuildeTree();
-
         Vector2 playerPos = new Vector2(_player.position.x, _player.position.z);
-        return monsterQuadTree.FindNearestMonster(playerPos, radius);
+        return monsterQuadTree.FindNearestObject(playerPos, radius);
+    }
+
+    public List<Monster> GetNearestMonsters(float radius)
+    {
+        Vector2 playerPos = new Vector2(_player.position.x, _player.position.z);
+        return monsterQuadTree.FindNearestObjects(playerPos, radius);
     }
 
     private void OnDrawGizmosSelected()

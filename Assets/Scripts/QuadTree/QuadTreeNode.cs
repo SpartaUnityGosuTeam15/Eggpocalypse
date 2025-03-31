@@ -1,40 +1,41 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class QuadTreeNode<T> where T : HasPosition
 {
     private const int Capacity = 4;
-    public Rect Bounds;
-    private List<T> objects;
-    private bool divided = false;
-    private QuadTreeNode<T> first;
-    private QuadTreeNode<T> second;
-    private QuadTreeNode<T> third;
-    private QuadTreeNode<T> fourth;
+    private Rect _bounds;
+    private List<T> _objects;
+    private bool _divided = false;
+    private QuadTreeNode<T> _first;
+    private QuadTreeNode<T> _second;
+    private QuadTreeNode<T> _third;
+    private QuadTreeNode<T> _fourth;
 
     public QuadTreeNode(Rect bounds)
     {
-        Bounds = bounds;
-        objects = new();
+        _bounds = bounds;
+        _objects = new();
     }
 
     public bool Insert(T obj)
     {
-        if(!Bounds.Contains(obj.Position)) return false;
+        if(!_bounds.Contains(obj.Position)) return false;
 
-        if (objects.Count < Capacity)
+        if (_objects.Count < Capacity)
         {
-            objects.Add(obj);
+            _objects.Add(obj);
             return true;
         }
         else
         {
-            if (!divided) SubDivide();
+            if (!_divided) SubDivide();
 
-            if (first.Insert(obj)) return true;
-            if (second.Insert(obj)) return true;
-            if (third.Insert(obj)) return true;
-            if (fourth.Insert(obj)) return true;
+            if (_first.Insert(obj)) return true;
+            if (_second.Insert(obj)) return true;
+            if (_third.Insert(obj)) return true;
+            if (_fourth.Insert(obj)) return true;
         }
 
         return false;
@@ -42,50 +43,101 @@ public class QuadTreeNode<T> where T : HasPosition
 
     private void SubDivide()
     {
-        float x = Bounds.x;
-        float y = Bounds.y;
-        float w = Bounds.width / 2f;
-        float h = Bounds.height / 2f;
+        float x = _bounds.x;
+        float y = _bounds.y;
+        float w = _bounds.width / 2f;
+        float h = _bounds.height / 2f;
 
         Rect firstRect = new Rect(x + w, y, w, h);
         Rect secondRect = new Rect(x, y, w, h);
         Rect thirdRect = new Rect(x, y + h, w, h);
         Rect fourthRect = new Rect(x + w, y + h, w, h);
 
-        first = new QuadTreeNode<T>(firstRect);
-        second = new QuadTreeNode<T>(secondRect);
-        third = new QuadTreeNode<T>(thirdRect);
-        fourth = new QuadTreeNode<T>(fourthRect);
-        divided = true;
+        _first = new QuadTreeNode<T>(firstRect);
+        _second = new QuadTreeNode<T>(secondRect);
+        _third = new QuadTreeNode<T>(thirdRect);
+        _fourth = new QuadTreeNode<T>(fourthRect);
+        _divided = true;
     }
 
-    public void Query(Rect range, List<T> found)
+    public void CollectObjectsInCircle(Vector2 center, float radius, List<T> found)
     {
-        if(!Bounds.Overlaps(range)) return;
-
-        foreach(var obj in objects)
+        if(!RectIntersectsCircle(_bounds, center, radius)) return;
+        if(RectFullyInsideCircle(_bounds, center, radius))
         {
-            if(range.Contains(obj.Position)) found.Add(obj);
+            GetAllObjects(found);
+            return;
         }
 
-        if (divided)
+        foreach(var obj in _objects)
         {
-            first.Query(range, found);
-            second.Query(range, found);
-            third.Query(range, found);
-            fourth.Query(range, found);
+            if((obj.Position - center).sqrMagnitude <= radius * radius) found.Add(obj);
+        }
+
+        if (_divided)
+        {
+            _first.CollectObjectsInCircle(center, radius, found);
+            _second.CollectObjectsInCircle(center, radius, found);
+            _third.CollectObjectsInCircle(center, radius, found);
+            _fourth.CollectObjectsInCircle(center, radius, found);
         }
     }
 
-    public void GetAll(List<T> result)
+    public void BestFirstSearch(Vector2 point, ref T best, ref float bestDistSqr)
     {
-        result.AddRange(objects);
-        if (divided)
+        float distToNodeSqr = Util.SqrDistancePointToRect(point, _bounds);
+        if (distToNodeSqr > bestDistSqr) return;
+
+        foreach (T obj in _objects)
         {
-            first.GetAll(result);
-            second.GetAll(result);
-            third.GetAll(result);
-            fourth.GetAll(result);
+            float distance = (obj.Position - point).sqrMagnitude;
+            if (distance < bestDistSqr)
+            {
+                bestDistSqr = distance;
+                best = obj;
+            }
         }
+
+        if (_divided)
+        {
+            List<QuadTreeNode<T>> children = new List<QuadTreeNode<T>> { _first, _second, _third, _fourth };
+            var sortedChildren = children.OrderBy(child => Util.SqrDistancePointToRect(point, child._bounds));
+            foreach (var child in sortedChildren)
+            {
+                child.BestFirstSearch(point, ref best, ref bestDistSqr);
+            }
+        }
+    }
+
+    public void GetAllObjects(List<T> result)
+    {
+        result.AddRange(_objects);
+        if (_divided)
+        {
+            _first.GetAllObjects(result);
+            _second.GetAllObjects(result);
+            _third.GetAllObjects(result);
+            _fourth.GetAllObjects(result);
+        }
+    }
+
+    public static bool RectIntersectsCircle(Rect rect, Vector2 center, float radius)
+    {//Rect가 일부라도 원과 겹치면 true
+        float dx = Mathf.Max(rect.xMin - center.x, 0, center.x - rect.xMax);
+        float dy = Mathf.Max(rect.yMin - center.y, 0, center.y - rect.yMax);
+        return (dx * dx + dy * dy) <= (radius * radius);
+    }
+
+    public static bool RectFullyInsideCircle(Rect rect, Vector2 center, float radius)
+    {//Rect가 원 내부에 완전히 포함되면 true
+        Vector2[] corners = new Vector2[]
+        {
+            new Vector2(rect.xMin, rect.yMin),
+            new Vector2(rect.xMin, rect.yMax),
+            new Vector2(rect.xMax, rect.yMin),
+            new Vector2(rect.xMax, rect.yMax)
+        };
+
+        return corners.All(corner => (corner - center).sqrMagnitude <= radius * radius);
     }
 }
