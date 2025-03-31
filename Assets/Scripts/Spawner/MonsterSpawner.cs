@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {
-    //public MonsterDataLoader monsterDataLoader; // JSON에서 로드된 데이터
     public Transform[] spawnPoints;
     public float waveDuration = 300f;   // 시간 : 5분
     public float spawnInterval = 0.5f;  // 스폰 주기
@@ -14,6 +13,10 @@ public class MonsterSpawner : MonoBehaviour
     private float elapsedTime = 0f;
     private Dictionary<int, MonsterData> monsterDict;
 
+    private void Awake()
+    {
+        
+    }
     private void Start()
     {
         DataManager.Instance.Init();
