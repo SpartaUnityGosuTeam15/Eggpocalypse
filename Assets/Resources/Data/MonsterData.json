@@ -15,22 +15,6 @@
       "health": 300,
       "attack": 10,
       "moveSpeed": 1.2
-    },
-    {
-      "id": 3,
-      "name": "나가",
-      "description": "테스트 설명",
-      "health": 150,
-      "attack": 15,
-      "moveSpeed": 2
-    },
-    {
-      "id": 4,
-      "name": "하피",
-      "description": "테스트 설명",
-      "health": 80,
-      "attack": 20,
-      "moveSpeed": 3
     }
   ]
 }
