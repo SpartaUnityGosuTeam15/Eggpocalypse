@@ -53,7 +53,6 @@ public class Monster : MonoBehaviour, IDamageable
     {
         if (other.gameObject.CompareTag("Player"))
         {
-
             CancelInvoke("DealDamage");
         }
     }
