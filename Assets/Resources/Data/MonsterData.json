@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "id": 1,
+      "id": 0,
       "name": "그루멜",
       "description": "기본 슬라임",
       "health": 100,
@@ -9,7 +9,7 @@
       "moveSpeed": 2.5
     },
     {
-      "id": 2,
+      "id": 1,
       "name": "스눅",
       "description": "가시 슬라임",
       "health": 300,
@@ -17,7 +17,7 @@
       "moveSpeed": 1.2
     },
     {
-      "id": 3,
+      "id": 2,
       "name": "나가",
       "description": "테스트 설명",
       "health": 150,
@@ -25,7 +25,7 @@
       "moveSpeed": 2
     },
     {
-      "id": 4,
+      "id": 3,
       "name": "하피",
       "description": "테스트 설명",
       "health": 80,

@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "id": 101,
+      "id": 0,
       "name": "불화살",
       "description": "스킬 설명란",
       "coefficient": 1.2,
@@ -12,7 +12,7 @@
       "cooldown": 2.5
     },
     {
-      "id": 102,
+      "id": 1,
       "name": "얼음창",
       "description": "스킬 설명란",
       "coefficient": 0.9,
