@@ -68,8 +68,11 @@ public class Player : MonoBehaviour
         float min = detectRadius;
         foreach (Monster monster in monsters)
         {
-            min = Mathf.Min(min, monster.Agent.remainingDistance);
-            closest = monster;
+            if(monster.Agent.remainingDistance < min)
+            {
+                min = monster.Agent.remainingDistance;
+                closest = monster;
+            }
         }
     }
 
@@ -78,5 +81,9 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.yellow;
         
         Gizmos.DrawSphere(transform.position, detectRadius);
+
+        Gizmos.color = Color.red;
+
+        if (closest != null) Gizmos.DrawSphere(closest.transform.position, 1f);
     }
 }

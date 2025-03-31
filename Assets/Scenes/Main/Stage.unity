@@ -466,9 +466,9 @@ MonoBehaviour:
   - {fileID: 579086474}
   - {fileID: 2019494679}
   waveDuration: 300
-  spawnInterval: 300
-  initialSpawnCount: 5000
-  spawnIncreaseRate: 0
+  spawnInterval: 3
+  initialSpawnCount: 5
+  spawnIncreaseRate: 1
 --- !u!4 &1259425804
 Transform:
   m_ObjectHideFlags: 0
