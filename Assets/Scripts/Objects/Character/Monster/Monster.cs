@@ -43,7 +43,26 @@ public class Monster : MonoBehaviour, IDamageable
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player")) TakeDamage(Damage);
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Debug.Log(Damage);
+            InvokeRepeating("DealDamage", 0f, 1f);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+
+            CancelInvoke("DealDamage");
+        }
+    }
+    private void DealDamage()
+    {
+        if (GameManager.Instance.player != null)
+        {
+            GameManager.Instance.player.condition.TakeDamage(Damage);
+        }
     }
 
     public void TakeDamage(int damage)
@@ -75,4 +94,5 @@ public class Monster : MonoBehaviour, IDamageable
     {
         Debug.Log($"{gameObject.name} die");
     }
+
 }
