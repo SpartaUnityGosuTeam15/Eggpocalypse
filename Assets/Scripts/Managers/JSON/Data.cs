@@ -10,18 +10,27 @@ public interface ILoader<Key, Value>
 
 #region SkillData
 
+public enum SkillType
+{
+    ProjectileSkill,
+    CircleSkill,
+    ZoneSkill
+}
+
 [Serializable]
 public class SkillData
 {
     public int id;
     public string name;
     public string description;      // 설명
-    public float coefficient;       // 계수
-    public bool isPenetrating;      // 관통 여부
-    public int targetCount;         
-    public float range;             
-    public int projectileCount;     
-    public float cooldown;          
+    public float[] damage = new float[6];  //데미지
+    public float[] attackRate = new float[6]; //공격속도
+    public float[] shotSpeed = new float[6]; //발사체 속도
+    public float[] attackRange = new float[6]; //사거리
+    public int[] penetration = new int[6]; //관통하는 몹수
+    public int[] shotCount = new int[6]; //한 번 발사시 횟수
+    public bool autoAttack = true; //자동 공격 여부
+    public SkillType skillType;
 }
 
 [Serializable]
@@ -102,3 +111,4 @@ public class BuildingDataLoader : ILoader<int, BuildingData>
 }
 
 #endregion
+

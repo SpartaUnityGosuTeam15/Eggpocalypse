@@ -5,7 +5,8 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public int penetration; //관통할 수 있는 횟수 //음수 설정하면 관통 횟수제한 X
-    public float lifeTime; //생존시간 //음수로 생성하면 시간 X
+    public float lifeTime; //생존시간
+    public bool isLifeTime; //생존시간 여부
     public Vector3 direction; //발사 방향
     public float shotSpeed;
 
@@ -13,8 +14,6 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //데미지 넣는 공식
-        //구현 필요
         if (other.gameObject.CompareTag("Monster"))
         {
             other.gameObject.GetComponent<IDamageable>().TakeDamage(damage);
@@ -34,6 +33,9 @@ public class Projectile : MonoBehaviour
             return;
 
         transform.position += direction * shotSpeed * Time.deltaTime;
+
+        if (!isLifeTime)
+            return;
 
         lifeTime -= Time.deltaTime;
         if (lifeTime <= 0)

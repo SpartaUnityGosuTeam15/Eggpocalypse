@@ -10,6 +10,7 @@ public class ZoneSkill : AttackSkill
     private void Start()
     {
         monsterList = new List<IDamageable>();
+        LevelUP();
     }
 
 
@@ -20,7 +21,7 @@ public class ZoneSkill : AttackSkill
             if (cooldown - Time.deltaTime <= 0f)
             {
                 UseSkill();
-                cooldown = attackRate;
+                cooldown = attackRate[skillLevel - 1];
             }
         }
 
@@ -32,7 +33,7 @@ public class ZoneSkill : AttackSkill
     {
         foreach (var monster in monsterList)
         {
-            monster.TakeDamage((int)damage);
+            monster.TakeDamage((int)damage[skillLevel - 1]);
         }
     }
 
@@ -51,9 +52,9 @@ public class ZoneSkill : AttackSkill
             monsterList.Remove(other.GetComponent<IDamageable>());
         }
     }
-
     public override void LevelUP()
     {
         base.LevelUP();
+        transform.localScale = new Vector3(attackRange[skillLevel - 1], 0.05f, attackRange[skillLevel - 1]);
     }
 }
