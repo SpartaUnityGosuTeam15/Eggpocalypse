@@ -69,6 +69,7 @@ public class Monster : HasPosition, IDamageable
     public void TakeDamage(int damage)
     {
         Health.Subtract(damage);
+        Debug.Log(Health.ToString());
         Transform textPosition = transform.GetChild(1);
         if (textPosition != null)
         {
