@@ -31,7 +31,6 @@ public class Monster : HasPosition, IDamageable
     public virtual void Start()
     {
         InitMonsterData();
-        //Cursor.lockState = CursorLockMode.Locked;
         stateMachine = new MonsterStateMachine(this);
         stateMachine.ChangeState(stateMachine.ChasingState);
         stateMachine.Target = GameManager.Instance.player;
@@ -70,6 +69,11 @@ public class Monster : HasPosition, IDamageable
     public void TakeDamage(int damage)
     {
         Health.Subtract(damage);
+        Transform textPosition = transform.GetChild(1);
+        if (textPosition != null)
+        {
+            UI_Damage.Instance.DamagePool(damage, textPosition.position);
+        }
         if(Health.CurValue <= 0)
         {
             MonsterDie();
