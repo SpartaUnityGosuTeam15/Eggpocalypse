@@ -7,8 +7,9 @@ public abstract class BaseSkill : MonoBehaviour
     public SkillData skillData;
 
     public string skillName;
+    public string skillDescription;
     public int skillLevel;
-    public const int maxLevel = 6;
+    public int maxLevel = 6;
 
     public virtual void LevelUP()
     {

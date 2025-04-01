@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillName: 
+  skillDescription: 
   skillLevel: 0
   damage: 0
   attackRate: 0
@@ -52,6 +53,7 @@ MonoBehaviour:
   cooldown: 0
   isAuto: 0
   pivotTrans: {fileID: 7543052309073255036}
+  shotCount: 3
   projectilePrefab: {fileID: 2462744603618338795, guid: d393014852733014a87717ae77ac0872,
     type: 3}
   projectiles: []

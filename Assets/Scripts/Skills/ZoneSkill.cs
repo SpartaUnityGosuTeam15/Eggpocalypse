@@ -5,6 +5,12 @@ using UnityEngine;
 public class ZoneSkill : AttackSkill
 {
     //몬스터 리스트 
+    List<IDamageable> monsterList;
+
+    private void Start()
+    {
+        monsterList = new List<IDamageable>();
+    }
 
 
     private void Update()
@@ -24,21 +30,26 @@ public class ZoneSkill : AttackSkill
 
     public override void UseSkill()
     {
-        //몬스터 리스트에 있는 적들에게 데미지 
+        foreach (var monster in monsterList)
+        {
+            monster.TakeDamage((int)damage);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        /*
-         * collision의 tag or layer가 몬스터인 경우 몬스터 리스트 추가
-         */
+        if (other.gameObject.CompareTag("Monster"))
+        {
+            monsterList.Add(other.GetComponent<IDamageable>());
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        /*
-         * collision의 tag or layer가 몬스터인 경우 몬스터 리스트 제거
-         */
+        if (other.gameObject.CompareTag("Monster"))
+        {
+            monsterList.Remove(other.GetComponent<IDamageable>());
+        }
     }
 
     public override void LevelUP()

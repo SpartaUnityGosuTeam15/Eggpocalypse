@@ -8,9 +8,13 @@ public class ProjectileSkill : AttackSkill
     Vector3 direction; //발사 방향
     public float shotSpeed; //발사속도
     public GameObject projectionPrefabs; //발사체
+    public int shotCount;
 
     private void Update()
     {
+        if (GameManager.Instance.player.closest == null)
+            return;
+
         if (isAuto) //자동 공격일 시 일정 시간마다 실행
         {
             if (cooldown - Time.deltaTime < 0f)
@@ -27,13 +31,9 @@ public class ProjectileSkill : AttackSkill
 
     public override void UseSkill()
     {
-        //타겟 방향으로 공격
-        //direction = target.transform.position - transform.position
+        direction = GameManager.Instance.player.closest.transform.position - new Vector3(transform.position.x, 0, transform.position.z);
 
-        //임시로 타격 방향은 원점을 향해서
-        direction = Vector3.zero - new Vector3(transform.position.x, 0, transform.position.z);
-
-        GameObject go = Instantiate(projectionPrefabs);
+        GameObject go = Instantiate(projectionPrefabs); //오브젝트 풀링으로 바꿀 것
 
         go.transform.position = transform.position;
         go.GetComponent<Projectile>().shotSpeed = shotSpeed;
@@ -43,10 +43,10 @@ public class ProjectileSkill : AttackSkill
 
     public IEnumerator makePrefabs()
     {
-        for (int i = 0; i < skillLevel; i++)
+        for (int i = 0; i < shotCount; i++)
         {
             UseSkill();
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForSeconds(0.05f); //연속 발사시 약간의 딜레이
         }
     }
 

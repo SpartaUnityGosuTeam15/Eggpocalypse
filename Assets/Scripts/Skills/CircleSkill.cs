@@ -6,6 +6,7 @@ public class CircleSkill : AttackSkill
 {
     public Transform pivotTrans;
     private float y_angle;
+    public int shotCount;
 
     public GameObject projectilePrefab;
 
@@ -19,8 +20,9 @@ public class CircleSkill : AttackSkill
 
     private void Start()
     {
-        MakePrefabs();
+        LevelUP();
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -51,7 +53,10 @@ public class CircleSkill : AttackSkill
     public override void LevelUP()
     {
         base.LevelUP();
-        MakePrefabs(); //투사체 하나 증가
-        //그 이외 공격력 등의 수치 변경
+        while (shotCount > projectiles.Count)
+        {
+            MakePrefabs(); //투사체 하나 증가
+                           //그 이외 공격력 등의 수치 변경
+        }
     }
 }
