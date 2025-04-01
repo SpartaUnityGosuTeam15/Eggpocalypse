@@ -6,7 +6,8 @@ using UnityEngine;
 public enum ItemType
 {
     Resource,
-    Exp
+    Exp,
+    Gold
 }
 public class Item : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class Item : MonoBehaviour
                     break;
                 case ItemType.Exp:
                     GameManager.Instance.player.condition.GainExp(value);
+                    break;
+                case ItemType.Gold:
+                    //GameManager.Instance.player.condition.GainGold(value);
+                    break;
+                default:
                     break;
             }
            GainItem?.Invoke();

@@ -9,14 +9,17 @@ public class Monster : MonoBehaviour, IDamageable
     public Animator Animator { get; private set; }
 
     public float AttackRange;
-    public int Exp;
     public int id;
     public string MonsterName {  get; private set; }
     public string Description {  get; private set; }
     public Stat Health {  get; private set; }
     public int Damage {  get; private set; }
-    public float MoveSpeed {  get; private set; }
-    
+    public float MoveSpeed { get; private set; }
+    public int Meat {  get; private set; }
+    public int Exp {  get; private set; }
+    public int Gold {  get; private set; }
+
+
     private bool isDead = false;
 
     public virtual void Awake()
@@ -88,6 +91,9 @@ public class Monster : MonoBehaviour, IDamageable
         Damage = data.attack;
         MoveSpeed = data.moveSpeed;
         Agent.speed = MoveSpeed;
+        Meat = data.dropMeat;
+        Gold = data.dropGold;
+        Exp = data.dropExp; 
     }
 
     public void MonsterDie()
@@ -96,16 +102,17 @@ public class Monster : MonoBehaviour, IDamageable
 
         isDead = true;
         Animator.SetTrigger("Die");
-        
-        Destroy(gameObject, 1f);
+        Debug.Log(Exp);
+        Destroy(gameObject, 1.5f);
         DropItems();
 
     }
 
     private void DropItems()
     {
-        ItemDrop.Instance.DropMeat(transform.position);
-        ItemDrop.Instance.DropExp(transform.position, Exp);
+        ItemDrop.Instance.DropItem(ItemDrop.Instance.meatPrefab, transform.position, Meat);
+        ItemDrop.Instance.DropItem(ItemDrop.Instance.expPrefab, transform.position, Exp);
+        ItemDrop.Instance.DropItem(ItemDrop.Instance.goldPrefab, transform.position, Gold);
     }
 
 }

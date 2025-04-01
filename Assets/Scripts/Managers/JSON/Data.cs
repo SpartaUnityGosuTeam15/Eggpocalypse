@@ -53,6 +53,9 @@ public class MonsterData
     public int health;
     public int attack;
     public float moveSpeed;
+    public int dropExp;
+    public int dropMeat;
+    public int dropGold;
 }
 
 [Serializable]

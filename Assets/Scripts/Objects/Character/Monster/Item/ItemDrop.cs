@@ -1,37 +1,33 @@
 
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public class ItemDrop : Singleton<ItemDrop>
 {
-    private GameObject meatPrefab;
-    private GameObject expPrefab;
+    public GameObject meatPrefab;
+    public GameObject expPrefab;
+    public GameObject goldPrefab;
 
     protected override void Awake()
     {
         meatPrefab = Resources.Load<GameObject>("Prefabs/MonsterDrop/Meat");
         expPrefab = Resources.Load<GameObject>("Prefabs/MonsterDrop/Exp");
+        goldPrefab = Resources.Load<GameObject>("Prefabs/MonsterDrop/Gold");
     }
 
-    public void DropMeat(Vector3 position)
+    public void DropItem(GameObject prefab, Vector3 position, int value)
     {
-        Poolable meat = PoolManager.Instance.Get(meatPrefab);
-        meat.transform.position = position;
-        meat.gameObject.SetActive(true);
-        meat.GetComponent<Item>().GainItem = () => PoolManager.Instance.Release(meat);
-    }
-
-    public void DropExp(Vector3 position, int expAmount)
-    {
-        for (int i = 0; i < expAmount / 10; i++)
+        for(int i = 0; i < value; i++)
         {
-            Poolable exp = PoolManager.Instance.Get(expPrefab);
+            Poolable poolable = PoolManager.Instance.Get(prefab);
 
             Vector3 randomOffest = new Vector3(Random.Range(-1.5f, 1.5f), .3f, Random.Range(-1.5f, 1.5f));
-            exp.transform.position = position + randomOffest;
-            exp.gameObject.SetActive(true);
+            poolable.transform.position = position + randomOffest;
+            poolable.gameObject.SetActive(true);
 
-            exp.GetComponent<Item>().GainItem = () => PoolManager.Instance.Release(exp);
+            poolable.GetComponent<Item>().GainItem = () => PoolManager.Instance.Release(poolable);
+
         }
     }
 
