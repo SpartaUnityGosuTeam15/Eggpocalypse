@@ -25,10 +25,15 @@ public class UI_Lobby : UI
     
     [SerializeField] private Button startButton;
 
+    private SaveData saveData;
+
     protected override void Awake()
     {
         base.Awake();
 
         //플레이어 세이브파일 받아와서 세팅해야 함
+        saveData = SaveManager.Instance.saveData;
+
+        //UI_Lobby 세팅해야 함
     }
 }
