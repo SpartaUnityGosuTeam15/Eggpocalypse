@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Monster : MonoBehaviour, IDamageable
+public class Monster : HasPosition, IDamageable
 {
     protected MonsterStateMachine stateMachine;
     public NavMeshAgent Agent {  get; private set; }
@@ -31,7 +31,7 @@ public class Monster : MonoBehaviour, IDamageable
     public virtual void Start()
     {
         InitMonsterData();
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         stateMachine = new MonsterStateMachine(this);
         stateMachine.ChangeState(stateMachine.ChasingState);
         stateMachine.Target = GameManager.Instance.player;
