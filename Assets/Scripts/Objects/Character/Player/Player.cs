@@ -6,11 +6,15 @@ public class Player : MonoBehaviour
 {
     [HideInInspector] public PlayerController controller;
     [HideInInspector] public PlayerCondition condition;
+
     public List<Monster> monsters = new List<Monster>();
     public float detectRadius = 10;
     public LayerMask monsterLayer;
     public Monster closest;
     private WaitForSeconds waitTime = new WaitForSeconds(0.1f);
+
+    public List<AttackSkill> attackSkills = new(3);
+    public List<StatSkill> statSkills = new(6);
 
     private void Awake()
     {
@@ -27,15 +31,15 @@ public class Player : MonoBehaviour
         StartCoroutine(DetectNearestMonster());
     }
 
-    IEnumerator findNearest()
-    {
-        while (true)
-        {
-            closest = ObjectManager.Instance.GetNearesrMonster(detectRadius);
+    //IEnumerator findNearest()
+    //{
+    //    while (true)
+    //    {
+    //        closest = ObjectManager.Instance.GetNearesrMonster(detectRadius);
 
-            yield return waitTime;
-        }
-    }
+    //        yield return waitTime;
+    //    }
+    //}
 
     IEnumerator DetectNearestMonster()
     {

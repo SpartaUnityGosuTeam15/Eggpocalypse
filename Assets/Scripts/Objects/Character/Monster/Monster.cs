@@ -31,7 +31,7 @@ public class Monster : HasPosition, IDamageable
     public virtual void Start()
     {
         InitMonsterData();
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         stateMachine = new MonsterStateMachine(this);
         stateMachine.ChangeState(stateMachine.ChasingState);
         stateMachine.Target = GameManager.Instance.player;

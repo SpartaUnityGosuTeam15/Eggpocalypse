@@ -10,5 +10,6 @@ public class Scene_Stage : Scene
 
         UIManager.Instance.ShowUI<UI_Hud>();
         UIManager.Instance.ShowUI<ButtonManager>();
+        UIManager.Instance.ShowUI<UI_SelectSkill>();
     }
 }

@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectManager : Singleton<ObjectManager>
-{
+public class ObjectManager : MonoBehaviour
+{//나중에 쿼드트리 사용하려면 Singleton<ObjectManager>로 변경 후 스포너와 플레이어에서 메서드 조정
     public List<Monster> monsters = new();
     private Transform _player;
 
