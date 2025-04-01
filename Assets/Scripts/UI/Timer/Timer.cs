@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class Timer : MonoBehaviour
+public class Timer : UI
 {
     public TMP_Text timerText;
     public float totalTime = 15 * 60f; // √  ¥‹¿ß
