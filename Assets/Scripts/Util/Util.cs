@@ -35,4 +35,20 @@ public static class Util
         }
         return comp;
     }
+
+    public static void Exit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false; // 에디터에서 실행 중이면 중지
+#else
+        Application.Quit(); // 빌드된 게임이면 종료
+#endif
+    }
+
+    public static float SqrDistancePointToRect(Vector2 point, Rect rect)
+    {
+        float dx = Mathf.Max(rect.xMin - point.x, 0, point.x - rect.xMax);
+        float dy = Mathf.Max(rect.yMin - point.y, 0, point.y - rect.yMax);
+        return dx * dx + dy * dy;
+    }
 }
