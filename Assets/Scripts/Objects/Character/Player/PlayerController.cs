@@ -1,8 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : MonoBehaviour
 {
+    private Player _player;
     private InputHandler _input;
     private Rigidbody _rb;
     private Animator _animator;
@@ -12,10 +14,9 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
     private Vector2 curMovement;
 
-    private bool _hasTarget = false;
-
     private void Start()
     {
+        _player = GetComponent<Player>();
         _input = GetComponent<InputHandler>();
         _rb = GetComponent<Rigidbody>();
         _animator = GetComponentInChildren<Animator>();
@@ -52,8 +53,8 @@ public class PlayerController : MonoBehaviour
         Vector3 dir = Vector3.forward * curMovement.y + Vector3.right * curMovement.x;
         _rb.velocity = dir * speed;
 
-        if (_hasTarget) { } //Look(target);
-        else //Look(dir);
+        if (_player.closest != null) Look(_player.closest.transform);
+        else Look(dir);
 
         if(dir != Vector3.zero)
         {
@@ -71,6 +72,7 @@ public class PlayerController : MonoBehaviour
     public void Look(Transform target)
     {
         Vector3 dir = (target.position - transform.position).normalized;
+        dir = new Vector3(dir.x, 0, dir.z);
         Look(dir);
     }
 

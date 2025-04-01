@@ -6,6 +6,6 @@ public class Scene_Lobby : Scene
     {
         base.Init();
 
-        PoolManager.Instance.Clear();
+        UIManager.Instance.ShowUI<UI_Lobby>();
     }
 }
