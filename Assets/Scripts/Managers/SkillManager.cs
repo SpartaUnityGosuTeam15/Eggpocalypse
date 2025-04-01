@@ -10,7 +10,7 @@ public class SkillManager : Singleton<SkillManager>
     private void Start()
     {
         //JsonLoader를 이용해서 스킬 및 스탯 옵션 정보 받기
-        DataManager.Instance.Init();
+        //DataManager.Instance.Init();
         Dictionary<int, SkillData> skillDict = DataManager.Instance.skillDict;
         foreach (var skillData in skillDict.Values)
         {

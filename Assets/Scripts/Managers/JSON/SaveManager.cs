@@ -27,13 +27,19 @@ public class SaveManager : Singleton<SaveManager>
         return JsonUtility.FromJson<SaveData>(json);
     }
 
-    void SaveDataFile(SaveData loader, string fileName)
+    void SaveDataFile(SaveData data, string fileName)
     {
-        string json = JsonUtility.ToJson(loader, true);
+        string json = JsonUtility.ToJson(data, true);
         string path = $"{Application.persistentDataPath}/{fileName}.json";
         System.IO.File.WriteAllText(path, json);
 
         Debug.Log($"{path} 历厘 肯丰");
+    }
+
+    public void ClearDataFile()
+    {
+        SaveData newData = new SaveData();//后 单捞磐 积己
+        SaveDataFile(newData, nameof(SaveData)); // 后 单捞磐 历厘
     }
 
     public void SaveAll()

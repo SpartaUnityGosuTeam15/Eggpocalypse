@@ -11,7 +11,7 @@ public class MonsterSpawner : ObjectSpawner
     {
         base.Awake();
         TryFindPlayer(); // 추후 바꿀예정
-        DataManager.Instance.Init();
+        //DataManager.Instance.Init();
         monsterDict = DataManager.Instance.monsterDict;
     }
 
