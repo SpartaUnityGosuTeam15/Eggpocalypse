@@ -5,7 +5,5 @@ public class Scene_Lobby : Scene
     protected override void Init()
     {
         base.Init();
-
-        PoolManager.Instance.Clear();
     }
 }
