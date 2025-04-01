@@ -6,6 +6,6 @@ public class Scene_Title : Scene
     {
         base.Init();
 
-        PoolManager.Instance.Clear();
+        UIManager.Instance.ShowUI<UI_Title>();
     }
 }

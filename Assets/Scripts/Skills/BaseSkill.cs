@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BaseSkill : MonoBehaviour
 {
+    public SkillData skillData;
+
     public string skillName;
     public int skillLevel;
-    public const int maxLevel = 6;
-
+    public readonly int maxLevel = 6;
 }

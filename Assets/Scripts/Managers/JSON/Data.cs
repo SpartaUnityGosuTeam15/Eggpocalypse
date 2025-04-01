@@ -49,7 +49,7 @@ public class MonsterData
 {
     public int id;
     public string name;
-    public string description; //Ό³Έν
+    public string description;
     public int health;
     public int attack;
     public float moveSpeed;

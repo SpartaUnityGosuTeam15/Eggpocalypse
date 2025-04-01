@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerCondition : MonoBehaviour, IDamageable
 {
+    private Player _player;
+
     public Stat Health = new Stat(100, 100);
     public int attack = 10;
     public int level = 1;
@@ -13,6 +15,11 @@ public class PlayerCondition : MonoBehaviour, IDamageable
 
     [SerializeField] private IntEventChannel OnLevelChanged;
     [SerializeField] private IntEventChannel OnMeatChanged;
+
+    private void Awake()
+    {
+        _player = GetComponent<Player>();
+    }
 
     private void Start()
     {
@@ -60,7 +67,9 @@ public class PlayerCondition : MonoBehaviour, IDamageable
         level++;
         OnLevelChanged?.RaiseEvent(level);
         //스킬 선택 메서드
-        //일시 정지
+        //UIManager.Instance.ShowUI<UI_SelectSkill>().Init(_player.attackSkills, _player.statSkills);
+        //일시정지
+        //Time.timeScale = 0f;
     }
 
     public void GainMeat(int amount)
