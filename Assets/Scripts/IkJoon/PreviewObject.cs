@@ -17,6 +17,7 @@ public class PreviewObject : MonoBehaviour
     public ButtonManager buttonManager;
     private Renderer objRenderer;
     private Transform[] childObjects;
+    
     [SerializeField]private bool canPlace = false;
     
 
@@ -85,6 +86,7 @@ public class PreviewObject : MonoBehaviour
         if(playerCondition.meat < 5)
         {
             objRenderer.material = redMat;
+            buttonManager.EnableText();
         }
         objRenderer.material = canPlace ? greenMat : redMat;
     }
