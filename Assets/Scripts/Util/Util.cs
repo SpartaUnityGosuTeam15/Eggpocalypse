@@ -35,4 +35,11 @@ public static class Util
         }
         return comp;
     }
+
+    public static float SqrDistancePointToRect(Vector2 point, Rect rect)
+    {
+        float dx = Mathf.Max(rect.xMin - point.x, 0, point.x - rect.xMax);
+        float dy = Mathf.Max(rect.yMin - point.y, 0, point.y - rect.yMax);
+        return dx * dx + dy * dy;
+    }
 }

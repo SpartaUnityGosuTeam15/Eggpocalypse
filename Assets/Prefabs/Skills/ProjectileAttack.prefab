@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1855164457261664804}
   - component: {fileID: 767705824986465183}
   m_Layer: 0
-  m_Name: CircleAttack
+  m_Name: ProjectileAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b699d3fe748aa4448b89877699d2e279, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  piercing: -1
-  lifeTime: -1
+  piercing: 0
+  lifeTime: 5
   direction: {x: 0, y: 0, z: 0}
+  shotSpeed: 0

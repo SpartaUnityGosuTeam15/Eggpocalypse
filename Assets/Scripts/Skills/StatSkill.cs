@@ -17,7 +17,7 @@ public class StatSkill : BaseSkill
         //스탯 변동이 있을 경우
     }
 
-    public void LevelUP()
+    public override void LevelUP()
     {
         if(maxLevel > skillLevel)
         {

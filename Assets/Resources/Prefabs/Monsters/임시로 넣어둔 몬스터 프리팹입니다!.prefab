@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6067658649197535065}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: "\uC784\uC2DC\uB85C \uB123\uC5B4\uB454 \uBAAC\uC2A4\uD130 \uD504\uB9AC\uD339\uC785\uB2C8\uB2E4!"
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
