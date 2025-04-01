@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +8,7 @@ public class PetAttackState : IState
     private NavMeshAgent agent;
     private float attackCooldown = 1.5f;
     private float lastAttackTime;
+    private List<Monster> monstersInRange = new List<Monster>();
 
     public PetAttackState(PetStateMachine machine)
     {
@@ -82,6 +84,30 @@ public class PetAttackState : IState
         {
             // 공격 대상 몬스터에게 데미지 적용
             targetMonster.TakeDamage(stateMachine.Pet.Damage);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Monster"))
+        {
+            Monster monster = other.GetComponent<Monster>();
+            if (monster != null)
+            {
+                monstersInRange.Add(monster);  // 리스트에 몬스터 추가
+            }
+        }
+    }
+
+    // 콜라이더에서 몬스터가 나가면 리스트에서 제거
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Monster"))
+        {
+            Monster monster = other.GetComponent<Monster>();
+            if (monster != null)
+            {
+                monstersInRange.Remove(monster);  // 리스트에서 몬스터 제거
+            }
         }
     }
 }

@@ -7,16 +7,23 @@ public class Egg : MonoBehaviour
     private Color targetColor = new Color(0x22 / 255f, 0x89 / 255f, 0xF3 / 255f);
     private int clickCount = 0;
     private int maxClicks = 5;
-    public ButtonManager buttonManager;
+    private ButtonManager buttonManager;
     [SerializeField]private GameObject petPrefab;
     private PlayerCondition playerCondition;
 
+
+    // public void Init(ButtonManager manager)
+    // {
+    //     // 생성된 시점에 ButtonManager를 주입받음
+    //     buttonManager = manager;
+    // }
     void Start()
     {
         eggRenderer = GetComponentInChildren<Renderer>();
         startColor = eggRenderer.material.color; // 시작 색 저장
         playerCondition = FindObjectOfType<PlayerCondition>();
         buttonManager = FindObjectOfType<ButtonManager>();
+
     }
 
     private void OnMouseDown()

@@ -5,14 +5,17 @@
       "skillId": 101,
       "attack": 50,
       "level": 1,
-      "maxLevel": 5
+      "maxLevel": 5,
+      "health" : 500
+      
     },
     {
       "id": 1,
       "skillId": 102,
       "attack": 70,
       "level": 2,
-      "maxLevel": 5
+      "maxLevel": 5,
+      "health" : 500
     }
   ]
 }

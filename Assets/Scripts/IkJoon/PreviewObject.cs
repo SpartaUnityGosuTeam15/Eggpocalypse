@@ -4,7 +4,11 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-
+public enum EggType
+{
+    Egg1,
+    Egg2
+}
 public class PreviewObject : MonoBehaviour
 {
     [SerializeField]private LayerMask groundLayer;
@@ -19,8 +23,7 @@ public class PreviewObject : MonoBehaviour
     private Transform[] childObjects;
     
     [SerializeField]private bool canPlace = false;
-    
-
+    public EggType eggType;
 
     // Start is called before the first frame update
     void Start()
@@ -64,6 +67,8 @@ public class PreviewObject : MonoBehaviour
             GameObject newEgg = Instantiate(eggPref, hit.point, Quaternion.identity);
             newEgg.name = "Egg";
             buttonManager.eggs.Add(newEgg);
+            Egg egg = eggPref.GetComponent<Egg>();
+            // egg.Init(buttonManager);
         }
         toggle.interactable = false;
         upgradeBtn.SetActive(true);

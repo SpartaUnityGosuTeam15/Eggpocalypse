@@ -677,7 +677,7 @@ GameObject:
   - component: {fileID: 688040028775219365}
   - component: {fileID: 6015388230727941373}
   m_Layer: 0
-  m_Name: Green
+  m_Name: GreenPet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

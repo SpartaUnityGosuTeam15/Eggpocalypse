@@ -2,10 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Pet : MonoBehaviour
+public class Pet : MonoBehaviour, IDamageable
 {
     protected PetStateMachine stateMachine;
     public NavMeshAgent Agent { get; private set; }
+    public Collider attackCollider;
 
     public Animator Animator { get; private set; }
 
@@ -14,7 +15,7 @@ public class Pet : MonoBehaviour
     public int Id { get; private set; }
     public string MonsterName { get; private set; }
     public string Description { get; private set; }
-    public float Health { get; private set; }
+    //public float Health { get; private set; }
     public int Damage { get; private set; }
     public float MoveSpeed { get; private set; }
 
@@ -24,11 +25,12 @@ public class Pet : MonoBehaviour
     {
         Animator = GetComponent<Animator>();
         Agent = GetComponent<NavMeshAgent>();
+        attackCollider = GetComponent<Collider>();
     }
 
     public virtual void Start()
     {
-        InitMonsterData();
+        InitDragonData();
 
         // stateMachine 초기화 및 타겟 설정
         stateMachine = new PetStateMachine(this);
@@ -54,9 +56,14 @@ public class Pet : MonoBehaviour
         Debug.Log($"Received {damage} damage.");
     }
 
-    private void InitMonsterData()
+    private void InitDragonData()
     {
-        // 몬스터 데이터 초기화 코드 (필요시 추가)
+        BuildingData data  = GameManager.Instance.GetBuildingData(Id);
+        if (data != null&&data.type == BuildingType.Dragon)
+        {
+            Damage = data.attack;
+            Agent.speed = MoveSpeed;
+        }
     }
 
         private void OnDrawGizmosSelected()

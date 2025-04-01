@@ -12,4 +12,8 @@ public class GameManager : Singleton<GameManager>
 
         SceneManager.LoadScene(sceneName);
     }
+    public BuildingData GetBuildingData(int id)
+    {
+        return DataManager.Instance.buildDict.TryGetValue(id, out BuildingData data) ? data : null;
+    }
 }
