@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: 426322126141256019}
   m_Layer: 0
   m_Name: Monster2
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8044675540492566152
 Transform:
   m_ObjectHideFlags: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackRange: 2
+  id: 2
 --- !u!136 &2745512322063060956
 CapsuleCollider:
   m_ObjectHideFlags: 0

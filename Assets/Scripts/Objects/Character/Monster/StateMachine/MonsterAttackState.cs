@@ -33,7 +33,8 @@ public class MonsterAttackState : MonsterBaseState
             //Attack();
             alreadyAppliedDealing = false;
         }
-        if(stateMachine.Target == null)
+
+        if (!stateMachine.ChasingState.IsInAttackRange())
         {
             stateMachine.ChangeState(stateMachine.ChasingState);
         }

@@ -1,20 +1,48 @@
 {
   "data": [
     {
-      "id": 1,
+      "id": 0,
       "name": "그루멜",
       "description": "기본 슬라임",
       "health": 100,
       "attack": 10,
-      "moveSpeed": 2.5
+      "moveSpeed": 2.5,
+      "dropExp": 10,
+      "dropMeat": 1,
+      "dropGold": 1
     },
     {
-      "id": 2,
+      "id": 1,
       "name": "스눅",
       "description": "가시 슬라임",
       "health": 300,
       "attack": 10,
-      "moveSpeed": 1.2
+      "moveSpeed": 1.2,
+      "dropExp": 10,
+      "dropMeat": 1,
+      "dropGold": 1
+    },
+    {
+      "id": 2,
+      "name": "나가",
+      "description": "테스트 설명",
+      "health": 150,
+      "attack": 15,
+      "moveSpeed": 2,
+      "dropExp": 10,
+      "dropMeat": 1,
+      "dropGold": 1
+    },
+    {
+      "id": 3,
+      "name": "하피",
+      "description": "테스트 설명",
+      "health": 80,
+      "attack": 20,
+      "moveSpeed": 3,
+      "dropExp": 10,
+      "dropMeat": 1,
+      "dropGold": 1
     }
   ]
 }

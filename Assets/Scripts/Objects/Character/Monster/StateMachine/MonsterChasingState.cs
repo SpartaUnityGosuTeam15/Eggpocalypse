@@ -28,7 +28,7 @@ public class MonsterChasingState : MonsterBaseState
 
     }
 
-    protected bool IsInAttackRange()
+    public bool IsInAttackRange()
     {
         if (stateMachine.Monster.Agent == null) return false;
 
