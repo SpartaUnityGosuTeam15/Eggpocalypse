@@ -102,23 +102,3 @@ public class BuildingDataLoader : ILoader<int, BuildingData>
 }
 
 #endregion
-
-#region SpawnData
-
-[Serializable]
-public class SpawnData
-{
-    public int wave;
-    public float startTime;
-    public float endTime;
-    public int monsterId;
-    public int count;
-}
-
-[Serializable]
-public class SpawnDataLoader
-{
-    public List<SpawnData> data;
-}
-
-#endregion

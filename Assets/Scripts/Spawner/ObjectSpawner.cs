@@ -4,12 +4,12 @@ using UnityEngine;
 
 public abstract class ObjectSpawner : MonoBehaviour
 {
-    //[SerializeField]
-    protected float waveDuration = 300f; // 스폰 시간
-    protected float spawnInterval = 5f;  // 스폰 간격 
+    [SerializeField] protected float totalDuration = 900f; // 총 지속 시간 (15분)
+    [SerializeField] protected float baseSpawnInterval = 1f; // 기본 스폰 간격
 
     protected float elapsedTime = 0f; // 경과 시간
     protected Dictionary<int, GameObject> prefabDict = new();
+
     protected virtual void Awake()
     {
         LoadPrefabs();
@@ -29,13 +29,13 @@ public abstract class ObjectSpawner : MonoBehaviour
     protected abstract void LoadPrefabs();
     protected abstract void SpawnObject();
 
-    IEnumerator SpawnRoutine()
+    protected virtual IEnumerator SpawnRoutine()
     {
-        while (elapsedTime < waveDuration)
+        while (elapsedTime < totalDuration)
         {
-            SpawnObject(); // 한 번만 호출 / 내부에서 시간 체크해서 필요한 애만 소환
-            yield return new WaitForSeconds(spawnInterval);
-            elapsedTime += spawnInterval;
+            SpawnObject();
+            yield return new WaitForSeconds(baseSpawnInterval);
+            elapsedTime += baseSpawnInterval;
         }
     }
 }
