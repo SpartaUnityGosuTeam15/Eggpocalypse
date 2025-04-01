@@ -1,103 +1,122 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class MonsterSpawner : MonoBehaviour
+public class MonsterSpawner : ObjectSpawner
 {
-    public Transform[] spawnPoints;
-    public float waveDuration = 300f;   // 시간 : 5분
-    public float spawnInterval = 0.5f;  // 스폰 주기
-    public int initialSpawnCount = 3;   // 한 번에 소환할 몬스터 수
-    public int spawnIncreaseRate = 1;   // 20초마다 스폰 수 증가
-
-    private float elapsedTime = 0f;
+    private Transform player;
     private Dictionary<int, MonsterData> monsterDict;
-    private Dictionary<int, GameObject> monsterPrefabs = new(); // 미리 로드된 프리팹 저장
 
-    private void Awake()
+    protected override void Awake()
     {
-        // 데이터 로딩
+        base.Awake();
+        TryFindPlayer(); // 추후 바꿀예정
         DataManager.Instance.Init();
         monsterDict = DataManager.Instance.monsterDict;
+    }
 
-        if (monsterDict == null || monsterDict.Count == 0)
+    protected override void LoadPrefabs()
+    {
+        for (int id = 1; id <= 4; id++)
         {
-            Debug.LogError("몬스터 데이터가 없습니다.");
-            return;
+            var prefab = Resources.Load<GameObject>($"Prefabs/Monsters/{id}");
+            if (prefab != null) prefabDict[id] = prefab;
         }
 
-        // 프리팹 미리 로드
-        foreach (var pair in monsterDict)
-        {
-            int id = pair.Key;
-            GameObject prefab = Resources.Load<GameObject>($"Prefabs/Monsters/{id}");
+        // 보스 프리팹 저장용
+        //var boss = Resources.Load<GameObject>("Monsters/보스몬스터아이디");
+        //if (boss != null) prefabDict[보스몬스터아이디] = boss;
+    }
 
-            if (prefab == null)
-            {
-                Debug.LogWarning($"프리팹 로딩 실패: id {id}, name {pair.Value.name}");
+    private void TryFindPlayer()
+    {
+        PlayerController pc = FindObjectOfType<PlayerController>();
+        if (pc != null) player = pc.transform;
+        else Debug.LogWarning("PlayerController를 찾지 못했습니다.");
+    }
+
+    //public void SetPlayer(Transform target)
+    //{
+    //    player = target;
+    //}
+
+    protected override void SpawnObject()
+    {
+        if (player == null) return;
+
+        float minute = Mathf.Floor(elapsedTime / 60f);
+
+        // 항상 1초마다 1,2몬스터 중 랜덤 3마리 스폰
+        SpawnMultipleRandom(3, new int[] { 1, 2 });
+
+        // 25% 확률, 2초마다 3마리 추가 스폰
+        if (Mathf.Approximately(elapsedTime % 2f, 0f) && Random.value < 0.25f)
+            SpawnMultipleRandom(3, new int[] { 1, 2 });
+
+        // 10% 확률, 7초마다, 4번 몬스터(1번몬스터 6마리집합체) 스폰
+        if (Mathf.Approximately(elapsedTime % 7f, 0f) && Random.value < 0.1f)
+            SpawnSingle(4);
+
+        // 10초마다 네임드몬스터 스폰
+        if (Mathf.Approximately(elapsedTime % 10f, 0f))
+            SpawnSingle(3);
+
+        // 5분마다 보스 스폰 
+        //if (Mathf.Approximately(elapsedTime % 300f, 0f) && prefabDict.ContainsKey(99))
+        //  SpawnSingle(99);
+
+        // 몬스터 강화 (1분마다 공격력, 체력 10% 증가)
+        ApplyMonsterScaling(minute);
+    }
+
+    private void SpawnMultipleRandom(int count, int[] ids) //여러 종류 여러마리 소환 할 때
+    {
+        for (int i = 0; i < count; i++)
+        {
+            int id = ids[Random.Range(0, ids.Length)];
+            SpawnSingle(id);
+        }
+    }
+
+    private void SpawnMultiple(int count, int id) //1개 종류 여러마리 소환 할 때
+    {
+        for (int i = 0; i < count; i++)
+            SpawnSingle(id);
+    }
+
+    private void SpawnSingle(int id) //1마리 소환 할 때
+    {
+        if (!prefabDict.ContainsKey(id)) return;
+
+        const int maxAttempts = 10;
+        float minDistance = 3f;
+        float areaSize = 15f;
+
+        for (int attempt = 0; attempt < maxAttempts; attempt++)
+        {
+            Vector3 offset = new Vector3(Random.Range(-areaSize, areaSize), 0, Random.Range(-areaSize, areaSize));
+            Vector3 pos = player.position + offset;
+
+            if (Vector3.Distance(player.position, pos) < minDistance)
                 continue;
-            }
 
-            monsterPrefabs[id] = prefab;
-        }
-    }
-
-    private void Start()
-    {
-        if (monsterPrefabs.Count == 0)
-        {
-            Debug.LogError("프리팹이 하나도 로딩되지 않았습니다.");
-            return;
-        }
-
-        StartCoroutine(SpawnWave());
-    }
-
-    IEnumerator SpawnWave()
-    {
-        int currentSpawnCount = initialSpawnCount;
-        float spawnCountIncreaseTimer = 0f;
-
-        while (elapsedTime < waveDuration)
-        {
-            for (int i = 0; i < currentSpawnCount; i++)
+            if (Physics.Raycast(pos + Vector3.up * 10f, Vector3.down, out RaycastHit hit, 20f, LayerMask.GetMask("Ground")))
             {
-                SpawnMonster();
-            }
-
-            yield return new WaitForSeconds(spawnInterval);
-            elapsedTime += spawnInterval;
-            spawnCountIncreaseTimer += spawnInterval;
-
-            // 20초마다 스폰 수 증가
-            if (spawnCountIncreaseTimer >= 20f)
-            {
-                currentSpawnCount += spawnIncreaseRate;
-                spawnCountIncreaseTimer = 0f; 
+                var pooled = PoolManager.Instance.Get(prefabDict[id]);
+                pooled.transform.position = hit.point;
+                pooled.transform.rotation = Quaternion.identity;
+                return;
             }
         }
     }
 
-    void SpawnMonster()
+    private void ApplyMonsterScaling(float minute) //몬스터 강화 
     {
-        int randomId = RandomMonsterId();
-        if (!monsterPrefabs.TryGetValue(randomId, out GameObject prefab))
+        foreach (var monster in monsterDict.Values)
         {
-            Debug.LogWarning($"프리팹이 미리 로드되어 있지 않음: id {randomId}");
-            return;
+            // 10% 씩 강해짐
+            monster.attack = Mathf.FloorToInt(monster.attack * (1 + 0.1f * minute));
+            monster.health = Mathf.FloorToInt(monster.health * (1 + 0.1f * minute));
         }
-
-        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-
-        Poolable pooled = PoolManager.Instance.Get(prefab);
-        pooled.transform.position = spawnPoint.position;
-        pooled.transform.rotation = spawnPoint.rotation;
-    }
-
-    int RandomMonsterId()
-    {
-        List<int> keys = new List<int>(monsterDict.Keys);
-        return keys[Random.Range(0, keys.Count)];
     }
 }

@@ -6,8 +6,6 @@ public class Scene_Stage : Scene
     {
         base.Init();
 
-        PoolManager.Instance.Clear();
-
         UIManager.Instance.ShowUI<UI_Hud>();
         UIManager.Instance.ShowUI<ButtonManager>();
         UIManager.Instance.ShowUI<UI_SelectSkill>();

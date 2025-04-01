@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 277406490}
   - component: {fileID: 277406489}
   - component: {fileID: 277406493}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,6 +466,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845955144233895482, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
+        type: 3}
+      propertyPath: meat
+      value: 10000000
       objectReference: {fileID: 0}
     - target: {fileID: 8542674038754344151, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
         type: 3}
