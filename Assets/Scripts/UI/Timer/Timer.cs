@@ -1,20 +1,23 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Timer : UI
 {
     public TMP_Text timerText;
-    public float totalTime = 15 * 60f; // 초 단위
-
+    public GameObject resultPanel;
+    
+    public float totalTime = 15 * 60f; // 초 단위 15분 
     private float remainingTime;
     private bool isRunning = true;
 
-    //private bool isBlinking = false;
     private float blinkTimer = 0f;
     private float blinkInterval = 0.5f;
 
     private Color defaultColor;
     private FontStyles defaultFontStyle;
+
+    private bool isCleared = false;
 
     void Start()
     {
@@ -23,6 +26,8 @@ public class Timer : UI
         // 기본 스타일 저장
         defaultColor = timerText.color;
         defaultFontStyle = timerText.fontStyle;
+
+        //resultPanel.onClick.AddListener(() => GameManager.Instance.LoadScene("Lobby"));
     }
 
     void Update()
@@ -31,14 +36,31 @@ public class Timer : UI
 
         remainingTime -= Time.deltaTime;
 
-        if (remainingTime <= 0)
+        if (remainingTime <= 0 && !isCleared)
         {
             remainingTime = 0;
             isRunning = false;
+            Clear();
         }
 
         UpdateTimerText();
         UpdateVisualEffect();
+    }
+    void Clear()
+    {
+        isCleared = true;
+        Time.timeScale = 0f;
+
+        Debug.Log("클리어 성공!");
+
+        if (resultPanel != null)
+            resultPanel.SetActive(true);
+    }
+    public void OnClickReturnToLobby()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Lobby");
+        
     }
 
     void UpdateTimerText()
