@@ -90,5 +90,6 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     void Dead()
     {
         Debug.Log("ав╬З╢ы!");
+        UIManager.Instance.ShowUI<GameOver>();
     }
 }

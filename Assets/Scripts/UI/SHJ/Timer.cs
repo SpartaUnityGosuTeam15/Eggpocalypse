@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 public class Timer : UI
 {
     public TMP_Text timerText;
-    public GameObject resultPanel;
+    public GameObject panel;
+    public GameObject returnButton;
     
     public float totalTime = 15 * 60f; // 초 단위 15분 
     private float remainingTime;
@@ -27,7 +28,6 @@ public class Timer : UI
         defaultColor = timerText.color;
         defaultFontStyle = timerText.fontStyle;
 
-        //resultPanel.onClick.AddListener(() => GameManager.Instance.LoadScene("Lobby"));
     }
 
     void Update()
@@ -53,8 +53,12 @@ public class Timer : UI
 
         Debug.Log("클리어 성공!");
 
-        if (resultPanel != null)
-            resultPanel.SetActive(true);
+        if (returnButton != null)
+            returnButton.SetActive(true);
+        if (panel != null)
+            panel.SetActive(true);
+        if (timerText != null)
+            timerText.enabled = false;
     }
     public void OnClickReturnToLobby()
     {
