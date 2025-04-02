@@ -22,6 +22,7 @@ public class MonsterBaseState : IState
 
     public virtual void Update()
     {
+        if (stateMachine.Monster == null) return;
         stateMachine.Monster.Agent.SetDestination(stateMachine.Target.transform.position);
     }
 
