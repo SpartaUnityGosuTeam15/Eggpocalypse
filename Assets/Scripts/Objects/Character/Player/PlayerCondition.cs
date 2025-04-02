@@ -19,17 +19,10 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     private void Awake()
     {
         _player = GetComponent<Player>();
-    }
 
-    private void Start()
-    {
-        InvokeRepeating(nameof(Test), 0, 0.5f);
-    }
-
-    void Test()
-    {
-        TakeDamage(1);
-        GainExp(1);
+        attack += SaveManager.Instance.saveData.GetAttack();
+        int newHealth = (int)(Health.MaxValue) + SaveManager.Instance.saveData.GetHealth();
+        Health = new Stat(newHealth, newHealth);
     }
 
     public void TakeDamage(int damage)
