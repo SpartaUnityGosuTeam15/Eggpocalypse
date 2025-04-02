@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
         controller = GetComponent<PlayerController>();
         condition = GetComponent<PlayerCondition>();
+
+        detectRadius += SaveManager.Instance.saveData.GetAttackRange();
     }
 
     private void Start()
@@ -89,5 +91,19 @@ public class Player : MonoBehaviour
         Gizmos.color = Color.red;
 
         if (closest != null) Gizmos.DrawSphere(closest.transform.position, 1f);
+    }
+     
+    public void GetAttackSkill(int id)
+    {
+        foreach (AttackSkill attack in attackSkills)
+        {
+            if(attack.id == id)
+            {
+                attack.LevelUP();
+                return;
+            }
+        }
+
+        attackSkills.Add(SkillManager.Instance.GetSkill(id, transform));
     }
 }

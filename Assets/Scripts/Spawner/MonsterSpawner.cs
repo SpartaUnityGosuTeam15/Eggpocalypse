@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MonsterSpawner : ObjectSpawner
 {
+    [SerializeField] private float minDistance = 4f;
+
     private Transform player;
     private Dictionary<int, MonsterData> monsterDict;
 
@@ -89,7 +91,7 @@ public class MonsterSpawner : ObjectSpawner
         if (!prefabDict.ContainsKey(id)) return;
 
         const int maxAttempts = 10;
-        float minDistance = 3f;
+        //float minDistance = 3f;
         float areaSize = 15f;
 
         for (int attempt = 0; attempt < maxAttempts; attempt++)

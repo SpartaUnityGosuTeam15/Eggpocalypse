@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Monster : HasPosition, IDamageable
+public class Monster : Poolable, IDamageable
 {
     protected MonsterStateMachine stateMachine;
     public NavMeshAgent Agent {  get; private set; }
@@ -25,11 +25,6 @@ public class Monster : HasPosition, IDamageable
     {
         Animator = GetComponentInChildren<Animator>();
         Agent = GetComponent<NavMeshAgent>();
-
-    }
-
-    public virtual void Start()
-    {
         InitMonsterData();
         stateMachine = new MonsterStateMachine(this);
         stateMachine.ChangeState(stateMachine.ChasingState);
@@ -41,14 +36,18 @@ public class Monster : HasPosition, IDamageable
         if (isDead) return;
         stateMachine.Update();
     }
-
+    public void OnEnable()
+    {
+        isDead = false;
+        stateMachine.ChangeState(stateMachine.ChasingState);
+        Agent.enabled = true;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log(Damage);
             InvokeRepeating("DealDamage", 0f, 1f);
-            MonsterDie();
+            //MonsterDie();
         }
     }
     private void OnTriggerExit(Collider other)
@@ -69,7 +68,6 @@ public class Monster : HasPosition, IDamageable
     public void TakeDamage(int damage)
     {
         Health.Subtract(damage);
-        Debug.Log(Health.ToString());
         Transform textPosition = transform.GetChild(1);
         if (textPosition != null)
         {
@@ -107,8 +105,9 @@ public class Monster : HasPosition, IDamageable
 
         isDead = true;
         Animator.SetTrigger("Die");
-        Debug.Log(Exp);
-        Destroy(gameObject, 1.5f);
+
+        Invoke("Relase", 1.5f);
+        //Destroy(gameObject, 1.5f);
         DropItems();
 
     }
@@ -118,6 +117,11 @@ public class Monster : HasPosition, IDamageable
         ItemDrop.Instance.DropItem(ItemDrop.Instance.meatPrefab, transform.position, Meat);
         ItemDrop.Instance.DropItem(ItemDrop.Instance.expPrefab, transform.position, Exp);
         ItemDrop.Instance.DropItem(ItemDrop.Instance.goldPrefab, transform.position, Gold);
+    }
+
+    void Relase()
+    {
+        PoolManager.Instance.Release(this);
     }
 
 }
