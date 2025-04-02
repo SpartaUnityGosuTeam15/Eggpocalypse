@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-[CustomEditor(typeof(BaseSkill), true)]
+[CustomEditor(typeof(AttackSkill), true)]
 public class SkillEditor : Editor
 {
     BaseSkill skill;
