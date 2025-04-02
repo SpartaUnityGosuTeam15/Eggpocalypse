@@ -37,6 +37,7 @@ public class UI_Pause : UI
             }
             else // 일시정지
             {
+
                 PauseGame(true);
             }
         }
@@ -44,6 +45,7 @@ public class UI_Pause : UI
 
     public void PauseGame(bool pause)
     {
+
         isPaused = pause;
         pausePanel.SetActive(isPaused);
         Time.timeScale = pause ? 0f : 1f;
