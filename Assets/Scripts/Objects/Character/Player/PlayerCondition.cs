@@ -29,6 +29,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     private void Start()
     {
         InvokeRepeating(nameof(RegenHealth), 1, 1);
+        OnHealthStatChanged.RaiseEvent(Health);
     }
 
     void RegenHealth()
@@ -50,6 +51,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     public void Heal(int amount)
     {
         Health.Add(amount);
+        OnHealthStatChanged?.RaiseEvent(Health);
     }
 
     public void GainExp(int amount)

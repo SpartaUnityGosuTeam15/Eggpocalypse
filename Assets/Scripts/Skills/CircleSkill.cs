@@ -48,7 +48,7 @@ public class CircleSkill : AttackSkill
         //발사체 개수에 따라 위치 조정
         for (int i = 0; i < projectiles.Count; i++)
         {
-            projectiles[i].transform.localPosition = Quaternion.Euler(0, (360.0f / projectiles.Count) * i, 0) * new Vector3(attackRange[skillLevel], 0f);
+            projectiles[i].transform.localPosition = Quaternion.Euler(0, (360.0f / projectiles.Count) * i, 0) * new Vector3(attackRange[skillLevel] * 2, 0f);
         }
     }
 

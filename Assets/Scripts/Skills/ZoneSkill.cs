@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class ZoneSkill : AttackSkill
 {
-    //몬스터 리스트 
-    List<IDamageable> monsterList;
+    public LayerMask monsterLayer;
 
     public override void Start()
     {
         base.Start();
         currentStat = SkillManager.Instance.currentStat;
-        monsterList = new List<IDamageable>();
         LevelUP();
     }
 
@@ -33,25 +31,11 @@ public class ZoneSkill : AttackSkill
 
     public override void UseSkill()
     {
-        foreach (var monster in monsterList)
-        {
-            monster.TakeDamage((int)(damage[skillLevel] + currentStat[2] + addictionAttack));
-        }
-    }
+        Collider[] hits = Physics.OverlapSphere(transform.position, attackRange[skillLevel] / 2, monsterLayer);
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Monster"))
+        foreach (var hit in hits)
         {
-            monsterList.Add(other.GetComponent<IDamageable>());
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Monster"))
-        {
-            monsterList.Remove(other.GetComponent<IDamageable>());
+            hit.GetComponent<IDamageable>().TakeDamage((int)(damage[skillLevel] + currentStat[2] + addictionAttack));
         }
     }
 

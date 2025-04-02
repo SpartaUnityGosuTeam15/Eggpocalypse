@@ -47,6 +47,9 @@ public class UI_SkillSelectSlot : MonoBehaviour
                 GameManager.Instance.player.GetAttackSkill(selectedSkill.id);
             }
             selectedSkill.level++;
+        } else
+        {
+            GameManager.Instance.player.GetComponent<PlayerCondition>().Heal(20);
         }
         Time.timeScale = 1f;
         UIManager.Instance.HideUI<UI_SelectSkill>();

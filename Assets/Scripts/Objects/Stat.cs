@@ -19,17 +19,17 @@ public class Stat
 
     public void Set(float amount)
     {
-        CurValue = Mathf.Clamp(MinValue, amount, MaxValue); ;
+        CurValue = Mathf.Clamp(amount, MinValue, MaxValue); ;
     }
 
     public void Add(float amount)
     {
-        CurValue = Mathf.Clamp(MinValue, CurValue + amount, MaxValue);
+        CurValue = Mathf.Clamp(CurValue + amount, MinValue , MaxValue);
     }
 
     public void Subtract(float amount)
     {
-        CurValue = Mathf.Clamp(MinValue, CurValue - amount, MaxValue);
+        CurValue = Mathf.Clamp(CurValue - amount, MinValue, MaxValue);
     }
 
     public float GetPercentage()

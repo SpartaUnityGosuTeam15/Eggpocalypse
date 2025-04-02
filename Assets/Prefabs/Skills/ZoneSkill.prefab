@@ -164,6 +164,7 @@ MonoBehaviour:
   skillDescription: 
   skillLevel: 0
   maxLevel: 6
+  id: 0
   damage: []
   attackRate: []
   shotSpeed: []
@@ -172,3 +173,11 @@ MonoBehaviour:
   shotCount: 
   isAuto: 0
   cooldown: 0
+  currentStat: []
+  addictionShotCount: 0
+  addictionAttackRate: 0
+  addictionRange: 0
+  addictionAttack: 0
+  monsterLayer:
+    serializedVersion: 2
+    m_Bits: 128

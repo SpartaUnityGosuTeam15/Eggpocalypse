@@ -72,7 +72,7 @@ public class Timer : UI
     public void OnClickReturnToLobby()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Lobby");
+        GameManager.Instance.LoadScene("Lobby");
         
     }
 
