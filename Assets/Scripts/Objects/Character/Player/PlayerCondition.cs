@@ -6,7 +6,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
 
     public Stat Health = new Stat(100, 100);
     public int attack = 10;
-    public int level = 1;
+    public int level = 0;
     public Stat Exp = new Stat(0, 10);
     public int meat = 0;
 
@@ -23,6 +23,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
         attack += SaveManager.Instance.saveData.GetAttack();
         int newHealth = (int)(Health.MaxValue) + SaveManager.Instance.saveData.GetHealth();
         Health = new Stat(newHealth, newHealth);
+        level = 0;
     }
 
     private void Start()

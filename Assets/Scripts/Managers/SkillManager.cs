@@ -69,6 +69,8 @@ public class SkillManager : Singleton<SkillManager>
             item.SkillName = statDict[i].name;
             statSkillList.Add(item);
         }
+
+        GameManager.Instance.player.GetComponent<PlayerCondition>().LevelUp();
         
     }
 

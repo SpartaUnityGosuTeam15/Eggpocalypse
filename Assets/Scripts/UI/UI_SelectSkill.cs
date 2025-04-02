@@ -37,11 +37,17 @@ public class UI_SelectSkill : UI
     {
         List<ChoiceSkillData> skillList = SkillManager.Instance.allSkillDict.Values.ToList(); //스킬과 스탯 포함한 리스트
 
-        if (GameManager.Instance.player.attackSkills.Count == 3) //이미 사용 스킬이 3개인 경우 나머지 공격스킬 제거
+        if (GameManager.Instance.player.GetComponent<PlayerCondition>().level == 1) //게임 시작시 스킬만 고르게
         {
-            skillList.RemoveAll(item => item.type == 0 && item.level == 0);
+            skillList.RemoveAll(item => item.type == 1);
         }
-
+        else
+        {
+            if (GameManager.Instance.player.attackSkills.Count == 3) //이미 사용 스킬이 3개인 경우 나머지 공격스킬 제거
+            {
+                skillList.RemoveAll(item => item.type == 0 && item.level == 0);
+            }
+        }
         skillList.RemoveAll(item => item.level == 6); //만렙 제거
 
         if (skillList.Count == 0)
