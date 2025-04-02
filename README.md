@@ -1,5 +1,3 @@
-# Eggpocalypse
-
 <div align="center">
 
 # <h1>🐲 Eggp🥚 calypse 🐉</h1>
@@ -58,7 +56,7 @@
 
 ## <h3>📽️ 시연 영상</h3>
 
-> 준비 중...
+> https://www.youtube.com/watch?v=AoSWIQcqGYE
 > 
 
 ---
@@ -69,7 +67,8 @@
     
     알이 제거되고 다른 알을 생성했을 때 업그레이드 버튼이 동작하지 않던 문제가 있었습니다.
     
-    ![image.png](image.png)
+    ![image](https://github.com/user-attachments/assets/483cbe46-fd75-41f6-9673-02a63fc8d802)
+
     
     새로운 알을 생성해도 기존의 알을 리스트에서 삭제하지 않아 삭제된 기존의 알을 참조하고 있어 클릭 시 동작을 하지 않았습니다.
     
@@ -78,7 +77,8 @@
         알이 죽어서 삭제하기 전 리스트에서 먼저 삭제하는 코드를 추가하여 해결하였습니다.
         
     
-    ![image.png](image%201.png)
+    ![image 1](https://github.com/user-attachments/assets/97f667bf-4bb3-47b1-a9de-e7174764a90a)
+
     
 2. 스킬 설계
     
@@ -94,7 +94,8 @@
     
     초기엔 몬스터에서 플레이어와의 거리 계산을 sqrMagnitude로 체크했습니다.
     
-    ![image.png](image%202.png)
+    ![image 2](https://github.com/user-attachments/assets/163d3de7-1e2a-4749-a99d-0dcf243c9d66)
+
     
     NavMeshAgent를 사용했기 때문에  remainingDistance와  stoppingDistance를 고려해야 했습니다.
     
@@ -103,7 +104,8 @@
         NavMeshAgent.remainingDistance와 stoppingDistance를 활용해 공격 범위 판별 로직을 수정하여 해결하였습니다.
         
     
-    ![image.png](image%203.png)
+    ![image 3](https://github.com/user-attachments/assets/15fdba8b-cf60-4660-a368-e97a85b28026)
+
     
 4. 몬스터 탐지 최적화
     
@@ -112,13 +114,16 @@
     Unity Profiler를 이용해 5000마리의 몬스터를 생성하여 테스트를 진행 하였습니다.
     
 
-![image.png](61ff874d-0843-4d02-8d50-d452bf922abb.png)
+    ![61ff874d-0843-4d02-8d50-d452bf922abb](https://github.com/user-attachments/assets/9ba3892a-529b-4fa2-a51c-ca349d54b628)
+
 
 - 결과
     
     
-    ![image.png](image%204.png)
+    ![image 4](https://github.com/user-attachments/assets/76602449-75fe-42be-b9f2-5446e5db9e0e)
+
     
-    ![image.png](image%205.png)
+    ![image 5](https://github.com/user-attachments/assets/ff295eb8-1623-4c06-b7d7-460296ba0410)
+
     
     프로젝트에 맞는 로직을 직접 찾아보는 것이 중요하다는 것을 알 수 있었습니다.
