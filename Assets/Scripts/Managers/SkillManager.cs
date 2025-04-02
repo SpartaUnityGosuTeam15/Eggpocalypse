@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class ChoiceSkillData
 {
     public int level;
     public int type; //0이면 attack // 1면 stat
+    //혹시나 추가 정보 필요하면 추가
 
     public ChoiceSkillData(int level, int type)
     {
@@ -21,6 +23,9 @@ public class SkillManager : Singleton<SkillManager>
     Dictionary<int, SkillData> skillDict; //Attack Skill
     
     Dictionary<int, StatData> statDict; //Stat Skill
+
+    public Action updateDamage;
+
 
     public float[][] totalStat;  //쓸 때 -> totalStat[id][level - 1];
     public int[] statLevel = new int[6]; //가진 스탯의 레벨
@@ -51,12 +56,14 @@ public class SkillManager : Singleton<SkillManager>
 
     public void InitStat() //스탯 정보 업데이트 //스킬 리스트 업데이트
     {
-        for(int i = 0; i < 6; i++)
+
+        for (int i = 0; i < 6; i++)
         {
             currentStat[i] = totalStat[i][statLevel[i]];
         }
 
-        foreach(var data in skillDict)
+        allSkillDict = new Dictionary<int, ChoiceSkillData>();
+        foreach (var data in skillDict)
         {
             allSkillDict.Add(data.Key, new ChoiceSkillData(0, 0));
         }
@@ -70,10 +77,15 @@ public class SkillManager : Singleton<SkillManager>
     {
         if (id < 0 || id >= totalStat.Length)
             return;
+        
+        if(statLevel[id] == 6)
+            return;
 
         statLevel[id]++;
 
         currentStat[id] = totalStat[id][statLevel[id]];
+
+        updateDamage?.Invoke();
     }
 
     public AttackSkill GetSkill(int id, Transform trans)
