@@ -19,6 +19,7 @@ public class PoolManager : Singleton<PoolManager>
                 , actionOnGet: OnGet
                 , actionOnRelease: OnRelease
                 , actionOnDestroy: OnDestroy
+                , defaultCapacity: maxCapacity / 2
                 , maxSize: maxCapacity);
         }
         Poolable Create()
@@ -75,18 +76,21 @@ public class PoolManager : Singleton<PoolManager>
         _poolDict.Add(original.name, pool);
     }
     public Poolable Get(GameObject original, int count = 10, Transform parent = null)
-    {//Instantiate ���
+    {//Instantiate 대신 사용
         if (_poolDict.ContainsKey(original.name) == false) CreatePool(original, count);
         return _poolDict[original.name].Pop(parent);
     }
     public void Release(Poolable poolable)
-    {//Destroy ���
+    {//Destroy 대신 사용
         string name = poolable.gameObject.name;
         if (_poolDict.ContainsKey(name) == true) _poolDict[name].Push(poolable);
         else CreatePool(poolable.gameObject);
     }
+
     public void Clear()
     {
+        if (_root == null) return;
+
         foreach (Transform child in _root)
         {
             GameObject.Destroy(child.gameObject);

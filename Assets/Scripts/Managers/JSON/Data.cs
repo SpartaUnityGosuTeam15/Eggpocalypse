@@ -147,3 +147,32 @@ public class StatDataLoader : ILoader<int, StatData>
 }
 
 #endregion
+
+#region StageData
+
+[Serializable]
+public class StageData
+{
+    public int id;
+    public string name;
+    public string description;
+}
+
+[Serializable]
+public class StageDataLoader : ILoader<int, StageData>
+{
+    public List<StageData> data = new List<StageData>();
+
+    public Dictionary<int, StageData> MakeDict()
+    {
+        Dictionary<int, StageData> dict = new Dictionary<int, StageData>();
+        foreach (StageData stage in data)
+        {
+            dict.Add(stage.id, stage);
+        }
+        return dict;
+    }
+}
+
+#endregion
+

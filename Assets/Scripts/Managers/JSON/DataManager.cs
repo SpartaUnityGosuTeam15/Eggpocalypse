@@ -1,21 +1,24 @@
 using JetBrains.Annotations;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 
-public class DataManager
+public class DataManager : Singleton<DataManager>
 {
-    public static DataManager Instance { get; private set; } = new DataManager();
+    public Dictionary<int, SkillData> skillDict { get; private set; } = new();
+    public Dictionary<int, MonsterData> monsterDict {  get; private set; } = new();
+    public Dictionary<int, BuildingData> buildDict { get; private set; } = new();
+    public Dictionary<int, StageData> stageDict { get; private set; } = new();
+    public Dictionary<int, StatData> statDict { get; private set; } = new();
 
-    public Dictionary<int, SkillData> skillDict { get; private set; } = new Dictionary<int, SkillData>();
-    public Dictionary<int, MonsterData> monsterDict {  get; private set; } = new Dictionary<int, MonsterData>();
-    public Dictionary<int, BuildingData> buildDict { get; private set; } = new Dictionary<int, BuildingData>();
-    public Dictionary<int, StatData> statDict { get; private set; } = new Dictionary<int, StatData>();
-
-    public void Init()
+    protected override void Awake()
     {
+        base.Awake();
+
         skillDict = LoadJson<SkillDataLoader, int, SkillData>(nameof(SkillData)).MakeDict();
         monsterDict = LoadJson<MonsterDataLoader, int, MonsterData>(nameof(MonsterData)).MakeDict();
         buildDict = LoadJson<BuildingDataLoader, int, BuildingData>(nameof(BuildingData)).MakeDict();
+        stageDict = LoadJson<StageDataLoader, int, StageData>(nameof(StageData)).MakeDict();
         statDict = LoadJson<StatDataLoader, int, StatData>(nameof(StatData)).MakeDict();
     }
 
