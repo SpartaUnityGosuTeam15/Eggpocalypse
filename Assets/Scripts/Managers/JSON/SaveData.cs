@@ -14,7 +14,7 @@ public class SaveData
     {
         eggIndex = 0;
         stageIndex = 0;
-        gold = 100;
+        gold = 1000;
         enchantState = new List<int> { 0, 0, 0, 0, 0, 0 };
     }
 }
