@@ -21,6 +21,5 @@ public class GameOver : UI
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("Lobby");
-
     }
 }
