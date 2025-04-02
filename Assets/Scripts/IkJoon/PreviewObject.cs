@@ -59,7 +59,7 @@ public class PreviewObject : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
         {
 
-            //int eggIndex = SaveManager.Instance.saveData.eggIndex; // 세이브 데이터에서 선택한 알 인덱스 가져오기
+            //int eggIndex = SaveManager.Instance.saveData.eggIndex; // 세이브 데이터에서 선택한 알 인덱스 가져오기 주석해제 하면 됨(아마도)
             int eggIndex = 1;
             if (eggIndex < 0 || eggIndex >= eggPrefabs.Length) eggIndex = 0; // 예외 처리
             

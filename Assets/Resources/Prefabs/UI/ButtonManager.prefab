@@ -280,8 +280,8 @@ MonoBehaviour:
   greenMat: {fileID: 2100000, guid: 7174638c37e2644aa90915c2a5a1fdf5, type: 2}
   redMat: {fileID: 2100000, guid: 8ec63d2779d5b43d8bd26281b33089a5, type: 2}
   eggPrefabs:
-  - {fileID: 6337375355049823815, guid: 26414b972f20440b7bd9cab15bcd3714, type: 3}
-  - {fileID: 6337375355049823815, guid: ca584cbd51668403bba688942702d35c, type: 3}
+  - {fileID: 7825879497283589182, guid: 26414b972f20440b7bd9cab15bcd3714, type: 3}
+  - {fileID: 7825879497283589182, guid: cff53c150b03e45c8af4975a04cffab3, type: 3}
   toggle: {fileID: 6623103082923359413}
   upgradeBtn: {fileID: 8312730252540708948}
   buttonManager: {fileID: 1089012101697283446}
@@ -1800,6 +1800,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7254be19e75104f178ff7a528a62ffd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pet: {fileID: 0}
+  buttonManager: {fileID: 1089012101697283446}
 --- !u!1 &8312730252540708948
 GameObject:
   m_ObjectHideFlags: 0
@@ -1946,7 +1948,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c05d44fe467c4a06922b4f669ee8711, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  egg: {fileID: 5631878112593735008, guid: 1232c3f12634548f2aec6dffd513cc03, type: 3}
+  egg: {fileID: 0}
   buttonManager: {fileID: 1089012101697283446}
 --- !u!1 &8732458059752077883
 GameObject:

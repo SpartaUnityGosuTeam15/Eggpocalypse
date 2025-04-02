@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -599,6 +599,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1433390047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1433390049}
+  - component: {fileID: 1433390048}
+  m_Layer: 0
+  m_Name: SkillManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1433390048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433390047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e332ed4d742584749b64b76f17331a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackSkillPrefabs:
+  - {fileID: 2788574922422708978, guid: dce66cbcdcdadae43af853bd38f1c464, type: 3}
+  - {fileID: 2788574922422708978, guid: dce66cbcdcdadae43af853bd38f1c464, type: 3}
+  - {fileID: 2788574922422708978, guid: dce66cbcdcdadae43af853bd38f1c464, type: 3}
+  - {fileID: 2462744603618338795, guid: 314cad368e15c0d49be8fb09cbceb608, type: 3}
+  statLevel: 000000000000000000000000000000000000000000000000
+--- !u!4 &1433390049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433390047}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1440306251 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8789988854919992780, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
@@ -611,6 +661,53 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 823508625}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1745590631
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1745590633}
+  - component: {fileID: 1745590632}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1745590632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745590631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49400e81e6e9dcb419f9fcaa58822d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  gold: 0
+  OnGoldChanged: {fileID: 0}
+--- !u!4 &1745590633
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745590631}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1921194915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -638,6 +735,11 @@ PrefabInstance:
         type: 3}
       propertyPath: monsterLayer.m_Bits
       value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 5845955144233895482, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
+        type: 3}
+      propertyPath: meat
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8789988854919992780, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
         type: 3}
@@ -890,3 +992,5 @@ SceneRoots:
   - {fileID: 2019494679}
   - {fileID: 579086474}
   - {fileID: 5404763589542963243}
+  - {fileID: 1433390049}
+  - {fileID: 1745590633}

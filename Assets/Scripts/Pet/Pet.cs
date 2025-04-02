@@ -8,6 +8,7 @@ public class Pet : MonoBehaviour, IDamageable
     public NavMeshAgent Agent { get; private set; }
     public Collider attackCollider;
     public GameObject biteArea; // 물어뜯는 범위
+    
 
     public Animator Animator { get; private set; }
 
@@ -58,6 +59,10 @@ public class Pet : MonoBehaviour, IDamageable
             Damage = buildingData.attack;
             Agent.speed = MoveSpeed;
         }
+    }
+    public void Feed()
+    {
+         //체력회복
     }
 
     private void OnTriggerEnter(Collider other)
