@@ -25,6 +25,16 @@ public class PlayerCondition : MonoBehaviour, IDamageable
         Health = new Stat(newHealth, newHealth);
     }
 
+    private void Start()
+    {
+        InvokeRepeating(nameof(RegenHealth), 1, 1);
+    }
+
+    void RegenHealth()
+    {
+        Heal(1);
+    }
+
     public void TakeDamage(int damage)
     {
         Health.Subtract(damage);
