@@ -702,10 +702,15 @@ MonoBehaviour:
     \uC788\uC2B5\uB2C8\uB2E4.\n\uBAB0\uB824\uC624\uB294 \uC801\uB4E4\uC5D0\uAC8C\uC11C
     \uC54C\uC744 \uC9C0\uD0A4\uACE0 \uC131\uACF5\uC801\uC73C\uB85C \uBD80\uD654\uC2DC\uCF1C
     \uBCF4\uC138\uC694!\n\uC801\uC744 \uBB3C\uB9AC\uCE58\uBA74 \uB098\uC624\uB294
-    \uACBD\uD5D8\uCE58\uB85C \uB2E4\uC591\uD55C \uC2A4\uD0AC\uC744 \uD68D\uB4DD\uD560
-    \uC218 \uC788\uC2B5\uB2C8\uB2E4.\n\uACE8\uB4DC\uB97C \uC5BB\uC5B4\uC11C \uB2A5\uB825\uCE58\uB97C
-    \uC601\uAD6C\uC801\uC73C\uB85C \uAC15\uD654\uD560 \uC218\uB3C4 \uC788\uC2B5\uB2C8\uB2E4.\n\n\uC774\uB3D9
-    : WASD / \uBC29\uD5A5\uD0A4"
+    \uACBD\uD5D8\uCE58\uC640 \uACE0\uAE30\uB4E4\uB85C \uB2E4\uC591\uD55C \uC2A4\uD0AC\uC744
+    \uD68D\uB4DD, \uC6A9\uC774 \uD0DC\uC5B4\uB0A0 \uC54C\uC744 \uC18C\uD658, \uAC15\uD654
+    \uD560 \uC218 \uC788\uC2B5\uB2C8\uB2E4.\n\uACE8\uB4DC\uB97C \uC5BB\uC5B4\uC11C
+    \uB2A5\uB825\uCE58\uB97C \uC601\uAD6C\uC801\uC73C\uB85C \uAC15\uD654\uD560 \uC218\uB3C4
+    \uC788\uC2B5\uB2C8\uB2E4.\n\n\uC774\uB3D9 : WASD / \uBC29\uD5A5\uD0A4\n\n\uC54C
+    \uC18C\uD658: \uC54C \uB0B3\uAE30 \uBC84\uD2BC \uD074\uB9AD \uD6C4 \uC6D0\uD558\uB294
+    \uC704\uCE58\uC5D0 \uD074\uB9AD\n\uC54C \uAC15\uD654: \uC54C\uC744 \uC18C\uD658\uD558\uBA74
+    \uBC14\uB00C\uB294 \uBC84\uD2BC\uC744 \uD074\uB9AD\uD574\uC11C \uAC15\uD654,
+    \uB05D\uAE4C\uC9C0 \uAC15\uD654\uD558\uBA74 \uAC15\uB825\uD55C \uC6A9\uC774 \uBD80\uD654\uD569\uB2C8\uB2E4!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce14a773c2560574481e8e6394346fec, type: 2}
   m_sharedMaterial: {fileID: 2139729706462716660, guid: ce14a773c2560574481e8e6394346fec,
@@ -733,8 +738,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2167,7 +2172,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1184646262228777489
 RectTransform:
   m_ObjectHideFlags: 0
