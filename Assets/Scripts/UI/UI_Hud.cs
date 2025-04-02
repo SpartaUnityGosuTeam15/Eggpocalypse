@@ -37,7 +37,8 @@ public class UI_Hud : UI
         BindListeners();
 
         SetMeat(0);
-        SetGold(GameManager.Instance.gold);
+        SetGold(SaveManager.Instance.saveData.gold);
+        GameManager.Instance.gold = SaveManager.Instance.saveData.gold;
     }
 
     void BindListeners()

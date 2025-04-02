@@ -28,7 +28,6 @@ public class GameManager : Singleton<GameManager>
         if(SceneManager.GetActiveScene().name != "Title" && SceneManager.GetActiveScene().name != "Lobby")
         {
             SaveManager.Instance.saveData.gold = gold;
-            gold = 0;
         }
 
         SceneManager.LoadScene(sceneName);
