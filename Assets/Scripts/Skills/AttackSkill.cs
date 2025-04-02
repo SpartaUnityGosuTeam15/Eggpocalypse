@@ -63,6 +63,19 @@ public abstract class AttackSkill : MonoBehaviour, BaseSkill
 
     public float[] currentStat;
 
+    public int addictionShotCount;
+    public float addictionAttackRate;
+    public float addictionRange;
+    public int addictionAttack;
+
+    public virtual void Start()
+    {
+        addictionShotCount = SaveManager.Instance.saveData.GetProjectileCount();
+        addictionRange = SaveManager.Instance.saveData.GetAttackRange();
+        addictionAttackRate = SaveManager.Instance.saveData.GetAttackSpeed();
+        addictionAttack = GameManager.Instance.player.gameObject.GetComponent<PlayerCondition>().attack;
+    }
+
     public abstract void UseSkill();
     public virtual void LevelUP()
     {

@@ -17,8 +17,9 @@ public class CircleSkill : AttackSkill
     }
 
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         currentStat = SkillManager.Instance.currentStat;
         LevelUP();
         SkillManager.Instance.updateDamage += DamageRefresh;
@@ -64,7 +65,7 @@ public class CircleSkill : AttackSkill
         foreach (GameObject go in projectiles)
         {
             projectile = go.GetComponent<Projectile>();
-            projectile.damage = (int)(damage[skillLevel] + currentStat[2]);
+            projectile.damage = (int)(damage[skillLevel] + currentStat[2] + addictionAttack);
             projectile.penetration = penetration[skillLevel];
             projectile.isLifeTime = false;
         }
@@ -77,7 +78,7 @@ public class CircleSkill : AttackSkill
         foreach (GameObject go in projectiles)
         {
             projectile = go.GetComponent<Projectile>();
-            projectile.damage = (int)(damage[skillLevel] + currentStat[2]);
+            projectile.damage = (int)(damage[skillLevel] + currentStat[2] + addictionAttack);
             projectile.penetration = penetration[skillLevel];
             projectile.isLifeTime = false;
         }

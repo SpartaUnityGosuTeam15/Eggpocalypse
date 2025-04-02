@@ -7,8 +7,9 @@ public class ZoneSkill : AttackSkill
     //몬스터 리스트 
     List<IDamageable> monsterList;
 
-    private void Start()
+    public override void Start()
     {
+        base.Start();
         currentStat = SkillManager.Instance.currentStat;
         monsterList = new List<IDamageable>();
         LevelUP();
@@ -22,7 +23,7 @@ public class ZoneSkill : AttackSkill
             if (cooldown - Time.deltaTime <= 0f)
             {
                 UseSkill();
-                cooldown = attackRate[skillLevel] * currentStat[3];
+                cooldown = attackRate[skillLevel] * currentStat[3] * addictionAttackRate;
             }
         }
 
@@ -34,7 +35,7 @@ public class ZoneSkill : AttackSkill
     {
         foreach (var monster in monsterList)
         {
-            monster.TakeDamage((int)(damage[skillLevel] + currentStat[2]));
+            monster.TakeDamage((int)(damage[skillLevel] + currentStat[2] + addictionAttack));
         }
     }
 
