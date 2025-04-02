@@ -2,40 +2,40 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Pet : MonoBehaviour
+public class Pet : MonoBehaviour, IDamageable
 {
     protected PetStateMachine stateMachine;
     public NavMeshAgent Agent { get; private set; }
+    public Collider attackCollider;
+    public GameObject biteArea; // 물어뜯는 범위
 
     public Animator Animator { get; private set; }
 
-    public float AttackRange = 2f; // 공격 범위
-    public float PlayerDetectionRange = 10f; // 플레이어 탐지 범위 (기즈모용)
+    public float AttackRange = 2f;
+    public float PlayerDetectionRange = 10f;
     public int Id { get; private set; }
-    public string MonsterName { get; private set; }
     public string Description { get; private set; }
-    public float Health { get; private set; }
     public int Damage { get; private set; }
+    public int health{ get; private set; }
     public float MoveSpeed { get; private set; }
 
     public Player Target { get; private set; }
+    public bool isAttacking { get; set; } // 공격 상태 여부
 
     public virtual void Awake()
     {
         Animator = GetComponent<Animator>();
         Agent = GetComponent<NavMeshAgent>();
+        attackCollider = GetComponent<Collider>();
     }
 
     public virtual void Start()
     {
-        InitMonsterData();
-
-        // stateMachine 초기화 및 타겟 설정
+        InitDragonData();
         stateMachine = new PetStateMachine(this);
         stateMachine.Target = GameManager.Instance.player;
-
-        // 추적 상태로 변경
         stateMachine.ChangeState(stateMachine.ChasingState);
+        //Damage = 100;
     }
 
     private void Update()
@@ -43,34 +43,40 @@ public class Pet : MonoBehaviour
         stateMachine.Update();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // if (other.gameObject.CompareTag("Player"))
-        //     TakeDamage(Damage);
-    }
-
     public void TakeDamage(int damage)
     {
-        Debug.Log($"Received {damage} damage.");
+
     }
 
-    private void InitMonsterData()
+    private void InitDragonData()
     {
-        // 몬스터 데이터 초기화 코드 (필요시 추가)
+        BuildingData buildingData  = DataManager.Instance.buildDict.TryGetValue(Id, out BuildingData data) ? data : null;
+
+        if (buildingData != null && buildingData.type == BuildingType.Dragon)
+        {
+
+            Damage = buildingData.attack;
+            Agent.speed = MoveSpeed;
+        }
     }
 
-        private void OnDrawGizmosSelected()
+    private void OnTriggerEnter(Collider other)
     {
-        //  stateMachine이 아직 생성되지 않은 경우 기본값 사용
-        float detectionRange = PlayerDetectionRange;
+        if (isAttacking && other.CompareTag("Monster") && biteArea != null && other == biteArea)
+        {
+            IDamageable monster = other.GetComponent<IDamageable>();
+            if (monster != null)
+            {
+                monster.TakeDamage(Damage);
+            }
+        }
+    }
 
-        // 빨간색으로 플레이어 감지 범위 표시
+    private void OnDrawGizmosSelected()
+    {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
-
-        // 파란색으로 공격 범위 표시
+        Gizmos.DrawWireSphere(transform.position, PlayerDetectionRange);
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, AttackRange);
     }
-
 }

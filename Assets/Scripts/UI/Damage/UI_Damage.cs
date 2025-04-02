@@ -7,7 +7,7 @@ public class UI_Damage : Singleton<UI_Damage>
     private GameObject damagePrefab;
     protected override void Awake()
     {
-        damagePrefab = Resources.Load<GameObject>("Prefabs/DamageText");
+        damagePrefab = Resources.Load<GameObject>("Prefabs/UI/DamageText");
 
     }
 

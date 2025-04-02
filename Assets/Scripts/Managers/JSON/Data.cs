@@ -7,6 +7,11 @@ public interface ILoader<Key, Value>
 {
     Dictionary<Key, Value> MakeDict();
 }
+public enum BuildingType
+{
+    Egg,
+    Dragon
+}
 
 #region SkillData
 
@@ -95,6 +100,8 @@ public class BuildingData
     public int attack;
     public int level;
     public int maxLevel;
+    public int health;
+    public BuildingType type;
 }
 
 [Serializable]

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,6 +8,7 @@ public class PetAttackState : IState
     private NavMeshAgent agent;
     private float attackCooldown = 1.5f;
     private float lastAttackTime;
+    private List<Monster> monstersInRange = new List<Monster>();
 
     public PetAttackState(PetStateMachine machine)
     {
@@ -16,7 +18,7 @@ public class PetAttackState : IState
 
     public void Enter()
     {
-        // 공격 상태로 전환될 때의 초기화
+        stateMachine.Pet.isAttacking = true; // 공격 시작
     }
 
     public void Update()
@@ -46,7 +48,6 @@ public class PetAttackState : IState
                 stateMachine.Pet.Animator.SetBool("Move", false);
                 stateMachine.Pet.Animator.SetBool("Attack", true);
                 Attack(closestMonster);
-                Debug.Log("몬스터 발견 공격시작");
             }
         }
     }
@@ -72,8 +73,7 @@ public class PetAttackState : IState
 
     public void Exit()
     {
-        // 공격 상태 종료 시
-        Debug.Log($"{stateMachine.Pet.name} 공격 멈춤.");
+
     }
 
     private void Attack(Monster targetMonster)

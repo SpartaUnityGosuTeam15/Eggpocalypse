@@ -16,7 +16,7 @@ public class PetChasingState : IState
 
     public void Enter()
     {
-        Debug.Log($"{stateMachine.Pet.name}플레이어 추적");
+        // Debug.Log($"{stateMachine.Pet.name}플레이어 추적");
         agent.isStopped = false; // 추적 시 이동
     }
 
@@ -41,7 +41,7 @@ public class PetChasingState : IState
 
     public void Exit()
     {
-        Debug.Log($"{stateMachine.Pet.name}추적 멈춤");
+        // Debug.Log($"{stateMachine.Pet.name}추적 멈춤");
     }
 
     // private Monster FindClosestMonster()
