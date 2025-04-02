@@ -279,7 +279,9 @@ MonoBehaviour:
     m_Bits: 8
   greenMat: {fileID: 2100000, guid: 7174638c37e2644aa90915c2a5a1fdf5, type: 2}
   redMat: {fileID: 2100000, guid: 8ec63d2779d5b43d8bd26281b33089a5, type: 2}
-  eggPref: {fileID: 6337375355049823815, guid: 26414b972f20440b7bd9cab15bcd3714, type: 3}
+  eggPrefabs:
+  - {fileID: 6337375355049823815, guid: 26414b972f20440b7bd9cab15bcd3714, type: 3}
+  - {fileID: 6337375355049823815, guid: ca584cbd51668403bba688942702d35c, type: 3}
   toggle: {fileID: 6623103082923359413}
   upgradeBtn: {fileID: 8312730252540708948}
   buttonManager: {fileID: 1089012101697283446}
@@ -454,7 +456,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &7887868137547496509
 MonoBehaviour:
@@ -618,7 +620,7 @@ RectTransform:
   m_GameObject: {fileID: 3743550854403000545}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 895585862290969332}
@@ -972,7 +974,7 @@ MonoBehaviour:
     m_Bits: 8
   greenMat: {fileID: 2100000, guid: 7174638c37e2644aa90915c2a5a1fdf5, type: 2}
   redMat: {fileID: 2100000, guid: 8ec63d2779d5b43d8bd26281b33089a5, type: 2}
-  eggPref: {fileID: 6337375355049823815, guid: ca584cbd51668403bba688942702d35c, type: 3}
+  eggPrefabs: []
   toggle: {fileID: 4862015652698254748}
   upgradeBtn: {fileID: 3835385895949061209}
   buttonManager: {fileID: 1089012101697283446}
@@ -1196,10 +1198,10 @@ RectTransform:
   - {fileID: 4997979913184911528}
   m_Father: {fileID: 7646884317098079199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 20, y: 20}
-  m_SizeDelta: {x: 120, y: 120}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -155, y: 75}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &6206374617959983985
 CanvasRenderer:
@@ -1222,15 +1224,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 2b34ead8ea3c78b4882a722a736f874c, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

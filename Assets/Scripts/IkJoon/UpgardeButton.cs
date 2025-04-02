@@ -16,18 +16,17 @@ public class UpgardeButton : MonoBehaviour
         {
             buttonManager = FindObjectOfType<ButtonManager>();
         }
+        
+    }
 
-        // buttonManager가 할당되어 있고, eggs 리스트에 항목이 있다면 가장 최근 egg 할당
+    public void OnClickUpgradeBtn()
+    {
         if (buttonManager != null && buttonManager.eggs.Count > 0)
         {
             egg = buttonManager.eggs[buttonManager.eggs.Count - 1];
             eggManager = egg.GetComponent<Egg>();
             Debug.Log("가장 최근에 추가된 egg: " + egg.name);
         }
-    }
-
-    public void OnClickUpgradeBtn()
-    {
         eggManager.eggLevelUp();
     }
 }

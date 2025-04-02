@@ -623,7 +623,7 @@ PrefabInstance:
     - target: {fileID: 5845955144233895482, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
         type: 3}
       propertyPath: meat
-      value: 108
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8789988854919992780, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
         type: 3}

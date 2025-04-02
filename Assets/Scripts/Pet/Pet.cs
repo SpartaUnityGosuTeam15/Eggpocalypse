@@ -35,7 +35,7 @@ public class Pet : MonoBehaviour, IDamageable
         stateMachine = new PetStateMachine(this);
         stateMachine.Target = GameManager.Instance.player;
         stateMachine.ChangeState(stateMachine.ChasingState);
-        //Damage = 100;
+        Damage = 100;
     }
 
     private void Update()

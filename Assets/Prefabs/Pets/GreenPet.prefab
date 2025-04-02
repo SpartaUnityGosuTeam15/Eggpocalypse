@@ -754,6 +754,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23523bd02528c4f80a75015cf5a96f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCollider: {fileID: 3423469329741893390}
+  biteArea: {fileID: 8017902587768781993}
   AttackRange: 8
   PlayerDetectionRange: 8
 --- !u!195 &6015388230727941373
@@ -2137,8 +2139,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4575417970720866227}
+  - component: {fileID: 3423469329741893390}
   m_Layer: 0
-  m_Name: R_Hand
+  m_Name: BiteArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2162,6 +2165,27 @@ Transform:
   - {fileID: 6194502423370073309}
   m_Father: {fileID: 166577177380858991}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3423469329741893390
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8017902587768781993}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 272.3993, y: 100, z: 225.53973}
+  m_Center: {x: -86.19969, y: -0.00000022360645, z: -3.6281676}
 --- !u!1 &8051785758162404254
 GameObject:
   m_ObjectHideFlags: 0
