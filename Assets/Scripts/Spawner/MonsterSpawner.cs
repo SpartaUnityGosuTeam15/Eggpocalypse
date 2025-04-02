@@ -11,7 +11,7 @@ public class MonsterSpawner : ObjectSpawner
     {
         base.Awake();
         TryFindPlayer(); // 추후 바꿀예정
-        DataManager.Instance.Init();
+        //DataManager.Instance.Init();
         monsterDict = DataManager.Instance.monsterDict;
     }
 
@@ -55,15 +55,15 @@ public class MonsterSpawner : ObjectSpawner
 
         // 10% 확률, 7초마다, 4번 몬스터(1번몬스터 6마리집합체) 스폰
         if (Mathf.Approximately(elapsedTime % 7f, 0f) && Random.value < 0.1f)
-            SpawnSingle(4);
+            SpawnMultiple(3, 1);
 
         // 10초마다 네임드몬스터 스폰
         if (Mathf.Approximately(elapsedTime % 10f, 0f))
             SpawnSingle(3);
 
         // 5분마다 보스 스폰 
-        //if (Mathf.Approximately(elapsedTime % 300f, 0f) && prefabDict.ContainsKey(99))
-        //  SpawnSingle(99);
+        //if (Mathf.Approximately(elapsedTime % 300f, 0f) && prefabDict.ContainsKey(보스몬스터아이디))
+        //  SpawnSingle(보스몬스터아이디);
 
         // 몬스터 강화 (1분마다 공격력, 체력 10% 증가)
         ApplyMonsterScaling(minute);

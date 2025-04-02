@@ -45,14 +45,14 @@ public class CircleSkill : AttackSkill
         //발사체 개수에 따라 위치 조정
         for (int i = 0; i < projectiles.Count; i++)
         {
-            projectiles[i].transform.localPosition = Quaternion.Euler(0, (360.0f / projectiles.Count) * i, 0) * new Vector3(attackRange[skillLevel - 1], 0f);
+            projectiles[i].transform.localPosition = Quaternion.Euler(0, (360.0f / projectiles.Count) * i, 0) * new Vector3(attackRange[skillLevel], 0f);
         }
     }
 
     public override void LevelUP()
     {
         base.LevelUP();
-        while (shotCount[skillLevel - 1] > projectiles.Count)
+        while (shotCount[skillLevel] > projectiles.Count)
         {
             MakePrefabs();
         }
@@ -62,8 +62,8 @@ public class CircleSkill : AttackSkill
         foreach (GameObject go in projectiles)
         {
             projectile = go.GetComponent<Projectile>();
-            projectile.damage = (int)damage[skillLevel - 1];
-            projectile.penetration = penetration[skillLevel - 1];
+            projectile.damage = (int)damage[skillLevel];
+            projectile.penetration = penetration[skillLevel];
             projectile.isLifeTime = false;
         }
     }

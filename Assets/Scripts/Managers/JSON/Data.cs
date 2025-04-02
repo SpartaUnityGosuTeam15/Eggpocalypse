@@ -28,12 +28,12 @@ public class SkillData
     public int id;
     public string name;
     public string description;      // 설명
-    public float[] damage = new float[6];  //데미지
-    public float[] attackRate = new float[6]; //공격속도
-    public float[] shotSpeed = new float[6]; //발사체 속도
-    public float[] attackRange = new float[6]; //사거리
-    public int[] penetration = new int[6]; //관통하는 몹수
-    public int[] shotCount = new int[6]; //한 번 발사시 횟수
+    public float[] damage = new float[7];  //데미지
+    public float[] attackRate = new float[7]; //공격속도
+    public float[] shotSpeed = new float[7]; //발사체 속도
+    public float[] attackRange = new float[7]; //사거리
+    public int[] penetration = new int[7]; //관통하는 몹수
+    public int[] shotCount = new int[7]; //한 번 발사시 횟수
     public bool autoAttack = true; //자동 공격 여부
     public SkillType skillType;
 }
@@ -115,6 +115,67 @@ public class BuildingDataLoader : ILoader<int, BuildingData>
         foreach (BuildingData building in data)
         {
             dict.Add(building.id, building);
+        }
+        return dict;
+    }
+}
+
+#endregion
+
+#region StatData
+
+[Serializable]
+public class StatData
+{
+    public int id;
+    public string name;
+    public float[] health = new float[7];
+    public float[] moveSpeed = new float[7];
+    public float[] attack = new float[7];
+    public float[] attackSpeed = new float[7];
+    public float[] projectileIncrement = new float[7];
+    public float[] range = new float[7];
+}
+
+[Serializable]
+public class StatDataLoader : ILoader<int, StatData>
+{
+    public List<StatData> data = new List<StatData>();
+
+    public Dictionary<int, StatData> MakeDict()
+    {
+        Dictionary<int, StatData> dict = new Dictionary<int, StatData>();
+        foreach (StatData stat in data)
+        {
+            dict.Add(stat.id, stat);
+        }
+        return dict;
+    }
+}
+
+#endregion
+
+#region StageData
+
+[Serializable]
+public class StageData
+{
+    public int id;
+    public string name;
+    public string description;
+}
+
+[Serializable]
+public class StageDataLoader : ILoader<int, StageData>
+{
+    public List<StageData> data = new List<StageData>();
+
+    public Dictionary<int, StageData> MakeDict()
+    {
+        Dictionary<int, StageData> dict = new Dictionary<int, StageData>();
+        foreach (StageData stage in data)
+        {
+            dict.Add(stage.id, stage);
         }
         return dict;
     }

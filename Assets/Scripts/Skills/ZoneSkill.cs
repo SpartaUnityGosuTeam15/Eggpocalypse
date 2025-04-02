@@ -21,7 +21,7 @@ public class ZoneSkill : AttackSkill
             if (cooldown - Time.deltaTime <= 0f)
             {
                 UseSkill();
-                cooldown = attackRate[skillLevel - 1];
+                cooldown = attackRate[skillLevel];
             }
         }
 
@@ -33,7 +33,7 @@ public class ZoneSkill : AttackSkill
     {
         foreach (var monster in monsterList)
         {
-            monster.TakeDamage((int)damage[skillLevel - 1]);
+            monster.TakeDamage((int)damage[skillLevel]);
         }
     }
 
@@ -55,6 +55,6 @@ public class ZoneSkill : AttackSkill
     public override void LevelUP()
     {
         base.LevelUP();
-        transform.localScale = new Vector3(attackRange[skillLevel - 1], 0.05f, attackRange[skillLevel - 1]);
+        transform.localScale = new Vector3(attackRange[skillLevel], 0.05f, attackRange[skillLevel]);
     }
 }

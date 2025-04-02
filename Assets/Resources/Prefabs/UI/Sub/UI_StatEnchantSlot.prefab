@@ -274,6 +274,9 @@ MonoBehaviour:
   selectButton: {fileID: 6460954081226734253}
   nameText: {fileID: 1041742027445460052}
   levelText: {fileID: 7439585098508815873}
+  OnEnchantButtonClicked: {fileID: 11400000, guid: 28f6ce6c672d21b44a9ac8e6dd878741,
+    type: 2}
+  id: -1
 --- !u!1 &5763338440155261828
 GameObject:
   m_ObjectHideFlags: 0
