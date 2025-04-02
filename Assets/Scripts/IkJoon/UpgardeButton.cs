@@ -23,7 +23,7 @@ public class UpgardeButton : MonoBehaviour
     {
         if (buttonManager != null && buttonManager.eggs.Count > 0)
         {
-            egg = buttonManager.eggs[buttonManager.eggs.Count - 1];
+            egg = buttonManager.eggs[0];
             eggManager = egg.GetComponent<Egg>();
             Debug.Log("가장 최근에 추가된 egg: " + egg.name);
         }

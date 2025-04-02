@@ -31,6 +31,8 @@ public class ButtonManager : UI
     }
     public void EnableText()
     {
+        if(notEnoughText.activeSelf) return;
+        
         notEnoughText.SetActive(true);
         CancelInvoke(nameof(DisableText));
         Invoke(nameof(DisableText),1f);
