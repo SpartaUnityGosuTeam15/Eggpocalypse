@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -20,7 +20,7 @@ public class GameOver : UI
 
         if (goldEarnedText != null)
             goldEarnedText.gameObject.SetActive(true);
-            goldEarnedText.text = $"¾òÀº °ñµå : <color=yellow>+ {earnedGold}Gold</color> È¹µæ!";
+            goldEarnedText.text = $"ì–»ì€ ê³¨ë“œ : <color=yellow>+ {earnedGold}Gold</color> íšë“!";
         
         GameObject timerText = GameObject.Find("TimerText");
         if (timerText != null) timerText.SetActive(false);

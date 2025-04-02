@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -72,11 +72,11 @@ public class UI_Lobby : UI
 
     void TryLevelUp(int id)
     {
-        if (saveData.enchantState[id] >= 6) return; //¸¸·¾ Ã¼Å©
+        if (saveData.enchantState[id] >= 6) return; //ë§Œë ™ ì²´í¬
 
         int requireGold = (saveData.enchantState[id] + 1) * 100;
 
-        if (saveData.gold < requireGold) return; //°ñµå º¸À¯·® Ã¼Å©
+        if (saveData.gold < requireGold) return; //ê³¨ë“œ ë³´ìœ ëŸ‰ ì²´í¬
 
         saveData.gold -= requireGold;
         UpdateGold();
