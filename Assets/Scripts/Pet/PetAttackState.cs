@@ -18,7 +18,7 @@ public class PetAttackState : IState
 
     public void Enter()
     {
-        // 공격 상태로 전환될 때의 초기화
+        stateMachine.Pet.isAttacking = true; // 공격 시작
     }
 
     public void Update()
@@ -48,7 +48,6 @@ public class PetAttackState : IState
                 stateMachine.Pet.Animator.SetBool("Move", false);
                 stateMachine.Pet.Animator.SetBool("Attack", true);
                 Attack(closestMonster);
-                Debug.Log("몬스터 발견 공격시작");
             }
         }
     }
@@ -74,8 +73,7 @@ public class PetAttackState : IState
 
     public void Exit()
     {
-        // 공격 상태 종료 시
-        Debug.Log($"{stateMachine.Pet.name} 공격 멈춤.");
+
     }
 
     private void Attack(Monster targetMonster)
@@ -84,30 +82,6 @@ public class PetAttackState : IState
         {
             // 공격 대상 몬스터에게 데미지 적용
             targetMonster.TakeDamage(stateMachine.Pet.Damage);
-        }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Monster"))
-        {
-            Monster monster = other.GetComponent<Monster>();
-            if (monster != null)
-            {
-                monstersInRange.Add(monster);  // 리스트에 몬스터 추가
-            }
-        }
-    }
-
-    // 콜라이더에서 몬스터가 나가면 리스트에서 제거
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Monster"))
-        {
-            Monster monster = other.GetComponent<Monster>();
-            if (monster != null)
-            {
-                monstersInRange.Remove(monster);  // 리스트에서 몬스터 제거
-            }
         }
     }
 }

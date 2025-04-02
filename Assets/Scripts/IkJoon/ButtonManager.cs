@@ -10,8 +10,8 @@ public class ButtonManager : UI
     public List<GameObject> eggs = new List<GameObject>();
     public GameObject notEnoughText;
     public bool isDragon = false;
-    [SerializeField]private GameObject upgradeBtn;
-    [SerializeField]private GameObject feedBtn;
+    [SerializeField]public GameObject upgradeBtn;
+    [SerializeField]public GameObject feedBtn;
     
     void Start()
     {
@@ -41,8 +41,16 @@ public class ButtonManager : UI
     }
     public void ToggleBtn()
     {
-        bool state = isDragon;
-        upgradeBtn.SetActive(!state);
-        feedBtn.SetActive(state);
+        upgradeBtn.SetActive(!upgradeBtn.activeSelf);
+        feedBtn.SetActive(!feedBtn.activeSelf);
+    }
+    public void ResetButton()
+    {
+        if (eggToggles.Length > 0)
+      {
+          eggToggles[0].isOn = true;
+      }
+      upgradeBtn.SetActive(false);
+      feedBtn.SetActive(false);
     }
 }

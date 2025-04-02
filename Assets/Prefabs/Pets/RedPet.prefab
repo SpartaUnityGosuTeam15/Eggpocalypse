@@ -1315,8 +1315,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 100, y: 100, z: 100}
-  m_Center: {x: 0, y: 0, z: -18.98}
+  m_Size: {x: 100, y: 199.31232, z: 100}
+  m_Center: {x: -0.0000010344, y: -49.656258, z: -18.980059}
 --- !u!1 &2915516224482009618
 GameObject:
   m_ObjectHideFlags: 0
@@ -2797,6 +2797,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCollider: {fileID: 368671770965400189}
+  biteArea: {fileID: 2713644104119554719}
   AttackRange: 8
   PlayerDetectionRange: 8
 --- !u!1 &5636390859666608514

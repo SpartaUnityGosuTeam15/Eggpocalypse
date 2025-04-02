@@ -7,9 +7,11 @@ public class Egg : MonoBehaviour
     private Color targetColor = new Color(0x22 / 255f, 0x89 / 255f, 0xF3 / 255f);
     private int clickCount = 0;
     private int maxClicks = 5;
+    public int health{ get; private set; }
     private ButtonManager buttonManager;
     [SerializeField]private GameObject petPrefab;
     private PlayerCondition playerCondition;
+    public bool isDie;
 
 
     // public void Init(ButtonManager manager)
@@ -25,6 +27,14 @@ public class Egg : MonoBehaviour
         buttonManager = FindObjectOfType<ButtonManager>();
 
     }
+    void Update()
+{
+    if (isDie)
+    {
+        isDie = false;
+        Invoke(nameof(Die), 2f);
+    }
+}
 
     private void OnMouseDown()
     {
@@ -59,6 +69,11 @@ public class Egg : MonoBehaviour
       Instantiate(petPrefab, spawnPosition, transform.rotation);
       buttonManager.isDragon = true;
       buttonManager.ToggleBtn();
+      Destroy(gameObject);
+    }
+    void Die()
+    {
+      buttonManager.ResetButton();
       Destroy(gameObject);
     }
 }
