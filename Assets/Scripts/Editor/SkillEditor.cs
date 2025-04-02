@@ -18,3 +18,17 @@ public class SkillEditor : Editor
         }
     }
 }
+
+[CustomEditor(typeof(Player), true)]
+public class PlayerEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        if (GUILayout.Button("SkillGet"))
+        {
+            SkillManager.Instance.GetSkill(102, GameManager.Instance.player.gameObject.transform);
+        }
+    }
+}

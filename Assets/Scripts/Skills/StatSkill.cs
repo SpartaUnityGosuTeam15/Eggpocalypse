@@ -4,26 +4,62 @@ using UnityEngine;
 
 public class StatSkill : BaseSkill
 {
-    public float amount;
+    public string skillName;
+    public string SkillName
+    {
+        get { return skillName; }
+        set
+        {
+            skillName = value;
+        }
+    }
+
+    public string skillDescription;
+    public string SkillDescription
+    {
+        get { return skillDescription; }
+        set
+        {
+            skillDescription = value;
+        }
+    }
+
+    public int skillLevel;
+    public int SkillLevel
+    {
+        get { return skillLevel; }
+        set
+        {
+            skillLevel = value;
+        }
+    }
+
+    public int maxLevel;
+    public int MaxLevel
+    {
+        get { return maxLevel; }
+    }
+
+    public int id;
+    public float[] amount;
     //public int type; // 스탯 타입 ex) 공격력, 이속, 공속...
+
+    private void Start()
+    {
+        LevelUP();
+    }
 
     public void GetStat()
     {
         //GameManager.Instance.player -> 스탯 add 하기
     }
 
-    public void UpdateStat()
+    public void LevelUP()
     {
-        //스탯 변동이 있을 경우
-    }
+        skillLevel++;
+        if (skillLevel > maxLevel)
+            skillLevel = maxLevel;
 
-    public override void LevelUP()
-    {
-        if(maxLevel > skillLevel)
-        {
-            skillLevel++;
-            //스킬 레벨에 따른 스탯 증가 
-            //UpdateStat();
-        }
+        SkillManager.Instance.totalStat[id][skillLevel] = amount[skillLevel];
     }
 }
