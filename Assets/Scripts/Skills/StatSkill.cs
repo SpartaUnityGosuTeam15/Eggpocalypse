@@ -42,6 +42,8 @@ public class StatSkill : BaseSkill
 
     public int id;
     public float[] amount;
+    internal SkillData skillData;
+
     //public int type; // 스탯 타입 ex) 공격력, 이속, 공속...
 
     private void Start()
