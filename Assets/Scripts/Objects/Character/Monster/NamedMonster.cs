@@ -12,10 +12,6 @@ public class NamedMonster : Monster
         AnimationData.Initialize();
         //InitSkills();
     }
-    public override void Start()
-    {
-        base.Start();
-    }
 
     private void InitSkills()
     {

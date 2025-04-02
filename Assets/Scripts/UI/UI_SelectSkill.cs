@@ -22,69 +22,47 @@ public class UI_SelectSkill : UI
         this._playerAttackSkills = attackSkills;
         this._playerStatSkills = statSkills;
 
-        List<SkillData> pickedSkills = GetRandomSkills();
+        List<ChoiceSkillData> pickedSkills = GetRandomSkills();
 
         for(int i = 0; i < 3; i++)
         {
-            skillSelectSlots[i].SetSkill(pickedSkills[i]);
+            if (pickedSkills == null)
+                skillSelectSlots[i].SetSkill(null);
+            else
+                skillSelectSlots[i].SetSkill(pickedSkills[i]);
         }
     }
 
-    public List<SkillData> GetRandomSkills()
+    public List<ChoiceSkillData> GetRandomSkills()
     {
-        List<SkillData> pickableSkills = new();
-        List<SkillData> allAttackSkills = new();//추후 dataManager에서 가져옴
-        List<SkillData> allStatSkills = new();//추후 dataManager에서 가져옴
+        List<ChoiceSkillData> skillList = SkillManager.Instance.allSkillDict.Values.ToList(); //스킬과 스탯 포함한 리스트
 
-        bool isAttackAllSelected = true;
-        for(int i = 0; i < _playerAttackSkills.Count; i++)
+        if (GameManager.Instance.player.GetComponent<PlayerCondition>().level == 1) //게임 시작시 스킬만 고르게
         {
-            AttackSkill skill = _playerAttackSkills[i];
-
-            if (skill != null)
-            {
-                if (skill.skillLevel >= skill.maxLevel) allAttackSkills.Remove(skill.skillData);
-            }
-            else isAttackAllSelected = false;
+            skillList.RemoveAll(item => item.type == 1);
         }
-
-        bool isStatAllSelected = true;
-        for(int i = 0; i < _playerStatSkills.Count; i++)
+        else
         {
-            StatSkill skill = _playerStatSkills[i];
-
-            if (skill != null)
+            if (GameManager.Instance.player.attackSkills.Count == 3) //이미 사용 스킬이 3개인 경우 나머지 공격스킬 제거
             {
-                if (skill.skillLevel >= skill.maxLevel) allStatSkills.Remove(skill.skillData);
-            }
-            else isStatAllSelected = false;
-        }
-
-        if (!isAttackAllSelected)
-        {
-            pickableSkills = allAttackSkills;
-        }
-        if (!isStatAllSelected)
-        {
-            foreach(SkillData skillData in allStatSkills)
-            {
-                pickableSkills.Add(skillData);
+                skillList.RemoveAll(item => item.type == 0 && item.level == 0);
             }
         }
+        skillList.RemoveAll(item => item.level == 6); //만렙 제거
 
-        List<SkillData> pickedSkills = new();
-        for(int i = 0; i < 3; i++)
+        if (skillList.Count == 0)
         {
-            if(pickableSkills.Count > 0)
-            {
-                int randomIndex = Random.Range(0, pickableSkills.Count);
-                pickableSkills.Add(pickableSkills[randomIndex]);
-                pickableSkills.RemoveAt(randomIndex);
-            }
-            else
-            {
-                //체력회복 스킬을 pickedSkills에 추가해주는 메서드
-            }
+            //모든 스킬의 레벨이 만렙일 경우 체력 및 기타 능력
+            return null;
+        }
+
+        //실제로 스킬 3개 뽑음
+        List<ChoiceSkillData> pickedSkills = new();
+
+        for(int i = 0; i < 3; i++) //아이템 중복을 허용 //남은 리스트가 3개 이하인 경우 중복으로 무조건 나오게
+        {
+            int randomIndex = Random.Range(0, skillList.Count);
+            pickedSkills.Add(skillList[randomIndex]);
         }
 
         return pickedSkills;

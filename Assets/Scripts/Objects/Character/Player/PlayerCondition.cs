@@ -6,7 +6,7 @@ public class PlayerCondition : MonoBehaviour, IDamageable
 
     public Stat Health = new Stat(100, 100);
     public int attack = 10;
-    public int level = 1;
+    public int level = 0;
     public Stat Exp = new Stat(0, 10);
     public int meat = 0;
 
@@ -19,17 +19,21 @@ public class PlayerCondition : MonoBehaviour, IDamageable
     private void Awake()
     {
         _player = GetComponent<Player>();
+
+        attack += SaveManager.Instance.saveData.GetAttack();
+        int newHealth = (int)(Health.MaxValue) + SaveManager.Instance.saveData.GetHealth();
+        Health = new Stat(newHealth, newHealth);
+        level = 0;
     }
 
     private void Start()
     {
-        InvokeRepeating(nameof(Test), 0, 0.5f);
+        InvokeRepeating(nameof(RegenHealth), 1, 1);
     }
 
-    void Test()
+    void RegenHealth()
     {
-        TakeDamage(1);
-        GainExp(1);
+        Heal(1);
     }
 
     public void TakeDamage(int damage)
@@ -67,9 +71,9 @@ public class PlayerCondition : MonoBehaviour, IDamageable
         level++;
         OnLevelChanged?.RaiseEvent(level);
         //스킬 선택 메서드
-        //UIManager.Instance.ShowUI<UI_SelectSkill>().Init(_player.attackSkills, _player.statSkills);
+        UIManager.Instance.ShowUI<UI_SelectSkill>().Init(_player.attackSkills, _player.statSkills);
         //일시정지
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
     }
 
     public void GainMeat(int amount)

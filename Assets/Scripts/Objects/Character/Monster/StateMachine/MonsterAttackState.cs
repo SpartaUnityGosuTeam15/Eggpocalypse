@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MonsterAttackState : MonsterBaseState
 {
-    bool alreadyApplyForce;
     bool alreadyAppliedDealing;
     public MonsterAttackState(MonsterStateMachine stateMachine) : base(stateMachine)
     {
@@ -16,7 +15,6 @@ public class MonsterAttackState : MonsterBaseState
         if (stateMachine.Monster is NamedMonster monster)
             StartAnimation(monster.AnimationData.AttackHash);
 
-        alreadyApplyForce = false;
         alreadyAppliedDealing = false;
     }
     public override void Exit()

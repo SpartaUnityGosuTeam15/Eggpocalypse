@@ -45,6 +45,7 @@ public class SaveManager : Singleton<SaveManager>
     public void ClearDataFile()
     {
         SaveData newData = new SaveData();//后 单捞磐 积己
+        saveData = newData;
         SaveDataFile(newData, nameof(SaveData)); // 后 单捞磐 历厘
     }
 

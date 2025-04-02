@@ -42,6 +42,15 @@ public abstract class AttackSkill : MonoBehaviour, BaseSkill
         get { return maxLevel; }
     }
 
+    public int id;
+    public int ID
+    {
+        get { return id; }
+        set
+        {
+            id = value;
+        }
+    }
     public float[] damage;        //데미지
     public float[] attackRate;    //공격 주기
     public float[] shotSpeed;     //발사속도
@@ -51,6 +60,21 @@ public abstract class AttackSkill : MonoBehaviour, BaseSkill
     public bool isAuto;         //자동 사용
 
     public float cooldown;      //공격 쿨타운
+
+    public float[] currentStat;
+
+    public int addictionShotCount;
+    public float addictionAttackRate;
+    public float addictionRange;
+    public int addictionAttack;
+
+    public virtual void Start()
+    {
+        addictionShotCount = SaveManager.Instance.saveData.GetProjectileCount();
+        addictionRange = SaveManager.Instance.saveData.GetAttackRange();
+        addictionAttackRate = SaveManager.Instance.saveData.GetAttackSpeed();
+        addictionAttack = GameManager.Instance.player.gameObject.GetComponent<PlayerCondition>().attack;
+    }
 
     public abstract void UseSkill();
     public virtual void LevelUP()

@@ -577,6 +577,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   condition: {fileID: 0}
+  monsters: []
+  detectRadius: 10
+  monsterLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  closest: {fileID: 0}
+  attackSkills: []
 --- !u!1 &1221233530
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,7 +804,7 @@ PrefabInstance:
     - target: {fileID: 7543569354514058641, guid: a6269aeeff1949f41ab6f0c0ddcf198e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -830,7 +837,7 @@ PrefabInstance:
     - target: {fileID: 7675204394156678150, guid: c6749443a70d5de44bdea47be9b0c71f,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8044675540492566152, guid: c6749443a70d5de44bdea47be9b0c71f,
         type: 3}
