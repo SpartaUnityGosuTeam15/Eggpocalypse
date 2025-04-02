@@ -12,6 +12,9 @@ public class GameOver : UI
     {
         Time.timeScale = 0f;
 
+        GameObject timerText = GameObject.Find("TimerText");
+        if (timerText != null)
+            timerText.SetActive(false);
         if (returnButton != null)
             returnButton.SetActive(true);
         if (panel != null)
