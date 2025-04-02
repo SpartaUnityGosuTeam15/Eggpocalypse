@@ -6,9 +6,13 @@ using static UnityEngine.GraphicsBuffer;
 public class ProjectileSkill : AttackSkill
 {
     Vector3 direction; //발사 방향
-    public float shotSpeed; //발사속도
+    
     public GameObject projectionPrefabs; //발사체
-    public int shotCount;
+
+    private void Start()
+    {
+        LevelUP();
+    }
 
     private void Update()
     {
@@ -20,7 +24,7 @@ public class ProjectileSkill : AttackSkill
             if (cooldown - Time.deltaTime < 0f)
             {
                 StartCoroutine(makePrefabs()); //오브젝트 풀링으로 바꿀 것
-                cooldown = attackRate;
+                cooldown = attackRate[skillLevel];
             }
         }
 
@@ -36,14 +40,17 @@ public class ProjectileSkill : AttackSkill
         GameObject go = Instantiate(projectionPrefabs); //오브젝트 풀링으로 바꿀 것
 
         go.transform.position = transform.position;
-        go.GetComponent<Projectile>().shotSpeed = shotSpeed;
+        go.GetComponent<Projectile>().shotSpeed = shotSpeed[skillLevel];
         go.GetComponent<Projectile>().direction = direction.normalized;
-        go.GetComponent<Projectile>().lifeTime = attackRange / shotSpeed;
+        go.GetComponent<Projectile>().lifeTime = attackRange[skillLevel] / shotSpeed[skillLevel];
+        go.GetComponent<Projectile>().damage = (int)damage[skillLevel];
+        go.GetComponent<Projectile>().penetration = penetration[skillLevel];
+        go.GetComponent<Projectile>().isLifeTime = true;
     }
 
     public IEnumerator makePrefabs()
     {
-        for (int i = 0; i < shotCount; i++)
+        for (int i = 0; i < shotCount[skillLevel]; i++)
         {
             UseSkill();
             yield return new WaitForSeconds(0.05f); //연속 발사시 약간의 딜레이
@@ -53,6 +60,5 @@ public class ProjectileSkill : AttackSkill
     public override void LevelUP()
     {
         base.LevelUP();
-        //수치 조정
     }
 }

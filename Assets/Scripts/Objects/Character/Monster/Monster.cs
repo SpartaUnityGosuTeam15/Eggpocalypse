@@ -100,6 +100,7 @@ public class Monster : HasPosition, IDamageable
         Exp = data.dropExp; 
     }
 
+    [ContextMenu("Dead")]
     public void MonsterDie()
     {
         if (isDead) return;

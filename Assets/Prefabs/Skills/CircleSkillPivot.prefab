@@ -44,16 +44,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84fb9b2c9a308704095bae87a77b49e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skillData:
+    id: 0
+    name: 
+    description: 
+    damage:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    attackRate:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    shotSpeed:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    attackRange:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
+    penetration: 000000000000000000000000000000000000000000000000
+    shotCount: 000000000000000000000000000000000000000000000000
+    autoAttack: 1
+    skillType: 0
   skillName: 
   skillDescription: 
   skillLevel: 0
-  damage: 0
-  attackRate: 0
-  attackRange: 0
-  cooldown: 0
+  maxLevel: 6
+  damage: []
+  attackRate: []
+  shotSpeed: []
+  attackRange: []
+  penetration: 
+  shotCount: 
   isAuto: 0
+  cooldown: 0
   pivotTrans: {fileID: 7543052309073255036}
-  shotCount: 3
   projectilePrefab: {fileID: 2462744603618338795, guid: d393014852733014a87717ae77ac0872,
     type: 3}
   projectiles: []

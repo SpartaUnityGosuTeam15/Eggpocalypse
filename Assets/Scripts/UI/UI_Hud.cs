@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.HableCurve;
 
 public class UI_Hud : UI
 {
@@ -34,6 +35,9 @@ public class UI_Hud : UI
         _statSkillSlots = new List<UI_StatSkillSlot>(statSkillSlotsParentTransform.GetComponentsInChildren<UI_StatSkillSlot>());
 
         BindListeners();
+
+        SetMeat(0);
+        SetGold(GameManager.Instance.gold);
     }
 
     void BindListeners()

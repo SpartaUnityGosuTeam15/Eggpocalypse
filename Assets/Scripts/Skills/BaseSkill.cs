@@ -2,19 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseSkill : MonoBehaviour
+public interface BaseSkill
 {
-    public SkillData skillData;
+    public string SkillName {  get; set; }
+    public string SkillDescription { get; set; }
+    public int SkillLevel { get; set; }
+    public int MaxLevel { get;}
 
-    public string skillName;
-    public string skillDescription;
-    public int skillLevel;
-    public int maxLevel = 6;
 
-    public virtual void LevelUP()
-    {
-        skillLevel++;
-        if(skillLevel > maxLevel)
-            skillLevel = maxLevel;
-    }
+    public void LevelUP();
 }
