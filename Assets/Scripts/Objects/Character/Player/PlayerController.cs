@@ -14,6 +14,11 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
     private Vector2 curMovement;
 
+    private void Awake()
+    {
+        speed += SaveManager.Instance.saveData.GetMoveSpeed();
+    }
+
     private void Start()
     {
         _player = GetComponent<Player>();

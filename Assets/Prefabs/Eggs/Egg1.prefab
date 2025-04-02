@@ -183,7 +183,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9aa1e3dc9e3e4fed9b6e5c0c3893fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  petPrefab: {fileID: 0}
+  petPrefab: {fileID: 5631878112593735008, guid: 1232c3f12634548f2aec6dffd513cc03,
+    type: 3}
 --- !u!136 &7610016966536642498
 CapsuleCollider:
   m_ObjectHideFlags: 0

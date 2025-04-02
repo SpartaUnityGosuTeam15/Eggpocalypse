@@ -47,7 +47,7 @@ public class Monster : Poolable, IDamageable
         if (other.gameObject.CompareTag("Player"))
         {
             InvokeRepeating("DealDamage", 0f, 1f);
-            MonsterDie();
+            //MonsterDie();
         }
     }
     private void OnTriggerExit(Collider other)

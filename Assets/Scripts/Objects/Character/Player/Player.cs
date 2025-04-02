@@ -22,6 +22,8 @@ public class Player : MonoBehaviour
 
         controller = GetComponent<PlayerController>();
         condition = GetComponent<PlayerCondition>();
+
+        detectRadius += SaveManager.Instance.saveData.GetAttackRange();
     }
 
     private void Start()

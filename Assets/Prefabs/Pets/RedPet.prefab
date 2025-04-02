@@ -1273,8 +1273,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3763942342683932651}
+  - component: {fileID: 368671770965400189}
   m_Layer: 0
-  m_Name: UpperMouth02
+  m_Name: BiteArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1295,6 +1296,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1790351511403119750}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &368671770965400189
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2713644104119554719}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 100, y: 199.31232, z: 100}
+  m_Center: {x: -0.0000010344, y: -49.656258, z: -18.980059}
 --- !u!1 &2915516224482009618
 GameObject:
   m_ObjectHideFlags: 0
@@ -2675,7 +2697,7 @@ GameObject:
   - component: {fileID: 3639214010442859267}
   - component: {fileID: 7183457222800194128}
   m_Layer: 0
-  m_Name: Red
+  m_Name: RedPet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2774,6 +2796,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23523bd02528c4f80a75015cf5a96f2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackCollider: {fileID: 368671770965400189}
+  biteArea: {fileID: 2713644104119554719}
   AttackRange: 8
   PlayerDetectionRange: 8
 --- !u!1 &5636390859666608514
