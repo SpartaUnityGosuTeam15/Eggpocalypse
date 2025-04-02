@@ -68,6 +68,7 @@ public class SkillManager : Singleton<SkillManager>
 
         AttackSkill skill = go.GetComponent<AttackSkill>();
 
+        skill.skillData = skillData;
         skill.skillName = skillData.name;
         skill.skillDescription = skillData.description;
         skill.skillLevel = 0;
