@@ -1103,7 +1103,10 @@ MonoBehaviour:
     Kit - Capsule [Free Edition]\r\n\r\nRPG Monster Duo PBR Polyart\r\n\r\nMini Legion
     Rock Golem PBR HP Polyart\r\n\r\nLowpoly Magician RIO\r\n\r\nFree Dragon Sprites
     Pack #1\r\n\r\nDark Brown GUI kit\r\n\r\nDragon for Boss Monster : HP\r\n\r\nMountain
-    - Stylized Fantasy Environment\r\n\r\nDungeon Modular Pack\r\n\r\nhttps://game-icons.net/1x1/lorc/meat.html\r\nhttps://game-icons.net/1x1/lorc/crown-coin.html\r\nhttps://game-icons.net/1x1/skoll/hearts.html\r\nhttps://game-icons.net/1x1/lorc/sprint.html\r\nhttps://game-icons.net/1x1/lorc/striking-clamps.html\r\nhttps://game-icons.net/1x1/lorc/rapidshare-arrow.html\r\nhttps://game-icons.net/1x1/lorc/falling-boulder.html\r\nhttps://game-icons.net/1x1/lorc/chained-arrow-heads.html\r\n"
+    - Stylized Fantasy Environment\r\n\r\nDungeon Modular Pack\r\n\r\nMeat icon by
+    Lorc\r\n\nCrown coin icon by Lorc\r\n\nHearts icon by Skoll\r\n\nSprint icon
+    by Lorc\r\n\nStriking clamps icon by Lorc\r\n\nRapid sharing arrow icon by Lorc\r\n\nFalling
+    boulder icon by Lorc \r\n\nChained arrow heads icon by Lorc\r\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce14a773c2560574481e8e6394346fec, type: 2}
   m_sharedMaterial: {fileID: 2139729706462716660, guid: ce14a773c2560574481e8e6394346fec,
