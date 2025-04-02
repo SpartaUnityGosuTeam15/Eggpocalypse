@@ -5,9 +5,10 @@ using UnityEngine.SceneManagement;
 public class Timer : UI
 {
     public TMP_Text timerText;
-    public GameObject panel;
+    public GameObject clearPanel;
     public GameObject returnButton;
-    
+    public TextMeshProUGUI goldEarnedText;
+
     public float totalTime = 15 * 60f; // 초 단위 15분 
     private float remainingTime;
     private bool isRunning = true;
@@ -55,10 +56,18 @@ public class Timer : UI
 
         if (returnButton != null)
             returnButton.SetActive(true);
-        if (panel != null)
-            panel.SetActive(true);
+        if (clearPanel != null)
+            clearPanel.SetActive(true);
         if (timerText != null)
             timerText.enabled = false;
+
+        int currentGold = GameManager.Instance.gold;
+        int savedGold = SaveManager.Instance.saveData.gold;
+        int earnedGold = currentGold - savedGold;
+
+        if (goldEarnedText != null)
+            goldEarnedText.gameObject.SetActive(true);
+        goldEarnedText.text = $"Result : <color=yellow>+ {earnedGold}</color> Gold!";
     }
     public void OnClickReturnToLobby()
     {
