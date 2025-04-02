@@ -83,7 +83,7 @@ public class UI_Lobby : UI
         saveData.enchantState[id]++;
         enchantSlots[id].SetLevel(saveData.enchantState[id]);
 
-        //SaveManager.Instance.SaveAll();
+        SaveManager.Instance.SaveAll();
     }
 
     void OpenEggSlots()

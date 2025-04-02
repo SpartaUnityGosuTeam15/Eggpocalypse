@@ -11,6 +11,12 @@ public class SaveManager : Singleton<SaveManager>
         saveData = LoadDataFile();
     }
 
+    public bool CheckDataFileExist()
+    {
+        string path = $"{Application.persistentDataPath}/{(nameof(SaveData))}.json";
+        return System.IO.File.Exists(path);
+    }
+
     SaveData LoadDataFile()
     {
         string path = $"{Application.persistentDataPath}/{(nameof(SaveData))}.json";
