@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8803b4b71a4c349b05ceac3f60549d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  changedColor: {r: 0, g: 0.5566038, b: 0.0027769783, a: 0}
+  changedColor: {r: 0.16602886, g: 0.38679248, b: 0.16758351, a: 0}
 --- !u!1001 &348817929470151589
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Resources/Prefabs/UI/UI_Pause.prefab.meta
+guid: ec5cac2114c22a6418f1a65c2c8a79d8
+PrefabImporter:
+========
 guid: a0a3d71d9d8b74b45a54afcdeffb3e5f
 folderAsset: yes
 DefaultImporter:
+>>>>>>>> develop:Assets/Scenes/Main/Stage_0.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

@@ -25,11 +25,6 @@ public class Monster : Poolable, IDamageable
     {
         Animator = GetComponentInChildren<Animator>();
         Agent = GetComponent<NavMeshAgent>();
-
-    }
-
-    public virtual void Start()
-    {
         InitMonsterData();
         stateMachine = new MonsterStateMachine(this);
         stateMachine.ChangeState(stateMachine.ChasingState);
@@ -41,7 +36,12 @@ public class Monster : Poolable, IDamageable
         if (isDead) return;
         stateMachine.Update();
     }
-
+    public void OnEnable()
+    {
+        isDead = false;
+        stateMachine.ChangeState(stateMachine.ChasingState);
+        Agent.enabled = true;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -106,7 +106,7 @@ public class Monster : Poolable, IDamageable
         isDead = true;
         Animator.SetTrigger("Die");
 
-        PoolManager.Instance.Release(this);
+        Invoke("Relase", 1.5f);
         //Destroy(gameObject, 1.5f);
         DropItems();
 
@@ -117,6 +117,11 @@ public class Monster : Poolable, IDamageable
         ItemDrop.Instance.DropItem(ItemDrop.Instance.meatPrefab, transform.position, Meat);
         ItemDrop.Instance.DropItem(ItemDrop.Instance.expPrefab, transform.position, Exp);
         ItemDrop.Instance.DropItem(ItemDrop.Instance.goldPrefab, transform.position, Gold);
+    }
+
+    void Relase()
+    {
+        PoolManager.Instance.Release(this);
     }
 
 }
