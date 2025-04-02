@@ -18,6 +18,7 @@ public class UI_Pause : UI
         inputAction = new PlayerInputActions();
         LobbyButton.onClick.AddListener(() => GameManager.Instance.LoadScene("Lobby"));
         ResumeButton.onClick.AddListener(() => PauseGame(false));
+        pausePanel.SetActive(false);
     }
 
     private void OnEnable()
