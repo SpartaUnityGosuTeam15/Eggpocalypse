@@ -20,7 +20,7 @@ public class GameOver : UI
 
         if (goldEarnedText != null)
             goldEarnedText.gameObject.SetActive(true);
-            goldEarnedText.text = $"Result : <color=yellow>+ {earnedGold}</color> Gold!";
+            goldEarnedText.text = $"¾òÀº °ñµå : <color=yellow>+ {earnedGold}Gold</color> È¹µæ!";
         
         GameObject timerText = GameObject.Find("TimerText");
         if (timerText != null) timerText.SetActive(false);
