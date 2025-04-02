@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+
+public class ChoiceSkillData
+{
+    public int level;
+    public int type; //0이면 attack // 1면 stat
+
+    public ChoiceSkillData(int level, int type)
+    {
+        this.level = level;
+        this.type = type;
+    }
+}
 
 public class SkillManager : Singleton<SkillManager>
 {
     public GameObject[] attackSkillPrefabs;
 
-    Dictionary<int, SkillData> skillDict;
-
-    Dictionary<int, StatData> statDict;
+    Dictionary<int, SkillData> skillDict; //Attack Skill
+    
+    Dictionary<int, StatData> statDict; //Stat Skill
 
     public float[][] totalStat;  //쓸 때 -> totalStat[id][level - 1];
     public int[] statLevel = new int[6]; //가진 스탯의 레벨
+    public float[] currentStat;
+
+    Dictionary<int, ChoiceSkillData> allSkillDict; //스킬 선택을 위한 dict
 
     private void Start()
     {
@@ -31,19 +45,36 @@ public class SkillManager : Singleton<SkillManager>
         totalStat[4] = statDict[4].projectileIncrement;
         totalStat[5] = statDict[5].range;
 
+        currentStat = new float[7];
+        InitStat();
+        
     }
 
-    public float[] GetStat(int id) //스킬 사용시 정보 가져오기
+    public void InitStat() //스탯 정보 업데이트 //스킬 리스트 업데이트
     {
-        float[] stat = new float[7];
-
         for(int i = 0; i < 6; i++)
         {
-            stat[i] = totalStat[i][statLevel[i]];
+            currentStat[i] = totalStat[i][statLevel[i]];
         }
 
+        foreach(var data in skillDict)
+        {
+            allSkillDict.Add(data.Key, new ChoiceSkillData(0, 0));
+        }
+        foreach (var data in statDict)
+        {
+            allSkillDict.Add(data.Key, new ChoiceSkillData(0, 1));
+        }
+    }
+    
+    public void UpdateStat(int id) //스탯 정보 업데이트
+    {
+        if (id < 0 || id >= totalStat.Length)
+            return;
 
-        return totalStat[id];
+        statLevel[id]++;
+
+        currentStat[id] = totalStat[id][statLevel[id]];
     }
 
     public AttackSkill GetSkill(int id, Transform trans)
@@ -69,6 +100,7 @@ public class SkillManager : Singleton<SkillManager>
         AttackSkill skill = go.GetComponent<AttackSkill>();
 
         skill.skillData = skillData;
+        skill.id = skillData.id;
         skill.skillName = skillData.name;
         skill.skillDescription = skillData.description;
         skill.skillLevel = 0;

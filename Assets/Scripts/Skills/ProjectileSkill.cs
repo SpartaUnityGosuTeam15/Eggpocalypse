@@ -11,6 +11,7 @@ public class ProjectileSkill : AttackSkill
 
     private void Start()
     {
+        currentStat = SkillManager.Instance.currentStat;
         LevelUP();
     }
 
@@ -24,7 +25,7 @@ public class ProjectileSkill : AttackSkill
             if (cooldown - Time.deltaTime < 0f)
             {
                 StartCoroutine(makePrefabs()); //오브젝트 풀링으로 바꿀 것
-                cooldown = attackRate[skillLevel];
+                cooldown = attackRate[skillLevel] * currentStat[3];
             }
         }
 
@@ -42,15 +43,15 @@ public class ProjectileSkill : AttackSkill
         go.transform.position = transform.position;
         go.GetComponent<Projectile>().shotSpeed = shotSpeed[skillLevel];
         go.GetComponent<Projectile>().direction = direction.normalized;
-        go.GetComponent<Projectile>().lifeTime = attackRange[skillLevel] / shotSpeed[skillLevel];
-        go.GetComponent<Projectile>().damage = (int)damage[skillLevel];
+        go.GetComponent<Projectile>().lifeTime = (attackRange[skillLevel] + currentStat[5]) / shotSpeed[skillLevel];
+        go.GetComponent<Projectile>().damage = (int)(damage[skillLevel] + currentStat[2]);
         go.GetComponent<Projectile>().penetration = penetration[skillLevel];
         go.GetComponent<Projectile>().isLifeTime = true;
     }
 
     public IEnumerator makePrefabs()
     {
-        for (int i = 0; i < shotCount[skillLevel]; i++)
+        for (int i = 0; i < shotCount[skillLevel] + (int)currentStat[4]; i++)
         {
             UseSkill();
             yield return new WaitForSeconds(0.05f); //연속 발사시 약간의 딜레이

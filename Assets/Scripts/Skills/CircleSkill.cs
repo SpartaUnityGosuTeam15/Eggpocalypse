@@ -19,6 +19,7 @@ public class CircleSkill : AttackSkill
 
     private void Start()
     {
+        currentStat = SkillManager.Instance.currentStat;
         LevelUP();
     }
 

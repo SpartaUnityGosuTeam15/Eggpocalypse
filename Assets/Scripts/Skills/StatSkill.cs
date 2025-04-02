@@ -41,6 +41,13 @@ public class StatSkill : BaseSkill
     }
 
     public int id;
+    public int ID { 
+        get { return id; }
+        set
+        {
+            id = value;
+        }
+    }
     public float[] amount;
     internal SkillData skillData;
 
