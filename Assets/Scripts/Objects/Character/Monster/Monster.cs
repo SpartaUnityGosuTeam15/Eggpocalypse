@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Monster : HasPosition, IDamageable
+public class Monster : Poolable, IDamageable
 {
     protected MonsterStateMachine stateMachine;
     public NavMeshAgent Agent {  get; private set; }
@@ -46,7 +46,6 @@ public class Monster : HasPosition, IDamageable
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log(Damage);
             InvokeRepeating("DealDamage", 0f, 1f);
             MonsterDie();
         }
@@ -69,7 +68,6 @@ public class Monster : HasPosition, IDamageable
     public void TakeDamage(int damage)
     {
         Health.Subtract(damage);
-        Debug.Log(Health.ToString());
         Transform textPosition = transform.GetChild(1);
         if (textPosition != null)
         {
@@ -107,8 +105,9 @@ public class Monster : HasPosition, IDamageable
 
         isDead = true;
         Animator.SetTrigger("Die");
-        Debug.Log(Exp);
-        Destroy(gameObject, 1.5f);
+
+        PoolManager.Instance.Release(this);
+        //Destroy(gameObject, 1.5f);
         DropItems();
 
     }
