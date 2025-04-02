@@ -1,9 +1,13 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UI_SkillSelectSlot : MonoBehaviour
 {
-    private Button selectButton;
+    [SerializeField] private Button selectButton;
+    [SerializeField] private Image skillIcon;
+    [SerializeField] private TextMeshProUGUI skillNameText;
+    [SerializeField] private TextMeshProUGUI skillLevelText;
 
     private void Awake()
     {

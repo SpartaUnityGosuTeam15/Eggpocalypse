@@ -17,6 +17,35 @@ public class SaveData
         gold = 1000;
         enchantState = new List<int> { 0, 0, 0, 0, 0, 0 };
     }
+
+    public int GetAttack()
+    {
+        return enchantState[0] * 1;
+    }
+    public int GetHealth()
+    {
+        return enchantState[1] * 10;
+    }
+
+    public float GetMoveSpeed()
+    {
+        return enchantState[2] * 1;
+    }
+
+    public float GetAttackSpeed()
+    {
+        return 1 - (enchantState[3] * 0.1f);
+    }
+
+    public int GetAttackRange()
+    {
+        return enchantState[4] * 1;
+    }
+
+    public int GetProjectileCount()
+    {
+        return enchantState[5] * 1;
+    }
 }
 
 //[Serializable]

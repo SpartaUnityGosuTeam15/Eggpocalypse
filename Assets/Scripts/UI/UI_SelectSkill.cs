@@ -36,6 +36,7 @@ public class UI_SelectSkill : UI
         List<SkillData> allAttackSkills = new();//추후 dataManager에서 가져옴
         List<SkillData> allStatSkills = new();//추후 dataManager에서 가져옴
 
+        //공격 스킬 체크
         bool isAttackAllSelected = true;
         for(int i = 0; i < _playerAttackSkills.Count; i++)
         {
@@ -48,6 +49,7 @@ public class UI_SelectSkill : UI
             else isAttackAllSelected = false;
         }
 
+        //스탯스킬 체크
         bool isStatAllSelected = true;
         for(int i = 0; i < _playerStatSkills.Count; i++)
         {
@@ -60,6 +62,7 @@ public class UI_SelectSkill : UI
             else isStatAllSelected = false;
         }
 
+        //체크한 스킬들을 통해 뽑기에 등장할 수 있는 스킬들 정리
         if (!isAttackAllSelected)
         {
             pickableSkills = allAttackSkills;
@@ -72,6 +75,7 @@ public class UI_SelectSkill : UI
             }
         }
 
+        //실제로 스킬 3개 뽑음
         List<SkillData> pickedSkills = new();
         for(int i = 0; i < 3; i++)
         {

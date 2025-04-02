@@ -130,6 +130,6 @@ public class UI_Lobby : UI
     void StartStage()
     {
         SaveManager.Instance.SaveAll();
-        GameManager.Instance.LoadScene("Stage");
+        GameManager.Instance.LoadScene($"Stage_{saveData.stageIndex}");
     }
 }
