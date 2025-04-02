@@ -7,9 +7,7 @@ public class Pet : MonoBehaviour, IDamageable
     protected PetStateMachine stateMachine;
     public NavMeshAgent Agent { get; private set; }
     public Collider attackCollider;
-    public GameObject biteArea; // 물어뜯는 범위
-    
-
+    public GameObject biteArea; // 물어뜯는 범위  
     public Animator Animator { get; private set; }
 
     public float AttackRange = 2f;
@@ -18,8 +16,8 @@ public class Pet : MonoBehaviour, IDamageable
     public string Description { get; private set; }
     public int Damage { get; private set; }
     public int health{ get; private set; }
+    public int skillId { get; private set; }
     public float MoveSpeed { get; private set; }
-
     public Player Target { get; private set; }
     public bool isAttacking { get; set; } // 공격 상태 여부
 
@@ -32,11 +30,11 @@ public class Pet : MonoBehaviour, IDamageable
 
     public virtual void Start()
     {
-        InitDragonData();
+        //InitDragonData();
         stateMachine = new PetStateMachine(this);
         stateMachine.Target = GameManager.Instance.player;
         stateMachine.ChangeState(stateMachine.ChasingState);
-        Damage = 100;
+        
     }
 
     private void Update()
@@ -46,20 +44,35 @@ public class Pet : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-
-    }
-
-    private void InitDragonData()
-    {
-        BuildingData buildingData  = DataManager.Instance.buildDict.TryGetValue(Id, out BuildingData data) ? data : null;
-
-        if (buildingData != null && buildingData.type == BuildingType.Dragon)
+        health -= damage;
+        if (health <= 0)
         {
-
-            Damage = buildingData.attack;
-            Agent.speed = MoveSpeed;
+            Die();
         }
     }
+    private void Die()
+    {
+        Destroy(gameObject);
+    }
+    public void InitializeStats(int eggHealth, int eggAttack, int eggSkillId)
+    {
+        health = eggHealth;
+        Damage = eggAttack;
+        skillId = eggSkillId;
+
+        Debug.Log($"Pet 생성됨 - HP: {health}, 공격력: {Damage}, 스킬 ID: {skillId}");
+    }
+    // private void InitDragonData()
+    // {
+    //     BuildingData buildingData  = DataManager.Instance.buildDict.TryGetValue(Id, out BuildingData data) ? data : null;
+
+    //     if (buildingData != null && buildingData.type == BuildingType.Dragon)
+    //     {
+
+    //         Damage = buildingData.attack;
+    //         Agent.speed = MoveSpeed;
+    //     }
+    // }
     public void Feed()
     {
          //체력회복

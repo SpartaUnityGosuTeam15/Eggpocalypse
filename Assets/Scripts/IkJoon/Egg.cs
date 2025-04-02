@@ -8,28 +8,42 @@ public class Egg : MonoBehaviour
     private int clickCount = 0;
     private int maxClicks = 5;
     public int health { get; private set; }
+    public int attack { get; private set; }
+    public int skillId { get; private set; }
     private ButtonManager buttonManager;
     [SerializeField] private GameObject petPrefab;
     private PlayerCondition playerCondition;
-    public int skillId;
+    
     
     public bool isDie;
+    private int id = 0;  // BuildingData에서 가져올 ID
 
     void Awake()
     {
-        Debug.Log("Start1");
         eggRenderer = GetComponentInChildren<Renderer>();
-        Debug.Log("Start2");
         startColor = eggRenderer.material.color; // 시작 색 저장
-        Debug.Log("Start3");
         playerCondition = FindObjectOfType<PlayerCondition>();
-        Debug.Log("Start4");
         buttonManager = FindObjectOfType<ButtonManager>();
-        Debug.Log("Start5");
+        LoadEggData();
         // 번개 구체 패시브 적용
         ApplyPassiveSkill();
-        Debug.Log("Start6");
     }
+
+   private void LoadEggData()
+{
+    if (DataManager.Instance.buildDict.TryGetValue(id, out BuildingData data))
+    {
+        health = data.health;
+        attack = data.attack;
+        skillId = data.skillId;
+
+        Debug.Log($"Egg: LoadEggData() 완료 - health: {health}, attack: {attack}, skillId: {skillId}");
+    }
+    else
+    {
+        Debug.LogError("Egg: BuildingData를 찾을 수 없음");
+    }
+}
 
     void Update()
     {
@@ -74,6 +88,13 @@ public class Egg : MonoBehaviour
     {
         Vector3 spawnPosition = transform.position + Vector3.down;
         GameObject pet = Instantiate(petPrefab, spawnPosition, transform.rotation);
+
+        Pet petScript = pet.GetComponent<Pet>();
+        if (petScript != null)
+        {
+            petScript.InitializeStats(health, attack, skillId);
+        }
+        
         PassSkillToPet(pet);
         buttonManager.isDragon = true;
         buttonManager.ToggleBtn();
