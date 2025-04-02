@@ -26,6 +26,7 @@ public class SkillManager : Singleton<SkillManager>
 
     public Action updateDamage;
 
+    public List<StatSkill> statSkillList;
 
     public float[][] totalStat;  //쓸 때 -> totalStat[id][level - 1];
     public int[] statLevel = new int[6]; //가진 스탯의 레벨
@@ -51,6 +52,19 @@ public class SkillManager : Singleton<SkillManager>
 
         currentStat = new float[7];
         InitStat();
+
+        
+        statSkillList = new List<StatSkill>();
+        for(int i = 0; i < 6;i++)
+        {
+            StatSkill item = new StatSkill();
+            item.id = i;
+            item.amount = totalStat[i];
+            item.skillLevel = 0;
+            item.maxLevel = 6;
+            item.SkillName = statDict[i].name;
+            statSkillList.Add(item);
+        }
         
     }
 
@@ -75,22 +89,16 @@ public class SkillManager : Singleton<SkillManager>
     
     public void UpdateStat(int id) //스탯 정보 업데이트
     {
-        if (id < 0 || id >= totalStat.Length)
-            return;
-        
-        if(statLevel[id] == 6)
-            return;
+        if (statLevel[id] >= 6) return;
 
         statLevel[id]++;
 
         currentStat[id] = totalStat[id][statLevel[id]];
-
         updateDamage?.Invoke();
     }
 
     public AttackSkill GetSkill(int id, Transform trans)
     {
-        //Dictionary<int, SkillData> skillDict = DataManager.Instance.skillDict;
         GameObject go;
         SkillData skillData;
         if(!skillDict.TryGetValue(id, out skillData))

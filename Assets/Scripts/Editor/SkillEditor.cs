@@ -54,19 +54,19 @@ public class AttackSkillEditor : Editor
 
         if (GUILayout.Button("attack level up"))
         {
-            manager.UpdateStat(2);
+            manager.statSkillList[2].LevelUP();
         }
         if (GUILayout.Button("attackSpeed level up"))
         {
-            manager.UpdateStat(3);
+            manager.statSkillList[3].LevelUP();
         }
         if (GUILayout.Button("projectileIncrement level up"))
         {
-            manager.UpdateStat(4);
+            manager.statSkillList[4].LevelUP();
         }
         if (GUILayout.Button("range level up"))
         {
-            manager.UpdateStat(5);
+            manager.statSkillList[5].LevelUP();
         }
     }
 }
