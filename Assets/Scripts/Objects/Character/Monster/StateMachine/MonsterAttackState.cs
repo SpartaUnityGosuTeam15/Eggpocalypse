@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MonsterAttackState : MonsterBaseState
 {
-    bool alreadyAppliedDealing;
     public MonsterAttackState(MonsterStateMachine stateMachine) : base(stateMachine)
     {
     }
@@ -14,8 +13,6 @@ public class MonsterAttackState : MonsterBaseState
         base.Enter();
         if (stateMachine.Monster is NamedMonster monster)
             StartAnimation(monster.AnimationData.AttackHash);
-
-        alreadyAppliedDealing = false;
     }
     public override void Exit()
     {
@@ -26,25 +23,9 @@ public class MonsterAttackState : MonsterBaseState
     public override void Update()
     {
         base.Update();
-        if (!alreadyAppliedDealing)
-        {
-            //Attack();
-            alreadyAppliedDealing = false;
-        }
-
         if (!stateMachine.ChasingState.IsInAttackRange())
         {
             stateMachine.ChangeState(stateMachine.ChasingState);
-        }
-    }
-
-    private void Attack()
-    {
-        if(stateMachine.Monster is NamedMonster namedMonster)
-        {
-            namedMonster.UseRandomSkill();
-            alreadyAppliedDealing = true;
-            return;
         }
     }
 }
