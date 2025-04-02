@@ -20,7 +20,6 @@ public class SkillManager : Singleton<SkillManager>
         for(int i = 0; i < 6; i++)
             totalStat[i] = new float[7];
 
-        DataManager.Instance.Init();
         skillDict = DataManager.Instance.skillDict;
         statDict = DataManager.Instance.statDict;
 

@@ -28,7 +28,7 @@ public class Item : MonoBehaviour
                     GameManager.Instance.player.condition.GainExp(value);
                     break;
                 case ItemType.Gold:
-                    //GameManager.Instance.player.condition.GainGold(value);
+                    GameManager.Instance.GainGold(value);
                     break;
                 default:
                     break;
