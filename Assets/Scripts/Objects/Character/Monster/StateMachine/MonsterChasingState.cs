@@ -20,7 +20,7 @@ public class MonsterChasingState : MonsterBaseState
     public override void Update()
     {
         base.Update();
-        if (IsInAttackRange() && stateMachine.Monster is NamedMonster)
+        if (stateMachine != null && IsInAttackRange() && stateMachine.Monster is NamedMonster)
         {
             stateMachine.ChangeState(stateMachine.AttackState);
             return;

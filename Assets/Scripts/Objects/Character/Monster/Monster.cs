@@ -39,8 +39,17 @@ public class Monster : Poolable, IDamageable
     public void OnEnable()
     {
         isDead = false;
+        //Agent.enabled = true;
+        Agent.isStopped = false;
+        InitMonsterData();
+
+        if(stateMachine == null)
+        {
+            stateMachine = new MonsterStateMachine(this);
+            stateMachine.Target = GameManager.Instance.player;
+        }
         stateMachine.ChangeState(stateMachine.ChasingState);
-        Agent.enabled = true;
+        if(Agent != null) Agent.enabled = true;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -105,9 +114,9 @@ public class Monster : Poolable, IDamageable
 
         isDead = true;
         Animator.SetTrigger("Die");
-
-        Invoke("Relase", 1.5f);
-        //Destroy(gameObject, 1.5f);
+        Agent.isStopped = true;
+        Invoke("Relase", 1.2f);
+        //Agent.enabled = false;
         DropItems();
 
     }
