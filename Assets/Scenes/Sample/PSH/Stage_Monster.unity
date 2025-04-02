@@ -454,6 +454,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CircleSkillPivot
       objectReference: {fileID: 0}
+    - target: {fileID: 6985038585209515160, guid: 4b2662e0362478243a93a39cdcba252e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7543052309073255036, guid: 4b2662e0362478243a93a39cdcba252e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -738,6 +743,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 205475552015586812, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
         type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 205475552015586812, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
+        type: 3}
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
@@ -754,12 +764,12 @@ PrefabInstance:
     - target: {fileID: 8789988854919992780, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 37.57
+      value: -21.9
       objectReference: {fileID: 0}
     - target: {fileID: 8789988854919992780, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 8789988854919992780, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
         type: 3}

@@ -25,7 +25,7 @@ public class GameManager : Singleton<GameManager>
         UIManager.Instance.Clear();
         PoolManager.Instance.Clear();
 
-        if(SceneManager.GetActiveScene().name == "Stage")
+        if(SceneManager.GetActiveScene().name != "Title" && SceneManager.GetActiveScene().name != "Lobby")
         {
             SaveManager.Instance.saveData.gold = gold;
             gold = 0;
