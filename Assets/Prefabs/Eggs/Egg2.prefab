@@ -115,7 +115,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73f617d64ccb747efbb387e2f4b68833, type: 2}
+  - {fileID: 2100000, guid: 766cd1587879a45cab3ddf1e966d7712, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -184,7 +184,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   petPrefab: {fileID: 2697234103898957624, guid: cbb1181bba18a42fc9882859968339df,
     type: 3}
-  skillId: 101
   isDie: 0
 --- !u!1 &8825245637007506248
 GameObject:
