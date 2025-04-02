@@ -25,15 +25,15 @@ public class Monster : Poolable, IDamageable
     {
         Animator = GetComponentInChildren<Animator>();
         Agent = GetComponent<NavMeshAgent>();
-
-    }
-
-    public virtual void Start()
-    {
         InitMonsterData();
         stateMachine = new MonsterStateMachine(this);
         stateMachine.ChangeState(stateMachine.ChasingState);
         stateMachine.Target = GameManager.Instance.player;
+    }
+
+    public virtual void Start()
+    {
+
     }
 
     private void Update()
@@ -41,7 +41,12 @@ public class Monster : Poolable, IDamageable
         if (isDead) return;
         stateMachine.Update();
     }
-
+    public void OnEnable()
+    {
+        isDead = false;
+        stateMachine.ChangeState(stateMachine.ChasingState);
+        Agent.enabled = true;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
