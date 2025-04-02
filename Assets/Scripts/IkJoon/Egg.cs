@@ -67,7 +67,7 @@ public class Egg : MonoBehaviour
         int requiredMeat = clickCount + 1;
         if (playerCondition.meat >= requiredMeat)
         {
-            playerCondition.meat -= requiredMeat;
+            playerCondition.UseMeat(requiredMeat);
             clickCount++;
             float t = (float)clickCount / maxClicks; // 클릭 횟수에 따라 보간 값 변경
             eggRenderer.material.color = Color.Lerp(startColor, targetColor, t);

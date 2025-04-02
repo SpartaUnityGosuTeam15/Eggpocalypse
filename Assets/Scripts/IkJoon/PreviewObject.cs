@@ -45,7 +45,7 @@ public class PreviewObject : MonoBehaviour
         CheckPlacement();
         if (canPlace == true && Input.GetMouseButtonDown(0) && playerCondition.meat >= 5)
         {
-            playerCondition.meat -= 5;
+            playerCondition.UseMeat(5);
             PlaceEgg();
         }
         else if (Input.GetMouseButtonDown(1))
