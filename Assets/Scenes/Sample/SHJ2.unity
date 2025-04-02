@@ -241,74 +241,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
---- !u!1001 &823508625
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1440306251}
-    m_Modifications:
-    - target: {fileID: 6985038585209515160, guid: 4b2662e0362478243a93a39cdcba252e,
-        type: 3}
-      propertyPath: m_Name
-      value: CircleSkillPivot
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543052309073255036, guid: 4b2662e0362478243a93a39cdcba252e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543052309073255036, guid: 4b2662e0362478243a93a39cdcba252e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.714
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543052309073255036, guid: 4b2662e0362478243a93a39cdcba252e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543052309073255036, guid: 4b2662e0362478243a93a39cdcba252e,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543052309073255036, guid: 4b2662e0362478243a93a39cdcba252e,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543052309073255036, guid: 4b2662e0362478243a93a39cdcba252e,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543052309073255036, guid: 4b2662e0362478243a93a39cdcba252e,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543052309073255036, guid: 4b2662e0362478243a93a39cdcba252e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543052309073255036, guid: 4b2662e0362478243a93a39cdcba252e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7543052309073255036, guid: 4b2662e0362478243a93a39cdcba252e,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4b2662e0362478243a93a39cdcba252e, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,6 +352,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MonsterSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600883934927733736, guid: 201ab5eb72639334ab56b6c8bd25a8fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -590,18 +527,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1440306251 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8789988854919992780, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
-    type: 3}
-  m_PrefabInstance: {fileID: 1921194915}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1600054359 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7543052309073255036, guid: 4b2662e0362478243a93a39cdcba252e,
-    type: 3}
-  m_PrefabInstance: {fileID: 823508625}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1921194915
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -672,11 +597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8789988854919992780, guid: 99fab6f6e464f5544b43a2b5eb3f4678,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1600054359}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99fab6f6e464f5544b43a2b5eb3f4678, type: 3}
 --- !u!1660057539 &9223372036854775807
