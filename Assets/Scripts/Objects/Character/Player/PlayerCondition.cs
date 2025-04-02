@@ -70,9 +70,9 @@ public class PlayerCondition : MonoBehaviour, IDamageable
         level++;
         OnLevelChanged?.RaiseEvent(level);
         //스킬 선택 메서드
-        //UIManager.Instance.ShowUI<UI_SelectSkill>().Init(_player.attackSkills, _player.statSkills);
+        UIManager.Instance.ShowUI<UI_SelectSkill>().Init(_player.attackSkills, _player.statSkills);
         //일시정지
-        //Time.timeScale = 0f;
+        Time.timeScale = 0f;
     }
 
     public void GainMeat(int amount)

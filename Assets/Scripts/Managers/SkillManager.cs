@@ -5,12 +5,16 @@ using UnityEngine;
 
 public class ChoiceSkillData
 {
+    public int id;
+    public string name;
     public int level;
     public int type; //0이면 attack // 1면 stat
     //혹시나 추가 정보 필요하면 추가
 
-    public ChoiceSkillData(int level, int type)
+    public ChoiceSkillData(int id, string name, int level, int type)
     {
+        this.id = id;
+        this.name = name;
         this.level = level;
         this.type = type;
     }
@@ -32,7 +36,7 @@ public class SkillManager : Singleton<SkillManager>
     public int[] statLevel = new int[6]; //가진 스탯의 레벨
     public float[] currentStat;
 
-    Dictionary<int, ChoiceSkillData> allSkillDict; //스킬 선택을 위한 dict
+    public Dictionary<int, ChoiceSkillData> allSkillDict; //스킬 선택을 위한 dict
 
     private void Start()
     {
@@ -79,11 +83,11 @@ public class SkillManager : Singleton<SkillManager>
         allSkillDict = new Dictionary<int, ChoiceSkillData>();
         foreach (var data in skillDict)
         {
-            allSkillDict.Add(data.Key, new ChoiceSkillData(0, 0));
+            allSkillDict.Add(data.Key, new ChoiceSkillData(data.Key, data.Value.name, 0, 0));
         }
         foreach (var data in statDict)
         {
-            allSkillDict.Add(data.Key, new ChoiceSkillData(0, 1));
+            allSkillDict.Add(data.Key, new ChoiceSkillData(data.Key, data.Value.name, 0, 1));
         }
     }
     

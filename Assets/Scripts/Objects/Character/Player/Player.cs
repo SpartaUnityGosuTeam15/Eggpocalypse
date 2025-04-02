@@ -92,4 +92,18 @@ public class Player : MonoBehaviour
 
         if (closest != null) Gizmos.DrawSphere(closest.transform.position, 1f);
     }
+     
+    public void GetAttackSkill(int id)
+    {
+        foreach (AttackSkill attack in attackSkills)
+        {
+            if(attack.id == id)
+            {
+                attack.LevelUP();
+                return;
+            }
+        }
+
+        attackSkills.Add(SkillManager.Instance.GetSkill(id, transform));
+    }
 }
