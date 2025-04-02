@@ -27,6 +27,8 @@ public class UI_SkillSelectSlot : MonoBehaviour
         }
         skillLevelText.text = skill.level.ToString();
         skillNameText.text = skill.name;
+        skillIcon.sprite = Resources.Load<Sprite>($"Arts/Skill/{skill.id}");
+        skillIcon.color = Color.gray;
         //이미지도 나중에 추가
     }
 
