@@ -19,6 +19,7 @@ public class PoolManager : Singleton<PoolManager>
                 , actionOnGet: OnGet
                 , actionOnRelease: OnRelease
                 , actionOnDestroy: OnDestroy
+                , defaultCapacity: maxCapacity / 2
                 , maxSize: maxCapacity);
         }
         Poolable Create()
